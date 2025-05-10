@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - LogViewer{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">Dashboard</h1>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                Cargar archivo de log
+            </div>
+            <div class="card-body">
+                <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="logfile" class="form-label">Seleccione un archivo de log</label>
+                        <input class="form-control" type="file" id="logfile" name="logfile" accept=".log,.txt">
+                        <div class="form-text">Formatos soportados: logs de Apache (acceso y error) y logs FTP</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Subir y procesar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                Registros de Acceso
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="card-title">Total: <span id="access-count">...</span></h5>
+                    <a href="{{ url_for('logs_view') }}?type=apache_access" class="btn btn-sm btn-outline-primary">Ver todos</a>
+                </div>
+                <p class="card-text">Los registros de acceso muestran las peticiones HTTP realizadas al servidor.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                Registros de Error
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="card-title">Total: <span id="error-count">...</span></h5>
+                    <a href="{{ url_for('logs_view') }}?type=apache_error" class="btn btn-sm btn-outline-primary">Ver todos</a>
+                </div>
+                <p class="card-text">Los registros de error muestran los problemas y advertencias del servidor.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                Registros FTP
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="card-title">Total: <span id="ftp-count">...</span></h5>
+                    <a href="{{ url_for('logs_view') }}?type=ftp_log" class="btn btn-sm btn-outline-primary">Ver todos</a>
+                </div>
+                <p class="card-text">Los registros FTP muestran las acciones realizadas en el servidor FTP.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                Transferencias FTP
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="card-title">Total: <span id="transfer-count">...</span></h5>
+                    <a href="{{ url_for('logs_view') }}?type=ftp_transfer" class="btn btn-sm btn-outline-primary">Ver todos</a>
+                </div>
+                <p class="card-text">Los registros de transferencia FTP muestran los archivos transferidos.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Cargar contadores al iniciar la página
+    document.addEventListener('DOMContentLoaded', function() {
+        // Cargar conteo de logs
+        fetch('/api/logs/apache_access?count=true')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('access-count').textContent = data.count || 0;
+            })
+            .catch(error => {
+                console.error('Error al cargar conteo de logs de acceso:', error);
+                document.getElementById('access-count').textContent = 'Error';
+            });
+            
+        fetch('/api/logs/apache_error?count=true')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('error-count').textContent = data.count || 0;
+            })
+            .catch(error => {
+                console.error('Error al cargar conteo de logs de error:', error);
+                document.getElementById('error-count').textContent = 'Error';
+            });
+            
+        fetch('/api/logs/ftp_log?count=true')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('ftp-count').textContent = data.count || 0;
+            })
+            .catch(error => {
+                console.error('Error al cargar conteo de logs FTP:', error);
+                document.getElementById('ftp-count').textContent = 'Error';
+            });
+            
+        fetch('/api/logs/ftp_transfer?count=true')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('transfer-count').textContent = data.count || 0;
+            })
+            .catch(error => {
+                console.error('Error al cargar conteo de transferencias FTP:', error);
+                document.getElementById('transfer-count').textContent = 'Error';
+            });
+    });
+</script>
+{% endblock %}

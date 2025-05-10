@@ -1,0 +1,7 @@
+127.0.0.1 - - [10/May/2025:00:38:37 -0400] "GET / HTTP/1.1" 200 3121 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:138.0) Gecko/20100101 Firefox/138.0"
+127.0.0.1 - - [10/May/2025:00:38:37 -0400] "GET /icons/ubuntu-logo.png HTTP/1.1" 200 3322 "http://localhost/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:138.0) Gecko/20100101 Firefox/138.0"
+127.0.0.1 - - [10/May/2025:00:38:37 -0400] "GET /favicon.ico HTTP/1.1" 404 271 "http://localhost/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:138.0) Gecko/20100101 Firefox/138.0"
+127.0.0.1 - - [10/May/2025:00:40:54 -0400] "GET /index.html HTTP/1.1" 200 3121 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:138.0) Gecko/20100101 Firefox/138.0"
+::1 - - [10/May/2025:00:50:14 -0400] "GET /index.html HTTP/1.1" 200 10671 "-" "MiNavegador/1.0"
+::1 - - [10/May/2025:00:50:22 -0400] "GET /pagina_no_existente.html HTTP/1.1" 404 271 "-" "MiNavegador/1.0"
+::1 - - [10/May/2025:00:50:42 -0400] "GET / HTTP/1.1" 200 10671 "http://sitioreferente.com" "MiNavegador/1.0"

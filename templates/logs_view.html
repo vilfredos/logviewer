@@ -1,0 +1,285 @@
+{% extends "base.html" %}
+
+{% block title %}Visualización de Logs - LogViewer{% endblock %}
+
+{% block extra_head %}
+<style>
+    .log-table {
+        font-size: 0.9rem;
+    }
+    .log-table th {
+        position: sticky;
+        top: 0;
+        background-color: #f8f9fa;
+        z-index: 10;
+    }
+    .log-container {
+        max-height: 70vh;
+        overflow-y: auto;
+    }
+    .log-raw {
+        font-family: monospace;
+        white-space: pre-wrap;
+        word-break: break-all;
+        max-height: 100px;
+        overflow-y: auto;
+    }
+    .log-error {
+        color: #dc3545;
+    }
+    .log-warning {
+        color: #ffc107;
+    }
+    .log-info {
+        color: #0dcaf0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1>Visualización de Logs</h1>
+            <div>
+                <button class="btn btn-sm btn-outline-secondary" id="btn-refresh">
+                    <i class="bi bi-arrow-clockwise"></i> Actualizar
+                </button>
+                <div class="btn-group">
+                    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="logTypeDropdown" data-bs-toggle="dropdown">
+                        Tipo de Log
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item {% if log_type == 'apache_access' %}active{% endif %}" href="{{ url_for('logs_view') }}?type=apache_access">Acceso Apache</a></li>
+                        <li><a class="dropdown-item {% if log_type == 'apache_error' %}active{% endif %}" href="{{ url_for('logs_view') }}?type=apache_error">Error Apache</a></li>
+                        <li><a class="dropdown-item {% if log_type == 'ftp_log' %}active{% endif %}" href="{{ url_for('logs_view') }}?type=ftp_log">FTP</a></li>
+                        <li><a class="dropdown-item {% if log_type == 'ftp_transfer' %}active{% endif %}" href="{{ url_for('logs_view') }}?type=ftp_transfer">Transferencias FTP</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<form action="{{ url_for('clear_database_route') }}" method="POST">
+    <button type="submit" class="btn btn-danger">Limpiar Base de Datos</button>
+</form>
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div>
+                    {% if filename %}
+                        <span>Archivo: <strong>{{ filename }}</strong></span>
+                    {% else %}
+                        <span>Logs en base de datos</span>
+                    {% endif %}
+                </div>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="autoRefresh" value="option1">
+                        <label class="form-check-label" for="autoRefresh">Auto-actualizar</label>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="log-container">
+                    {% if log_type == 'apache_access' %}
+                        <table class="table table-striped table-hover log-table mb-0">
+                            <thead>
+                                <tr>
+                                    <th>IP</th>
+                                    <th>Fecha/Hora</th>
+                                    <th>Método</th>
+                                    <th>Ruta</th>
+                                    <th>Estado</th>
+                                    <th>Tamaño</th>
+                                    <th>protocolo</th>
+                                    <th>Referencia</th>
+                                    <th>navegador</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for log in logs %}
+                                <tr>
+                                    <td>{{ log.ip }}</td>
+                                    <td>{{ log.fecha_hora }}</td>
+                                    <td>{{ log.metodo }}</td>
+                                    <td title="{{ log.ruta }}">{{ log.ruta|truncate(30) }}</td>
+                                    <td>{{ log.codigo_estado }}</td>
+                                    <td>{{ log.bytes_enviados }}</td>
+                                    <td>{{ log.protocolo }}</td>
+                                    <td>{{ log.referer }}</td>
+                                    <td>{{ log.user_agent }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% elif log_type == 'apache_error' %}
+                        <table class="table table-striped table-hover log-table mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Fecha/Hora</th>
+                                    <th>Nivel</th>
+                                    <th>Cliente</th>
+                                    <th>Mensaje</th>
+                                    <th>Archivo</th>
+                                    <th>Línea</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for log in logs %}
+                                <tr class="{% if log.nivel_error == 'error' %}log-error{% elif log.nivel_error == 'warning' %}log-warning{% elif log.nivel_error == 'info' %}log-info{% endif %}">
+                                    <td>{{ log.fecha_hora }}</td>
+                                    <td>{{ log.nivel_error }}</td>
+                                    <td>{{ log.cliente }}</td>
+                                    <td title="{{ log.mensaje }}">{{ log.mensaje|truncate(50) }}</td>
+                                    <td>{{ log.archivo }}</td>
+                                    <td>{{ log.linea }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% elif log_type == 'ftp_log' %}
+                        <table class="table table-striped table-hover log-table mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Fecha/Hora</th>
+                                    <th>Usuario</th>
+                                    <th>IP</th>
+                                    <th>Acción</th>
+                                    <th>Archivo</th>
+                                    <th>Detalles</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for log in logs %}
+                                <tr>
+                                    <td>{{ log.fecha_hora }}</td>
+                                    <td>{{ log.usuario }}</td>
+                                    <td>{{ log.ip }}</td>
+                                    <td>{{ log.accion }}</td>
+                                    <td title="{{ log.archivo }}">{{ log.archivo|truncate(30) }}</td>
+                                    <td title="{{ log.detalles }}">{{ log.detalles|truncate(50) }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% elif log_type == 'ftp_transfer' %}
+                        <table class="table table-striped table-hover log-table mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Fecha/Hora</th>
+                                    <th>Usuario</th>
+                                    <th>IP</th>
+                                    <th>Archivo</th>
+                                    <th>Tamaño</th>
+                                    <th>Dirección</th>
+                                    <th>Duración</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for log in logs %}
+                                <tr>
+                                    <td>{{ log.fecha_hora }}</td>
+                                    <td>{{ log.usuario }}</td>
+                                    <td>{{ log.ip_remota }}</td>
+                                    <td title="{{ log.archivo }}">{{ log.archivo|truncate(30) }}</td>
+                                    <td>{{ log.tamaño_archivo }}</td>
+                                    <td>{{ 'Subida' if log.direccion == 'i' else 'Descarga' }}</td>
+                                    <td>{{ log.duracion }}s</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <div class="p-4 text-center">
+                            <p>Seleccione un tipo de log para visualizar</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="card-footer">
+                {% if total_pages > 1 %}
+                <nav>
+                    <ul class="pagination pagination-sm justify-content-center mb-0">
+                        <li class="page-item {% if page == 1 %}disabled{% endif %}">
+                            <a class="page-link" href="{{ url_for('view_log', log_type=log_type, filename=filename, page=page-1) }}">&laquo;</a>
+                        </li>
+                        
+                        {% if total_pages <= 10 %}
+                            {% for p in range(1, total_pages + 1) %}
+                            <li class="page-item {% if p == page %}active{% endif %}">
+                                <a class="page-link" href="{{ url_for('view_log', log_type=log_type, filename=filename, page=p) }}">{{ p }}</a>
+                            </li>
+                            {% endfor %}
+                        {% else %}
+                            {% if page <= 5 %}
+                                {% for p in range(1, 8) %}
+                                <li class="page-item {% if p == page %}active{% endif %}">
+                                    <a class="page-link" href="{{ url_for('view_log', log_type=log_type, filename=filename, page=p) }}">{{ p }}</a>
+                                </li>
+                                {% endfor %}
+                                <li class="page-item disabled">
+                                    <span class="page-link">...</span>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ url_for('view_log', log_type=log_type, filename=filename, page=total_pages) }}">{{ total_pages }}</a>
+                                </li>
+                            {% elif page > total_pages - 5 %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ url_for('view_log', log_type=log_type, filename=filename, page=1) }}">1</a>
+                                </li>
+                                <li class="page-item disabled">
+                                    <span class="page-link">...</span>
+                                </li>
+                                {% for p in range(total_pages - 6, total_pages + 1) %}
+                                <li class="page-item {% if p == page %}active{% endif %}">
+                                    <a class="page-link" href="{{ url_for('view_log', log_type=log_type, filename=filename, page=p) }}">{{ p }}</a>
+                                </li>
+                                {% endfor %}
+                            {% else %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ url_for('view_log', log_type=log_type, filename=filename, page=1) }}">1</a>
+                                </li>
+                                <li class="page-item disabled">
+                                    <span class="page-link">...</span>
+                                </li>
+                                {% for p in range(page - 2, page + 3) %}
+                                <li class="page-item {% if p == page %}active{% endif %}">
+                                    <a class="page-link" href="{{ url_for('view_log', log_type=log_type, filename=filename, page=p) }}">{{ p }}</a>
+                                </li>
+                                {% endfor %}
+                                <li class="page-item disabled">
+                                    <span class="page-link">...</span>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ url_for('view_log', log_type=log_type, filename=filename, page=total_pages) }}">{{ total_pages }}</a>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                        
+                        <li class="page-item {% if page == total_pages %}disabled{% endif %}">
+                            <a class="page-link" href="{{ url_for('view_log', log_type=log_type, filename=filename, page=page+1) }}">&raquo;</a>
+                        </li>
+                    </ul>
+                </nav>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                Visualización Rápida - Archivo Crudo
+            </div>
+            <div class="card-body p-0">
+                <pre id="raw-log-display" class="log-raw p-3"></pre>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+/**/

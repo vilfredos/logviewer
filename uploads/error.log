@@ -1,0 +1,57 @@
+[Sat May 10 00:02:52.587159 2025] [mpm_event:notice] [pid 7245:tid 132569102276480] AH00489: Apache/2.4.58 (Ubuntu) configured -- resuming normal operations
+[Sat May 10 00:02:52.587184 2025] [core:notice] [pid 7245:tid 132569102276480] AH00094: Command line: '/usr/sbin/apache2'
+[Sat May 10 00:24:35.781822 2025] [mpm_event:notice] [pid 7245:tid 132569102276480] AH00492: caught SIGWINCH, shutting down gracefully
+[Sat May 10 00:24:35.846915 2025] [watchdog:debug] [pid 11899:tid 134071693916032] mod_watchdog.c(445): AH010033: Watchdog: Running with WatchdogInterval 1000ms
+[Sat May 10 00:24:35.846977 2025] [watchdog:debug] [pid 11899:tid 134071693916032] mod_watchdog.c(454): AH02974: Watchdog: found parent providers.
+[Sat May 10 00:24:35.846983 2025] [watchdog:debug] [pid 11899:tid 134071693916032] mod_watchdog.c(500): AH02977: Watchdog: found child providers.
+[Sat May 10 00:24:35.846987 2025] [watchdog:debug] [pid 11899:tid 134071693916032] mod_watchdog.c(508): AH02978: Watchdog: Looking for child (_singleton_).
+[Sat May 10 00:24:35.846991 2025] [watchdog:debug] [pid 11899:tid 134071693916032] mod_watchdog.c(508): AH02978: Watchdog: Looking for child (_default_).
+[Sat May 10 00:24:35.848920 2025] [mpm_event:debug] [pid 11899:tid 134071693916032] event.c(740): Child 0 started: pid 11901, gen 0, active 1/6, total 1/1/16
+[Sat May 10 00:24:35.849257 2025] [mpm_event:debug] [pid 11899:tid 134071693916032] event.c(740): Child 1 started: pid 11902, gen 0, active 2/6, total 2/2/16
+[Sat May 10 00:24:35.849268 2025] [mpm_event:notice] [pid 11899:tid 134071693916032] AH00489: Apache/2.4.58 (Ubuntu) configured -- resuming normal operations
+[Sat May 10 00:24:35.849272 2025] [mpm_event:info] [pid 11899:tid 134071693916032] AH00490: Server built: 2025-04-03T14:36:49
+[Sat May 10 00:24:35.849282 2025] [core:notice] [pid 11899:tid 134071693916032] AH00094: Command line: '/usr/sbin/apache2'
+[Sat May 10 00:24:35.849287 2025] [core:debug] [pid 11899:tid 134071693916032] log.c(1597): AH02639: Using SO_REUSEPORT: yes (1)
+[Sat May 10 00:24:35.851801 2025] [watchdog:debug] [pid 11902:tid 134071693916032] mod_watchdog.c(559): AH02980: Watchdog: nothing configured?
+[Sat May 10 00:24:35.852148 2025] [watchdog:debug] [pid 11901:tid 134071693916032] mod_watchdog.c(559): AH02980: Watchdog: nothing configured?
+[Sat May 10 00:24:35.852334 2025] [mpm_event:debug] [pid 11901:tid 134071688210112] event.c(2401): AH02471: start_threads: Using epoll (wakeable)
+[Sat May 10 00:24:35.852585 2025] [mpm_event:debug] [pid 11902:tid 134071688210112] event.c(2401): AH02471: start_threads: Using epoll (wakeable)
+[Sat May 10 00:38:37.015885 2025] [authz_core:debug] [pid 11901:tid 134071671424704] mod_authz_core.c(815): [client 127.0.0.1:34028] AH01626: authorization result of Require all granted: granted
+[Sat May 10 00:38:37.015922 2025] [authz_core:debug] [pid 11901:tid 134071671424704] mod_authz_core.c(815): [client 127.0.0.1:34028] AH01626: authorization result of <RequireAny>: granted
+[Sat May 10 00:38:37.018465 2025] [deflate:debug] [pid 11901:tid 134071671424704] mod_deflate.c(904): [client 127.0.0.1:34028] AH01384: Zlib: Compressed 10671 to 3103 : URL /index.html
+[Sat May 10 00:38:37.307941 2025] [authz_core:debug] [pid 11901:tid 134071539713728] mod_authz_core.c(815): [client 127.0.0.1:34028] AH01626: authorization result of Require all granted: granted, referer: http://localhost/
+[Sat May 10 00:38:37.307962 2025] [authz_core:debug] [pid 11901:tid 134071539713728] mod_authz_core.c(815): [client 127.0.0.1:34028] AH01626: authorization result of <RequireAny>: granted, referer: http://localhost/
+[Sat May 10 00:38:37.442905 2025] [authz_core:debug] [pid 11901:tid 134071531321024] mod_authz_core.c(815): [client 127.0.0.1:34028] AH01626: authorization result of Require all granted: granted, referer: http://localhost/
+[Sat May 10 00:38:37.442936 2025] [authz_core:debug] [pid 11901:tid 134071531321024] mod_authz_core.c(815): [client 127.0.0.1:34028] AH01626: authorization result of <RequireAny>: granted, referer: http://localhost/
+[Sat May 10 00:38:37.442954 2025] [core:info] [pid 11901:tid 134071531321024] [client 127.0.0.1:34028] AH00128: File does not exist: /var/www/html/favicon.ico, referer: http://localhost/
+[Sat May 10 00:40:54.909810 2025] [authz_core:debug] [pid 11902:tid 134071663032000] mod_authz_core.c(815): [client 127.0.0.1:42500] AH01626: authorization result of Require all granted: granted
+[Sat May 10 00:40:54.912794 2025] [authz_core:debug] [pid 11902:tid 134071663032000] mod_authz_core.c(815): [client 127.0.0.1:42500] AH01626: authorization result of <RequireAny>: granted
+[Sat May 10 00:40:54.926824 2025] [deflate:debug] [pid 11902:tid 134071663032000] mod_deflate.c(904): [client 127.0.0.1:42500] AH01384: Zlib: Compressed 10671 to 3103 : URL /index.html
+[Sat May 10 00:50:14.589978 2025] [authz_core:debug] [pid 11901:tid 134071338387136] mod_authz_core.c(815): [client ::1:46824] AH01626: authorization result of Require all granted: granted
+[Sat May 10 00:50:14.590097 2025] [authz_core:debug] [pid 11901:tid 134071338387136] mod_authz_core.c(815): [client ::1:46824] AH01626: authorization result of <RequireAny>: granted
+[Sat May 10 00:50:22.749999 2025] [authz_core:debug] [pid 11902:tid 134071654639296] mod_authz_core.c(815): [client ::1:44600] AH01626: authorization result of Require all granted: granted
+[Sat May 10 00:50:22.750063 2025] [authz_core:debug] [pid 11902:tid 134071654639296] mod_authz_core.c(815): [client ::1:44600] AH01626: authorization result of <RequireAny>: granted
+[Sat May 10 00:50:22.750120 2025] [core:info] [pid 11902:tid 134071654639296] [client ::1:44600] AH00128: File does not exist: /var/www/html/pagina_no_existente.html
+[Sat May 10 00:50:42.839237 2025] [authz_core:debug] [pid 11901:tid 134071162238656] mod_authz_core.c(815): [client ::1:47170] AH01626: authorization result of Require all granted: granted, referer: http://sitioreferente.com
+[Sat May 10 00:50:42.839265 2025] [authz_core:debug] [pid 11901:tid 134071162238656] mod_authz_core.c(815): [client ::1:47170] AH01626: authorization result of <RequireAny>: granted, referer: http://sitioreferente.com
+[Sat May 10 00:53:34.009359 2025] [core:info] [pid 11899:tid 134071693916032] AH00096: removed PID file /var/run/apache2/apache2.pid (pid=11899)
+[Sat May 10 00:53:34.009437 2025] [mpm_event:notice] [pid 11899:tid 134071693916032] AH00492: caught SIGWINCH, shutting down gracefully
+[Sat May 10 00:53:34.009975 2025] [mpm_event:debug] [pid 11901:tid 134071693916032] event.c(575): wake up listener
+[Sat May 10 00:53:34.010119 2025] [mpm_event:debug] [pid 11902:tid 134071693916032] event.c(575): wake up listener
+[Sat May 10 00:53:34.027154 2025] [mpm_event:debug] [pid 11899:tid 134071693916032] event.c(715): Child 1 stopped: pid 11902, gen 0, active 1/6, total 1/2/16, quiescing 1
+[Sat May 10 00:53:34.043976 2025] [mpm_event:debug] [pid 11899:tid 134071693916032] event.c(715): Child 0 stopped: pid 11901, gen 0, active 0/6, total 0/2/16, quiescing 1
+[Sat May 10 00:53:34.131142 2025] [watchdog:debug] [pid 12676:tid 132520101308288] mod_watchdog.c(445): AH010033: Watchdog: Running with WatchdogInterval 1000ms
+[Sat May 10 00:53:34.131191 2025] [watchdog:debug] [pid 12676:tid 132520101308288] mod_watchdog.c(454): AH02974: Watchdog: found parent providers.
+[Sat May 10 00:53:34.131196 2025] [watchdog:debug] [pid 12676:tid 132520101308288] mod_watchdog.c(500): AH02977: Watchdog: found child providers.
+[Sat May 10 00:53:34.131200 2025] [watchdog:debug] [pid 12676:tid 132520101308288] mod_watchdog.c(508): AH02978: Watchdog: Looking for child (_singleton_).
+[Sat May 10 00:53:34.131203 2025] [watchdog:debug] [pid 12676:tid 132520101308288] mod_watchdog.c(508): AH02978: Watchdog: Looking for child (_default_).
+[Sat May 10 00:53:34.134023 2025] [mpm_event:debug] [pid 12676:tid 132520101308288] event.c(740): Child 0 started: pid 12678, gen 0, active 1/6, total 1/1/16
+[Sat May 10 00:53:34.139305 2025] [watchdog:debug] [pid 12678:tid 132520101308288] mod_watchdog.c(559): AH02980: Watchdog: nothing configured?
+[Sat May 10 00:53:34.139394 2025] [mpm_event:debug] [pid 12676:tid 132520101308288] event.c(740): Child 1 started: pid 12679, gen 0, active 2/6, total 2/2/16
+[Sat May 10 00:53:34.139442 2025] [mpm_event:notice] [pid 12676:tid 132520101308288] AH00489: Apache/2.4.58 (Ubuntu) configured -- resuming normal operations
+[Sat May 10 00:53:34.139446 2025] [mpm_event:info] [pid 12676:tid 132520101308288] AH00490: Server built: 2025-04-03T14:36:49
+[Sat May 10 00:53:34.139468 2025] [core:notice] [pid 12676:tid 132520101308288] AH00094: Command line: '/usr/sbin/apache2'
+[Sat May 10 00:53:34.139472 2025] [core:debug] [pid 12676:tid 132520101308288] log.c(1597): AH02639: Using SO_REUSEPORT: yes (1)
+[Sat May 10 00:53:34.140370 2025] [mpm_event:debug] [pid 12678:tid 132520095598272] event.c(2401): AH02471: start_threads: Using epoll (wakeable)
+[Sat May 10 00:53:34.142481 2025] [watchdog:debug] [pid 12679:tid 132520101308288] mod_watchdog.c(559): AH02980: Watchdog: nothing configured?
+[Sat May 10 00:53:34.143175 2025] [mpm_event:debug] [pid 12679:tid 132520095598272] event.c(2401): AH02471: start_threads: Using epoll (wakeable)

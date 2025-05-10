@@ -1,0 +1,5 @@
+Flask==2.2.3
+Werkzeug==2.2.3
+pymysql==1.0.3
+python-dateutil==2.8.2
+regex==2023.3.23

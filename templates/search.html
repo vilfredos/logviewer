@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+
+{% block title %}Ver Logs - LogViewer{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Ver Logs</h1>
+
+{% if logs %}
+<div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">{{ log_type|title }} - {{ filename }}</h5>
+        <div>
+            <a href="{{ url_for('index') }}" class="btn btn-outline-primary btn-sm">Volver al Dashboard</a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    {% if log_type == 'apache_access' %}
+                    <tr>
+                        <th>IP</th>
+                        <th>Fecha/Hora</th>
+                        <th>Método</th>
+                        <th>Ruta</th>
+                        <th>Código</th>
+                        <th>Bytes</th>
+                        <th>Tiempo</th>
+                    </tr>
+                    {% elif log_type == 'apache_error' %}
+                    <tr>
+                        <th>Fecha/Hora</th>
+                        <th>Nivel</th>
+                        <th>Cliente</th>
+                        <th>Mensaje</th>
+                        <th>Archivo</th>
+                        <th>Línea</th>
+                    </tr>
+                    {% elif log_type == 'ftp_log' %}
+                    <tr>
+                        <th>Fecha/Hora</th>
+                        <th>Usuario</th>
+                        <th>IP</th>
+                        <th>Acción</th>
+                        <th>Archivo</th>
+                        <th>Detalles</th>
+                    </tr>
+                    {% elif log_type == 'ftp_transfer' %}
+                    <tr>
+                        <th>Fecha/Hora</th>
+                        <th>Usuario</th>
+                        <th>IP Remota</th>
+                        <th>Archivo</th>
+                        <th>Tamaño</th>
+                        <th>Tipo</th>
+                        <th>Dirección</th>
+                    </tr>
+                    {% endif %}
+                </thead>
+                <tbody>
+                    {% if log_type == 'apache_access' %}
+                        {% for log in logs %}
+                        <tr>
+                            <td>{{ log.ip }}</td>
+                            <td>{{ log.fecha_hora.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                            <td><span class="badge {% if log.metodo == 'GET' %}bg-success{% elif log.metodo == 'POST' %}bg-primary{% else %}bg-secondary{% endif %}">{{ log.metodo }}</span></td>
+                            <td class="text-truncate" style="max-width: 200px;">{{ log.ruta }}</td>
+                            <td>
+                                <span class="badge {% if log.codigo_estado < 300 %}bg-success{% elif log.codigo_estado < 400 %}bg-info{% elif log.codigo_estado < 500 %}bg-warning{% else %}bg-danger{% endif %}">
+                                    {{ log.codigo_estado }}
+                                </span>
+                            </td>
+                            <td>{{ log.bytes_enviados }}</td>
+                            <td>{{ log.tiempo_respuesta }} ms</td>
+                        </tr>
+                        {% endfor %}
+                    {% elif log_type == 'apache_error' %}
+                        {% for log in logs %}
+                        <tr>
+                            <td>{{ log.fecha_hora.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                            <td>
+                                <span class="badge {% if log.nivel_error == 'ERROR' %}bg-danger{% elif log.nivel_error == 'WARNING' %}bg-warning{% elif log.nivel_error == 'NOTICE' %}bg-info{% else %}bg-secondary{% endif %}">
+                                    {{ log.nivel_error }}
+                                </span>
+                            </td>
+                            <td>{{ log.cliente }}</td>
+                            <td class="text-truncate" style="max-width: 300px;">{{ log.mensaje }}</td>
+                            <td class="text-truncate" style="max-width: 150px;">{{ log.archivo }}</td>
+                            <td>{{ log.linea }}</td>
+                        </tr>
+                        {% endfor %}
+                    {% elif log_type == 'ftp_log' %}
+                        {% for log in logs %}
+                        <tr>
+                            <td>{{ log.fecha_hora.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                            <td>{{ log.usuario }}</td>
+                            <td>{{ log.ip }}</td>
+                            <td>{{ log.accion }}</td>
+                            <td class="text-truncate" style="max-width: 200px;">{{ log.archivo }}</td>
+                            <td class="text-truncate" style="max-width: 200px;">{{ log.detalles }}</td>
+                        </tr>
+                        {% endfor %}
+                    {% elif log_type == 'ftp_transfer' %}
+                        {% for log in logs %}
+                        <tr>
+                            <td>{{ log.fecha_hora.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                            <td>{{ log.usuario }}</td>
+                            <td>{{ log.ip_remota }}</td>
+                            <td class="text-truncate" style="max-width: 200px;">{{ log.archivo }}</td>
+                            <td>{{ log.tamaño_archivo }}</td>
+                            <td>
+                                <span class="badge {% if log.tipo_transferencia == 'upload' %}bg-primary{% elif log.tipo_transferencia == 'download' %}bg-success{% else %}bg-secondary{% endif %}">
+                                    {{ log.tipo_transferencia }}
+                                </span>
+                            </td>
+                            <td>{{ log.direccion }}</td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer">
+        <nav>
+            <ul class="pagination justify-content-center mb-0">
+                {% if page > 1 %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('view_log', log_type=log_type, filename=filename, page=page-1) }}">Anterior</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">Anterior</span>
+                </li>
+                {% endif %}
+
+                {% for pg in range(max(1, page-2), min(total_pages+1, page+3)) %}
+                <li class="page-item {% if pg == page %}active{% endif %}">
+                    <a class="page-link" href="{{ url_for('view_log', log_type=log_type, filename=filename, page=pg) }}">{{ pg }}</a>
+                </li>
+                {% endfor %}
+
+                {% if page < total_pages %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('view_log', log_type=log_type, filename=filename, page=page+1) }}">Siguiente</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">Siguiente</span>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
+{% else %}
+<div class="card">
+    <div class="card-body">
+        <div class="text-center py-5">
+            <h4 class="mb-4">No hay registros disponibles</h4>
+            <p class="text-muted">Para visualizar logs, cargue un archivo desde el dashboard.</p>
+            <a href="{{ url_for('index') }}" class="btn btn-primary mt-3">Ir al Dashboard</a>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% if not logs %}
+<div class="card mt-4">
+    <div class="card-header">
+        <h5>Cargar Archivo de Log</h5>
+    </div>
+    <div class="card-body">
+        <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data" class="mb-3">
+            <div class="mb-3">
+                <label for="logfile" class="form-label">Seleccionar archivo de log:</label>
+                <input type="file" class="form-control" id="logfile" name="logfile" accept=".log,.txt" required>
+                <div class="form-text">Formatos soportados: .log, .txt</div>
+            </div>
+            <button type="submit" class="btn btn-primary">Cargar y Analizar</button>
+        </form>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
