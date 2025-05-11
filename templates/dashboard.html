@@ -29,67 +29,6 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-6 mb-4">
-        <div class="card h-100">
-            <div class="card-header">
-                Registros de Acceso
-            </div>
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h5 class="card-title">Total: <span id="access-count">...</span></h5>
-                    <a href="{{ url_for('logs_view') }}?type=apache_access" class="btn btn-sm btn-outline-primary">Ver todos</a>
-                </div>
-                <p class="card-text">Los registros de acceso muestran las peticiones HTTP realizadas al servidor.</p>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col-md-6 mb-4">
-        <div class="card h-100">
-            <div class="card-header">
-                Registros de Error
-            </div>
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h5 class="card-title">Total: <span id="error-count">...</span></h5>
-                    <a href="{{ url_for('logs_view') }}?type=apache_error" class="btn btn-sm btn-outline-primary">Ver todos</a>
-                </div>
-                <p class="card-text">Los registros de error muestran los problemas y advertencias del servidor.</p>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col-md-6 mb-4">
-        <div class="card h-100">
-            <div class="card-header">
-                Registros FTP
-            </div>
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h5 class="card-title">Total: <span id="ftp-count">...</span></h5>
-                    <a href="{{ url_for('logs_view') }}?type=ftp_log" class="btn btn-sm btn-outline-primary">Ver todos</a>
-                </div>
-                <p class="card-text">Los registros FTP muestran las acciones realizadas en el servidor FTP.</p>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col-md-6 mb-4">
-        <div class="card h-100">
-            <div class="card-header">
-                Transferencias FTP
-            </div>
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h5 class="card-title">Total: <span id="transfer-count">...</span></h5>
-                    <a href="{{ url_for('logs_view') }}?type=ftp_transfer" class="btn btn-sm btn-outline-primary">Ver todos</a>
-                </div>
-                <p class="card-text">Los registros de transferencia FTP muestran los archivos transferidos.</p>
-            </div>
-        </div>
-    </div>
-</div>
 {% endblock %}
 
 {% block extra_js %}

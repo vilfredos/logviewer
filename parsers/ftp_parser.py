@@ -8,7 +8,12 @@ class FTPParser:
             r'(\w{3} \w{3} \d{1,2} \d{2}:\d{2}:\d{2} \d{4}) (\S+) \((\S+)\): (.+)'
         )
         
-        # Patrón para logs de transferencia FTP
+        # Patrón para logs de transferencia FTP (formato xferlog estándar)
+        self.xferlog_pattern = re.compile(
+            r'(\w{3} \w{3} \d{1,2} \d{2}:\d{2}:\d{2} \d{4}) (\d+) (\S+) (\d+) (\S+) ([abcABC]) (\_) ([ioIO]) (\S+) (\S+) (\S+) (\S+) (.*)'
+        )
+        
+        # Patrón alternativo para transferencias más genérico
         self.transfer_pattern = re.compile(
             r'(\w{3} \w{3} \d{1,2} \d{2}:\d{2}:\d{2} \d{4}) (\d+) (\S+) (\S+) (\d+) (.+) (\w+) (\S+) (\w+) (\S+) (\S+) (\S+) (\S+)'
         )
@@ -139,7 +144,7 @@ class FTPParser:
         return entries
         
     def parse_ftp_transfer(self, filepath):
-        """Parsea un archivo de log de transferencias FTP"""
+        """Parsea un archivo de log de transferencias FTP (xferlog)"""
         entries = []
         
         try:
@@ -150,13 +155,14 @@ class FTPParser:
                         continue
                         
                     try:
-                        # Intentar con el patrón regular
-                        match = self.transfer_pattern.match(line)
+                        # Intentar primero con el patrón xferlog estándar
+                        match = self.xferlog_pattern.match(line)
                         
                         if match:
-                            (date_time, duracion, servidor, ip_remota, tamano_archivo, 
-                            archivo, tipo_transferencia, accion_especial, direccion, 
-                            usuario, servicio, autenticacion, usuario_id) = match.groups()
+                            # Formato xferlog estándar: fecha dur host bytes archivo tipo _ dir modo user serv auth resto
+                            (date_time, duracion, servidor, tamano_archivo, 
+                             archivo, tipo_transferencia, accion_especial, direccion, 
+                             modo, usuario, servicio, autenticacion, resto) = match.groups()
                             
                             # Convertir valores numéricos
                             try:
@@ -168,79 +174,113 @@ class FTPParser:
                                 tamano_archivo = int(tamano_archivo)
                             except:
                                 tamano_archivo = 0
+                                
+                            # Normalizar tipo_transferencia (a=ASCII, b=Binary)
+                            tipo_transferencia = tipo_transferencia.upper()
+                            
+                            # Normalizar dirección (i=IN/upload, o=OUT/download)
+                            direccion_normalizada = 'IN' if direccion.lower() == 'i' else 'OUT'
                             
                             entry = {
                                 'fecha_hora': self.parse_date(date_time),
                                 'duracion': duracion,
                                 'servidor': servidor,
-                                'ip_remota': ip_remota,
+                                'ip_remota': servidor,  # En xferlog a veces se usa host como IP
                                 'tamaño_archivo': tamano_archivo,
                                 'archivo': archivo,
                                 'tipo_transferencia': tipo_transferencia,
                                 'accion_especial': accion_especial,
-                                'direccion': direccion,
+                                'direccion': direccion_normalizada,
                                 'usuario': usuario,
                                 'servicio': servicio,
                                 'metodo_autenticacion': autenticacion,
-                                'usuario_id': usuario_id
+                                'usuario_id': usuario
                             }
                             entries.append(entry)
                         else:
-                            # Enfoque alternativo si el patrón no coincide
-                            parts = line.split()
+                            # Probar con el patrón alternativo para otros formatos de transferencia
+                            match = self.transfer_pattern.match(line)
                             
-                            if len(parts) >= 8:
-                                # Extraer fecha (primeros elementos que pueden formar una fecha)
-                                date_part = ' '.join(parts[:5])
-                                fecha_hora = self.parse_date(date_part)
+                            if match:
+                                (date_time, duracion, servidor, ip_remota, tamano_archivo, 
+                                archivo, tipo_transferencia, accion_especial, direccion, 
+                                usuario, servicio, autenticacion, usuario_id) = match.groups()
                                 
-                                # Buscar IP remota
-                                ip_remota = ''
-                                for part in parts:
-                                    if re.match(r'\b(?:\d{1,3}\.){3}\d{1,3}\b', part):
-                                        ip_remota = part
-                                        break
-                                
-                                # Buscar tamaño de archivo (número grande)
-                                tamano_archivo = 0
-                                for part in parts:
-                                    if part.isdigit() and len(part) > 3:
-                                        tamano_archivo = int(part)
-                                        break
-                                
-                                # Buscar usuario
-                                usuario = 'anonymous'
-                                for part in parts:
-                                    if '@' in part or part.lower() in ['user', 'anonymous', 'admin', 'root']:
-                                        usuario = part
-                                        break
-                                
-                                # Determinar dirección (upload/download)
-                                direccion = 'i'  # i=inbound por defecto
-                                if 'outbound' in line.lower() or 'download' in line.lower():
-                                    direccion = 'o'  # o=outbound
+                                # Convertir valores numéricos
+                                try:
+                                    duracion = int(duracion)
+                                except:
+                                    duracion = 0
                                     
-                                # Determinar tipo de transferencia
-                                tipo = 'b'  # b=binary por defecto
-                                if 'ascii' in line.lower():
-                                    tipo = 'a'  # a=ascii
+                                try:
+                                    tamano_archivo = int(tamano_archivo)
+                                except:
+                                    tamano_archivo = 0
                                 
                                 entry = {
-                                    'fecha_hora': fecha_hora,
-                                    'duracion': 0,
-                                    'servidor': 'servidor',
+                                    'fecha_hora': self.parse_date(date_time),
+                                    'duracion': duracion,
+                                    'servidor': servidor,
                                     'ip_remota': ip_remota,
                                     'tamaño_archivo': tamano_archivo,
-                                    'archivo': '',  # No se puede determinar con precisión
-                                    'tipo_transferencia': tipo,
-                                    'accion_especial': '_',
+                                    'archivo': archivo,
+                                    'tipo_transferencia': tipo_transferencia,
+                                    'accion_especial': accion_especial,
                                     'direccion': direccion,
                                     'usuario': usuario,
-                                    'servicio': 'ftp',
-                                    'metodo_autenticacion': 'password',
-                                    'usuario_id': usuario
+                                    'servicio': servicio,
+                                    'metodo_autenticacion': autenticacion,
+                                    'usuario_id': usuario_id
                                 }
                                 entries.append(entry)
+                            else:
+                                # Enfoque alternativo para xferlog si ningún patrón coincide
+                                parts = line.split()
+                                
+                                # Verificar si tiene suficientes partes para ser un xferlog
+                                if len(parts) >= 12:
+                                    # En xferlog, los primeros 5 elementos suelen ser la fecha
+                                    date_str = ' '.join(parts[:5])
+                                    fecha_hora = self.parse_date(date_str)
+                                    
+                                    # Posiciones estándar en xferlog (puede variar)
+                                    try:
+                                        duracion = int(parts[5])
+                                    except:
+                                        duracion = 0
+                                        
+                                    servidor = parts[6]
+                                    
+                                    try:
+                                        tamano_archivo = int(parts[7])
+                                    except:
+                                        tamano_archivo = 0
+                                        
+                                    archivo = parts[8]
+                                    tipo_transferencia = parts[9].upper()  # a/b -> A/B
+                                    accion_especial = parts[10]
+                                    direccion = 'IN' if parts[11].lower() == 'i' else 'OUT'
+                                    
+                                    # Los campos restantes pueden variar según la implementación
+                                    usuario = parts[12] if len(parts) > 12 else 'unknown'
+                                    servicio = parts[13] if len(parts) > 13 else 'ftp'
+                                    
+                                    entry = {
+                                        'fecha_hora': fecha_hora,
+                                        'duracion': duracion,
+                                        'servidor': servidor,
+                                        'ip_remota': servidor,  # En algunos formatos no hay IP específica
+                                        'tamaño_archivo': tamano_archivo,
+                                        'archivo': archivo,
+                                        'tipo_transferencia': tipo_transferencia,
+                                        'accion_especial': accion_especial,
+                                        'direccion': direccion,
+                                        'usuario': usuario,
+                                        'servicio': servicio,
+                                        'metodo_autenticacion': 'password',  # Valor por defecto
+                                        'usuario_id': usuario
+                                    }
+                                    entries.append(entry)
                     except Exception as e:
                         print(f"Error al procesar línea de log de transferencia FTP: {e}")
                         continue

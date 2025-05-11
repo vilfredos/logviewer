@@ -92,20 +92,30 @@ def detect_log_type(filepath):
             # Leer más líneas para tener una muestra más representativa
             sample_lines = ''.join([f.readline() for _ in range(20)])
         
+        # Verificar primero si es un xferlog (formato específico de transferencia FTP)
+        # El formato típico es: día-semana mes-nombre día-mes hora:min:seg año tiempo host bytes archivo tipo _ dirección modo usuario servicio resto
+        xferlog_pattern = r'^\w{3}\s+\w{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2}\s+\d{4}\s+\d+\s+\S+\s+\d+\s+\S+\s+[abcABC]\s+\_\s+[ioIO]\s+\S+\s+\S+\s+\S+'
+        if re.search(xferlog_pattern, sample_lines, re.MULTILINE):
+            return 'ftp_transfer'
+            
+        # Si el archivo se llama xferlog.log o tiene formato similar, es probable que sea un log de transferencia
+        if 'xferlog' in filepath.lower() or re.search(r'(xfer|transfer)\.log', filepath.lower()):
+            # Verificar si el contenido coincide con el formato general de xferlog
+            if re.search(r'\d{4}\s+\d+\s+\S+\s+\d+\s+\/\S+\s+[abcABC]\s+\_\s+[ioIO]', sample_lines):
+                return 'ftp_transfer'
+        
         # Patrones específicos para vsftpd.log y otros logs de FTP
-        # Primero verificar si es un log de FTP
         if 'vsftpd' in sample_lines.lower() or 'ftp' in sample_lines.lower():
+            # Verificar primero si parece un log de transferencia
+            if re.search(r'bytes sent|bytes received|\d+\s+bytes|transfer complete', sample_lines.lower()):
+                # Si tiene menciones de transferencia pero no es xferlog, sigue siendo un log de transferencia
+                if re.search(r'(STOR|RETR)\s+\S+.*\d+\s+bytes', sample_lines):
+                    return 'ftp_transfer'
             return 'ftp_log'
         
         # Verificar patrones específicos de FTP
         if re.search(r'(STOR|RETR|DELE|MKD|RMD|CWD|USER|PASS|QUIT)', sample_lines):
             return 'ftp_log'
-        
-        # Verificar patrones de transferencia FTP
-        if ('bytes sent' in sample_lines.lower() or 
-            'bytes received' in sample_lines.lower() or
-            re.search(r'(\d+ bytes|download|upload|transfer complete)', sample_lines.lower())):
-            return 'ftp_transfer'
             
         # Verificar si es un log de acceso de Apache
         if re.search(r'"(GET|POST|PUT|DELETE|HEAD|OPTIONS) .+? HTTP/\d', sample_lines):
@@ -146,15 +156,19 @@ def detect_log_type(filepath):
             log_type = apache_parser.detect_log_type(filepath)
             return log_type
         except:
-            # Si todo falla, asumir que es un log FTP si el nombre lo sugiere
-            if 'ftp' in filepath.lower() or 'vsftpd' in filepath.lower():
+            # Si todo falla, intentamos inferir por el nombre del archivo
+            if 'xferlog' in filepath.lower():
+                return 'ftp_transfer'
+            elif 'ftp' in filepath.lower() or 'vsftpd' in filepath.lower():
                 return 'ftp_log'
             
         raise ValueError("No se pudo determinar el tipo de log")
             
     except Exception as e:
         # Si hay error al abrir o procesar, intentamos inferir por el nombre del archivo
-        if 'ftp' in filepath.lower() or 'vsftpd' in filepath.lower():
+        if 'xferlog' in filepath.lower():
+            return 'ftp_transfer'
+        elif 'ftp' in filepath.lower() or 'vsftpd' in filepath.lower():
             return 'ftp_log'
         elif 'access' in filepath.lower():
             return 'apache_access'
@@ -301,6 +315,92 @@ def test_parser():
             
     else:
         return jsonify({'error': 'Tipo de archivo no permitido'}), 400
+    
+@app.route('/search_logs')
+def search_logs():
+    """Busca en los logs según los criterios especificados"""
+    # Obtener parámetros de búsqueda
+    search_term = request.args.get('searchTerm', '')
+    is_advanced = request.args.get('advancedSearch') == 'on'
+    log_type = request.args.get('log_type', 'apache_access')  # Por defecto, usar apache_access
+    
+    # Parámetros de búsqueda avanzada
+    start_date = request.args.get('startDate', '')
+    end_date = request.args.get('endDate', '')
+    term1 = request.args.get('term1', '')
+    operator = request.args.get('operator', 'AND')
+    term2 = request.args.get('term2', '')
+    filter_field = request.args.get('filterField', '')
+    filter_value = request.args.get('filterValue', '')
+    
+    # Construir consulta según si es búsqueda básica o avanzada
+    page = request.args.get('page', 1, type=int)
+    per_page = 50
+    
+    try:
+        if is_advanced:
+            # Preparar los parámetros para búsqueda avanzada
+            search_params = {
+                'start_date': start_date,
+                'end_date': end_date,
+                'term1': term1,
+                'operator': operator,
+                'term2': term2,
+                'filter_field': filter_field,
+                'filter_value': filter_value
+            }
+            
+            if log_type == 'apache_access':
+                logs = db.search_access_logs_advanced(search_params, page, per_page)
+                total = db.count_search_access_logs_advanced(search_params)
+            elif log_type == 'apache_error':
+                logs = db.search_error_logs_advanced(search_params, page, per_page)
+                total = db.count_search_error_logs_advanced(search_params)
+            elif log_type == 'ftp_log':
+                logs = db.search_ftp_logs_advanced(search_params, page, per_page)
+                total = db.count_search_ftp_logs_advanced(search_params)
+            elif log_type == 'ftp_transfer':
+                logs = db.search_ftp_transfers_advanced(search_params, page, per_page)
+                total = db.count_search_ftp_transfers_advanced(search_params)
+            else:
+                flash('Tipo de log no válido para búsqueda', 'danger')
+                return redirect(url_for('logs_view'))
+        else:
+            # Búsqueda básica (solo término)
+            if log_type == 'apache_access':
+                logs = db.search_access_logs(search_term, page, per_page)
+                total = db.count_search_access_logs(search_term)
+            elif log_type == 'apache_error':
+                logs = db.search_error_logs(search_term, page, per_page)
+                total = db.count_search_error_logs(search_term)
+            elif log_type == 'ftp_log':
+                logs = db.search_ftp_logs(search_term, page, per_page)
+                total = db.count_search_ftp_logs(search_term)
+            elif log_type == 'ftp_transfer':
+                logs = db.search_ftp_transfers(search_term, page, per_page)
+                total = db.count_search_ftp_transfers(search_term)
+            else:
+                flash('Tipo de log no válido para búsqueda', 'danger')
+                return redirect(url_for('logs_view'))
+        
+        # Asegurar que total tenga un valor válido
+        total = total or 0
+        total_pages = (total + per_page - 1) // per_page if total > 0 else 1
+        
+        # Mostrar resultados usando la misma plantilla logs_view.html
+        return render_template('logs_view.html',
+                               logs=logs,
+                               log_type=log_type,
+                               filename=None,  # No hay archivo específico
+                               page=page,
+                               total_pages=total_pages,
+                               search_term=search_term,
+                               is_advanced=is_advanced,
+                               search_params=request.args)
+                               
+    except Exception as e:
+        flash(f'Error al realizar la búsqueda: {str(e)}', 'danger')
+        return redirect(url_for('logs_view'))    
 
 if __name__ == '__main__':
     app.run(debug=True)
