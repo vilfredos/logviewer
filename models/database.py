@@ -1,8 +1,11 @@
 import pymysql
 import config
 from datetime import datetime
-
+import mysql.connector
+from mysql.connector import Error
+from typing import Dict, Any
 class Database:
+
     def __init__(self):
         self.config = config.DB_CONFIG
 

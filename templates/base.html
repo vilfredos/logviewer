@@ -11,10 +11,14 @@
     {% block extra_head %}{% endblock %}
 </head>
 <body>
+    <form action="{{ url_for('clear_database_route') }}" method="POST">
+        <button type="submit" class="btn btn-danger">Salir</button>
+    </form>
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('index') }}">Analizador de Logs - FTP & Apache</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-brand">Analizador de Logs - FTP & Apache</span>            
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>

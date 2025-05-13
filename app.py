@@ -4,6 +4,8 @@ from werkzeug.utils import secure_filename
 from models.database import Database
 from parsers.apache_parser import ApacheParser
 from parsers.ftp_parser import FTPParser
+from utils.report_analyzer import ReportAnalyzer
+from utils.alerts_handler import get_alerts
 import config
 import re
 
@@ -44,14 +46,6 @@ def logs_view():
 @app.route('/search')
 def search():
     return render_template('search.html')
-
-@app.route('/reports')
-def reports():
-    return render_template('reports.html')
-
-@app.route('/alerts')
-def alerts():
-    return render_template('alerts.html')
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -400,7 +394,42 @@ def search_logs():
                                
     except Exception as e:
         flash(f'Error al realizar la búsqueda: {str(e)}', 'danger')
-        return redirect(url_for('logs_view'))    
+        return redirect(url_for('logs_view'))   
+
+ 
+@app.route('/reports')
+def reports():
+    """Render the reports page with statistical analysis."""
+    db_config = config.DB_CONFIG
+    
+    # Create report analyzer instance
+    report_analyzer = ReportAnalyzer(db_config)
+    
+    # Get active table information
+    active_table, count = report_analyzer.identify_active_table()
+    
+    # Generate report based on active table
+    report_data = report_analyzer.generate_report()
+    
+    return render_template(
+        'reports.html', 
+        active_table=active_table,
+        record_count=count,
+        report_data=report_data
+    )
+
+@app.route('/alerts')
+def alerts():
+    """Alertas y errores en los logs"""
+    alerts_data = get_alerts()
+    table_name = alerts_data['table']
+    error_logs = alerts_data['logs']
+    
+    return render_template(
+        'alerts.html', 
+        table_name=table_name, 
+        error_logs=error_logs
+    )
 
 if __name__ == '__main__':
     app.run(debug=True)

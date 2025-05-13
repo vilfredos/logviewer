@@ -40,108 +40,128 @@ class FTPParser:
         except Exception as e:
             print(f"Error al parsear fecha FTP: {e}")
             return datetime.now()
-            
+        
+    def parse_dates(self, date_str):
+        """Convertir string de fecha a objeto datetime"""
+        try:
+            # Formato: Sat May 10 00:51:40 2025
+            return datetime.strptime(date_str, '%a %b %d %H:%M:%S %Y')
+        except Exception as e:
+            print(f"Error al parsear fecha '{date_str}': {e}")
+            return datetime.now()  # Usar fecha actual como respaldo
+        
     def parse_ftp_log(self, filepath):
-        """Parsea un archivo de log FTP general"""
+        """Parsea un archivo de log de vsftpd"""
         entries = []
         
         try:
             with open(filepath, 'r', errors='ignore') as f:
+                current_user = None
+                current_ip = None
+                
                 for line in f:
                     line = line.strip()
                     if not line:
                         continue
                         
                     try:
-                        # Intentar con el patrón regular
-                        match = self.ftp_pattern.match(line)
-                        
-                        if match:
-                            date_time, usuario, ip, detalles = match.groups()
-                            
-                            # Identificar acción y archivo
-                            accion = 'unknown'
-                            archivo = ''
-                            
-                            # Buscar comandos FTP comunes
-                            ftp_commands = ['STOR', 'RETR', 'DELE', 'MKD', 'RMD', 'LIST', 'NLST', 'CDUP', 
-                                           'CWD', 'PWD', 'SYST', 'QUIT', 'USER', 'PASS', 'ACCT', 'PORT']
-                            
-                            for cmd in ftp_commands:
-                                if cmd in detalles:
-                                    accion = cmd
-                                    # Extraer archivo si existe
-                                    parts = detalles.split(cmd, 1)
+                        # Extraer fecha y hora
+                        date_parts = line.split('[pid', 1)[0].strip()
+                        fecha_hora = self.parse_date(date_parts)
+
+                        # Extraer usuario evitando [pid]
+                        usuario = 'anonymous'
+                        usuario_match = re.search(r'\[(?!pid)([^\]]+)\]', line)
+                        if usuario_match:
+                            usuario = usuario_match.group(1)
+                        elif 'USER ' in line:
+                            user_parts = line.split('USER ', 1)
+                            if len(user_parts) > 1:
+                                usuario = user_parts[1].split()[0]
+                        if usuario != 'anonymous' and usuario != '':
+                            current_user = usuario
+                        elif current_user:
+                            usuario = current_user
+
+                        # Extraer IP
+                        ip = ''
+                        ip_match = re.search(r'Client "([^"]+)"', line)
+                        if ip_match:
+                            ip = ip_match.group(1)
+                            current_ip = ip
+                        elif current_ip:
+                            ip = current_ip
+
+                        # Determinar acción
+                        accion = 'unknown'
+                        archivo = ''
+                        action_map = {
+                            'CONNECT:': 'CONNECT',
+                            'OK LOGIN:': 'LOGIN',
+                            'FAIL LOGIN:': 'LOGIN_FAILED',
+                            'OK UPLOAD:': 'UPLOAD',
+                            'OK DOWNLOAD:': 'DOWNLOAD',
+                            'STOR ': 'STOR',
+                            'RETR ': 'RETR',
+                            'DELE ': 'DELETE',
+                            'MKD ': 'MKDIR',
+                            'RMD ': 'RMDIR',
+                            'CWD ': 'CWD',
+                            'LIST': 'LIST',
+                            'USER ': 'USER',
+                            'PASS ': 'PASS',
+                            'QUIT': 'QUIT'
+                        }
+
+                        for action_key, action_value in action_map.items():
+                            if action_key in line:
+                                accion = action_value
+                                if action_key in ['STOR ', 'RETR ', 'DELE ', 'MKD ', 'RMD ', 'CWD ']:
+                                    parts = line.split(action_key, 1)
                                     if len(parts) > 1:
-                                        archivo = parts[1].strip()
-                                    break
-                            
-                            # Crear entry
-                            entry = {
-                                'fecha_hora': self.parse_date(date_time),
-                                'usuario': usuario,
-                                'ip': ip,
-                                'accion': accion,
-                                'archivo': archivo,
-                                'detalles': detalles
-                            }
-                            entries.append(entry)
-                        else:
-                            # Enfoque alternativo si el patrón no coincide
-                            parts = line.split()
-                            if len(parts) >= 4:
-                                # Buscar fecha (primeros elementos que forman una fecha válida)
-                                date_str = ' '.join(parts[:5])  # Tomar hasta 5 elementos para la fecha
-                                fecha_hora = self.parse_date(date_str)
-                                
-                                # Buscar usuario y dirección IP
-                                usuario = 'anonymous'
-                                ip = ''
-                                
-                                # Buscar IP en la línea
-                                ip_pattern = r'\b(?:\d{1,3}\.){3}\d{1,3}\b'
-                                ip_match = re.search(ip_pattern, line)
-                                if ip_match:
-                                    ip = ip_match.group(0)
-                                
-                                # Buscar usuario común
-                                for part in parts:
-                                    if '@' in part or part.lower() in ['user', 'anonymous', 'admin', 'root']:
-                                        usuario = part
-                                        break
-                                
-                                # Determinar acción y archivo
-                                accion = 'unknown'
-                                archivo = ''
-                                
-                                for cmd in ['STOR', 'RETR', 'DELE', 'MKD', 'LIST']:
-                                    if cmd in line:
-                                        accion = cmd
-                                        cmd_idx = line.find(cmd)
-                                        if cmd_idx > 0:
-                                            # Tomar el resto de la línea como archivo
-                                            rest = line[cmd_idx + len(cmd):].strip()
-                                            # Eliminar flags o parámetros adicionales
-                                            archivo = rest.split()[0] if rest and ' ' in rest else rest
-                                        break
-                                
-                                entry = {
-                                    'fecha_hora': fecha_hora,
-                                    'usuario': usuario,
-                                    'ip': ip,
-                                    'accion': accion,
-                                    'archivo': archivo,
-                                    'detalles': line
-                                }
-                                entries.append(entry)
+                                        file_part = parts[1].strip()
+                                        if '"' in file_part:
+                                            file_match = re.search(r'"([^"]+)"', file_part)
+                                            if file_match:
+                                                archivo = file_match.group(1)
+                                        else:
+                                            archivo = file_part.split()[0]
+                                elif action_key in ['OK UPLOAD:', 'OK DOWNLOAD:']:
+                                    file_match = re.search(r'"[^"]+", "([^"]+)"', line)
+                                    if file_match:
+                                        archivo = file_match.group(1)
+                                break
+
+                        # Limpiar detalles
+                        detalles = line
+                        if '[pid' in detalles:
+                            detalles = detalles.split('[pid', 1)[1]
+                            if ']' in detalles:
+                                detalles = detalles.split(']', 1)[1].strip()
+                        if current_user and current_user != 'anonymous':
+                            detalles = detalles.replace(f'[{current_user}] ', '')
+                        detalles = detalles.strip()
+
+                        # Construir entrada
+                        entry = {
+                            'fecha_hora': fecha_hora,
+                            'usuario': usuario,
+                            'ip': ip,
+                            'accion': accion,
+                            'archivo': archivo,
+                            'detalles': detalles
+                        }
+                        entries.append(entry)
+
                     except Exception as e:
                         print(f"Error al procesar línea de log FTP: {e}")
                         continue
-                        
+
         except Exception as e:
             print(f"Error al abrir o leer el archivo de log FTP: {e}")
-            
+
         return entries
+    
         
     def parse_ftp_transfer(self, filepath):
         """Parsea un archivo de log de transferencias FTP (xferlog)"""

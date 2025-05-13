@@ -1,0 +1,1073 @@
+Thu Apr  3 19:12:52 2025 [pid 54292] CONNECT: Client "::1"
+Thu Apr  3 19:12:52 2025 [pid 54292] FTP response: Client "::1", "220 (vsFTPd 3.0.5)"
+Thu Apr  3 19:12:55 2025 [pid 54292] FTP command: Client "::1", "USER publica"
+Thu Apr  3 19:12:55 2025 [pid 54292] [publica] FTP response: Client "::1", "331 Please specify the password."
+Thu Apr  3 19:12:57 2025 [pid 54292] [publica] FTP command: Client "::1", "PASS <password>"
+Thu Apr  3 19:12:57 2025 [pid 54291] [publica] OK LOGIN: Client "::1"
+Thu Apr  3 19:12:57 2025 [pid 54293] [publica] FTP response: Client "::1", "230 Login successful."
+Thu Apr  3 19:12:57 2025 [pid 54293] [publica] FTP command: Client "::1", "SYST"
+Thu Apr  3 19:12:57 2025 [pid 54293] [publica] FTP response: Client "::1", "215 UNIX Type: L8"
+Thu Apr  3 19:12:57 2025 [pid 54293] [publica] FTP command: Client "::1", "FEAT"
+Thu Apr  3 19:12:57 2025 [pid 54293] [publica] FTP response: Client "::1", "211-Features:"
+Thu Apr  3 19:12:57 2025 [pid 54293] [publica] FTP response: Client "::1", " EPRT
+"
+Thu Apr  3 19:12:57 2025 [pid 54293] [publica] FTP response: Client "::1", " EPSV
+"
+Thu Apr  3 19:12:57 2025 [pid 54293] [publica] FTP response: Client "::1", " MDTM
+"
+Thu Apr  3 19:12:57 2025 [pid 54293] [publica] FTP response: Client "::1", " PASV
+"
+Thu Apr  3 19:12:57 2025 [pid 54293] [publica] FTP response: Client "::1", " REST STREAM
+"
+Thu Apr  3 19:12:57 2025 [pid 54293] [publica] FTP response: Client "::1", " SIZE
+"
+Thu Apr  3 19:12:57 2025 [pid 54293] [publica] FTP response: Client "::1", " TVFS
+"
+Thu Apr  3 19:12:57 2025 [pid 54293] [publica] FTP response: Client "::1", " UTF8
+"
+Thu Apr  3 19:12:57 2025 [pid 54293] [publica] FTP response: Client "::1", "211 End"
+Thu Apr  3 19:12:59 2025 [pid 54293] [publica] FTP command: Client "::1", "PWD"
+Thu Apr  3 19:12:59 2025 [pid 54293] [publica] FTP response: Client "::1", "257 "/" is the current directory"
+Thu Apr  3 19:13:53 2025 [pid 54377] CONNECT: Client "::ffff:192.168.139.1"
+Thu Apr  3 19:13:53 2025 [pid 54377] FTP response: Client "::ffff:192.168.139.1", "220 (vsFTPd 3.0.5)"
+Thu Apr  3 19:13:58 2025 [pid 54377] FTP command: Client "::ffff:192.168.139.1", "USER publica"
+Thu Apr  3 19:13:58 2025 [pid 54377] [publica] FTP response: Client "::ffff:192.168.139.1", "331 Please specify the password."
+Thu Apr  3 19:14:04 2025 [pid 54377] [publica] FTP command: Client "::ffff:192.168.139.1", "PASS <password>"
+Thu Apr  3 19:14:04 2025 [pid 54376] [publica] OK LOGIN: Client "::ffff:192.168.139.1"
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "230 Login successful."
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "SYST"
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "215 UNIX Type: L8"
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "FEAT"
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "211-Features:"
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", " EPRT
+"
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", " EPSV
+"
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", " MDTM
+"
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", " PASV
+"
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", " REST STREAM
+"
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", " SIZE
+"
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", " TVFS
+"
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", " UTF8
+"
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "211 End"
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "HELP SITE"
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "214-The following commands are recognized."
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", " ABOR ACCT ALLO APPE CDUP CWD  DELE EPRT EPSV FEAT HELP LIST MDTM MKD
+"
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", " MODE NLST NOOP OPTS PASS PASV PORT PWD  QUIT REIN REST RETR RMD  RNFR
+"
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", " RNTO SITE SIZE SMNT STAT STOR STOU STRU SYST TYPE USER XCUP XCWD XMKD
+"
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", " XPWD XRMD
+"
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "214 Help OK."
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "OPTS UTF8 ON"
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "200 Always in UTF8 mode."
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "PWD"
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "257 "/" is the current directory"
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "TYPE A"
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "200 Switching to ASCII mode."
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "PORT 192,168,139,1,248,157"
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "200 PORT command successful. Consider using PASV."
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "LIST"
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "150 Here comes the directory listing."
+Thu Apr  3 19:14:04 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "226 Directory send OK."
+Thu Apr  3 19:14:23 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "CWD Documents"
+Thu Apr  3 19:14:23 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "250 Directory successfully changed."
+Thu Apr  3 19:14:23 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "PWD"
+Thu Apr  3 19:14:23 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "257 "/Documents" is the current directory"
+Thu Apr  3 19:14:23 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "PORT 192,168,139,1,248,159"
+Thu Apr  3 19:14:23 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "200 PORT command successful. Consider using PASV."
+Thu Apr  3 19:14:23 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "LIST"
+Thu Apr  3 19:14:23 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "150 Here comes the directory listing."
+Thu Apr  3 19:14:23 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "226 Directory send OK."
+Thu Apr  3 19:14:34 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "TYPE I"
+Thu Apr  3 19:14:34 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "200 Switching to Binary mode."
+Thu Apr  3 19:14:34 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "PORT 192,168,139,1,248,160"
+Thu Apr  3 19:14:34 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "200 PORT command successful. Consider using PASV."
+Thu Apr  3 19:14:34 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "STOR xp123.com-INVEST-series.pdf"
+Thu Apr  3 19:14:34 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "150 Ok to send data."
+Thu Apr  3 19:14:34 2025 [pid 54378] [publica] OK UPLOAD: Client "::ffff:192.168.139.1", "/Documents/xp123.com-INVEST-series.pdf", 189719 bytes, 8128.84Kbyte/sec
+Thu Apr  3 19:14:34 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "226 Transfer complete."
+Thu Apr  3 19:14:34 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "SIZE xp123.com-INVEST-series.pdf"
+Thu Apr  3 19:14:34 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "213 189719"
+Thu Apr  3 19:14:34 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "TYPE A"
+Thu Apr  3 19:14:34 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "200 Switching to ASCII mode."
+Thu Apr  3 19:14:34 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "PORT 192,168,139,1,248,161"
+Thu Apr  3 19:14:34 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "200 PORT command successful. Consider using PASV."
+Thu Apr  3 19:14:34 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "LIST"
+Thu Apr  3 19:14:34 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "150 Here comes the directory listing."
+Thu Apr  3 19:14:34 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "226 Directory send OK."
+Thu Apr  3 19:16:26 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "TYPE I"
+Thu Apr  3 19:16:26 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "200 Switching to Binary mode."
+Thu Apr  3 19:16:26 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "PORT 192,168,139,1,248,172"
+Thu Apr  3 19:16:26 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "200 PORT command successful. Consider using PASV."
+Thu Apr  3 19:16:26 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "STOR 3.jpg"
+Thu Apr  3 19:16:26 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "150 Ok to send data."
+Thu Apr  3 19:16:26 2025 [pid 54378] [publica] OK UPLOAD: Client "::ffff:192.168.139.1", "/Documents/3.jpg", 63253 bytes, 4388.36Kbyte/sec
+Thu Apr  3 19:16:26 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "226 Transfer complete."
+Thu Apr  3 19:16:26 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "SIZE 3.jpg"
+Thu Apr  3 19:16:26 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "213 63253"
+Thu Apr  3 19:16:26 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "TYPE A"
+Thu Apr  3 19:16:26 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "200 Switching to ASCII mode."
+Thu Apr  3 19:16:26 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "PORT 192,168,139,1,248,173"
+Thu Apr  3 19:16:26 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "200 PORT command successful. Consider using PASV."
+Thu Apr  3 19:16:26 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "LIST"
+Thu Apr  3 19:16:26 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "150 Here comes the directory listing."
+Thu Apr  3 19:16:26 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "226 Directory send OK."
+Thu Apr  3 19:17:45 2025 [pid 54293] [publica] FTP command: Client "::1", "QUIT"
+Thu Apr  3 19:17:45 2025 [pid 54293] [publica] FTP response: Client "::1", "221 Goodbye."
+Thu Apr  3 19:18:17 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "TYPE I"
+Thu Apr  3 19:18:17 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "200 Switching to Binary mode."
+Thu Apr  3 19:18:17 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "PORT 192,168,139,1,248,191"
+Thu Apr  3 19:18:17 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "200 PORT command successful. Consider using PASV."
+Thu Apr  3 19:18:17 2025 [pid 54378] [publica] FTP command: Client "::ffff:192.168.139.1", "RETR xp123.com-INVEST-series.pdf"
+Thu Apr  3 19:18:17 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "150 Opening BINARY mode data connection for xp123.com-INVEST-series.pdf (189719 bytes)."
+Thu Apr  3 19:18:17 2025 [pid 54378] [publica] OK DOWNLOAD: Client "::ffff:192.168.139.1", "/Documents/xp123.com-INVEST-series.pdf", 189719 bytes, 41926.33Kbyte/sec
+Thu Apr  3 19:18:17 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "226 Transfer complete."
+Thu Apr  3 19:23:17 2025 [pid 54378] [publica] FTP response: Client "::ffff:192.168.139.1", "421 Timeout."
+Thu Apr  3 19:27:46 2025 [pid 54497] CONNECT: Client "::1"
+Thu Apr  3 19:27:46 2025 [pid 54497] FTP response: Client "::1", "220 (vsFTPd 3.0.5)"
+Thu Apr  3 19:27:50 2025 [pid 54497] FTP command: Client "::1", "USER publica"
+Thu Apr  3 19:27:50 2025 [pid 54497] [publica] FTP response: Client "::1", "331 Please specify the password."
+Thu Apr  3 19:27:51 2025 [pid 54497] [publica] FTP command: Client "::1", "PASS <password>"
+Thu Apr  3 19:27:51 2025 [pid 54496] [publica] OK LOGIN: Client "::1"
+Thu Apr  3 19:27:51 2025 [pid 54498] [publica] FTP response: Client "::1", "230 Login successful."
+Thu Apr  3 19:27:51 2025 [pid 54498] [publica] FTP command: Client "::1", "SYST"
+Thu Apr  3 19:27:51 2025 [pid 54498] [publica] FTP response: Client "::1", "215 UNIX Type: L8"
+Thu Apr  3 19:27:51 2025 [pid 54498] [publica] FTP command: Client "::1", "FEAT"
+Thu Apr  3 19:27:51 2025 [pid 54498] [publica] FTP response: Client "::1", "211-Features:"
+Thu Apr  3 19:27:51 2025 [pid 54498] [publica] FTP response: Client "::1", " EPRT
+"
+Thu Apr  3 19:27:51 2025 [pid 54498] [publica] FTP response: Client "::1", " EPSV
+"
+Thu Apr  3 19:27:51 2025 [pid 54498] [publica] FTP response: Client "::1", " MDTM
+"
+Thu Apr  3 19:27:51 2025 [pid 54498] [publica] FTP response: Client "::1", " PASV
+"
+Thu Apr  3 19:27:51 2025 [pid 54498] [publica] FTP response: Client "::1", " REST STREAM
+"
+Thu Apr  3 19:27:51 2025 [pid 54498] [publica] FTP response: Client "::1", " SIZE
+"
+Thu Apr  3 19:27:51 2025 [pid 54498] [publica] FTP response: Client "::1", " TVFS
+"
+Thu Apr  3 19:27:51 2025 [pid 54498] [publica] FTP response: Client "::1", " UTF8
+"
+Thu Apr  3 19:27:51 2025 [pid 54498] [publica] FTP response: Client "::1", "211 End"
+Thu Apr  3 19:27:53 2025 [pid 54498] [publica] FTP command: Client "::1", "PWD"
+Thu Apr  3 19:27:53 2025 [pid 54498] [publica] FTP response: Client "::1", "257 "/home/publica" is the current directory"
+Thu Apr  3 19:28:01 2025 [pid 54498] [publica] FTP command: Client "::1", "QUIT"
+Thu Apr  3 19:28:01 2025 [pid 54498] [publica] FTP response: Client "::1", "221 Goodbye."
+Thu Apr  3 19:29:26 2025 [pid 54592] CONNECT: Client "::1"
+Thu Apr  3 19:29:26 2025 [pid 54592] FTP response: Client "::1", "220 (vsFTPd 3.0.5)"
+Thu Apr  3 19:29:29 2025 [pid 54592] FTP command: Client "::1", "USER user01"
+Thu Apr  3 19:29:29 2025 [pid 54592] [user01] FTP response: Client "::1", "331 Please specify the password."
+Thu Apr  3 19:29:31 2025 [pid 54592] [user01] FTP command: Client "::1", "PASS <password>"
+Thu Apr  3 19:29:31 2025 [pid 54591] [user01] OK LOGIN: Client "::1"
+Thu Apr  3 19:29:31 2025 [pid 54593] [user01] FTP response: Client "::1", "230 Login successful."
+Thu Apr  3 19:29:31 2025 [pid 54593] [user01] FTP command: Client "::1", "SYST"
+Thu Apr  3 19:29:31 2025 [pid 54593] [user01] FTP response: Client "::1", "215 UNIX Type: L8"
+Thu Apr  3 19:29:31 2025 [pid 54593] [user01] FTP command: Client "::1", "FEAT"
+Thu Apr  3 19:29:31 2025 [pid 54593] [user01] FTP response: Client "::1", "211-Features:"
+Thu Apr  3 19:29:31 2025 [pid 54593] [user01] FTP response: Client "::1", " EPRT
+"
+Thu Apr  3 19:29:31 2025 [pid 54593] [user01] FTP response: Client "::1", " EPSV
+"
+Thu Apr  3 19:29:31 2025 [pid 54593] [user01] FTP response: Client "::1", " MDTM
+"
+Thu Apr  3 19:29:31 2025 [pid 54593] [user01] FTP response: Client "::1", " PASV
+"
+Thu Apr  3 19:29:31 2025 [pid 54593] [user01] FTP response: Client "::1", " REST STREAM
+"
+Thu Apr  3 19:29:31 2025 [pid 54593] [user01] FTP response: Client "::1", " SIZE
+"
+Thu Apr  3 19:29:31 2025 [pid 54593] [user01] FTP response: Client "::1", " TVFS
+"
+Thu Apr  3 19:29:31 2025 [pid 54593] [user01] FTP response: Client "::1", " UTF8
+"
+Thu Apr  3 19:29:31 2025 [pid 54593] [user01] FTP response: Client "::1", "211 End"
+Thu Apr  3 19:29:32 2025 [pid 54593] [user01] FTP command: Client "::1", "PWD"
+Thu Apr  3 19:29:32 2025 [pid 54593] [user01] FTP response: Client "::1", "257 "/" is the current directory"
+Thu Apr  3 19:29:41 2025 [pid 54593] [user01] FTP command: Client "::1", "QUIT"
+Thu Apr  3 19:29:41 2025 [pid 54593] [user01] FTP response: Client "::1", "221 Goodbye."
+Thu Apr  3 19:29:42 2025 [pid 54596] CONNECT: Client "::1"
+Thu Apr  3 19:29:42 2025 [pid 54596] FTP response: Client "::1", "220 (vsFTPd 3.0.5)"
+Thu Apr  3 19:29:45 2025 [pid 54596] FTP command: Client "::1", "USER user02"
+Thu Apr  3 19:29:45 2025 [pid 54596] [user02] FTP response: Client "::1", "331 Please specify the password."
+Thu Apr  3 19:29:47 2025 [pid 54596] [user02] FTP command: Client "::1", "PASS <password>"
+Thu Apr  3 19:29:47 2025 [pid 54595] [user02] OK LOGIN: Client "::1"
+Thu Apr  3 19:29:47 2025 [pid 54597] [user02] FTP response: Client "::1", "230 Login successful."
+Thu Apr  3 19:29:47 2025 [pid 54597] [user02] FTP command: Client "::1", "SYST"
+Thu Apr  3 19:29:47 2025 [pid 54597] [user02] FTP response: Client "::1", "215 UNIX Type: L8"
+Thu Apr  3 19:29:47 2025 [pid 54597] [user02] FTP command: Client "::1", "FEAT"
+Thu Apr  3 19:29:47 2025 [pid 54597] [user02] FTP response: Client "::1", "211-Features:"
+Thu Apr  3 19:29:47 2025 [pid 54597] [user02] FTP response: Client "::1", " EPRT
+"
+Thu Apr  3 19:29:47 2025 [pid 54597] [user02] FTP response: Client "::1", " EPSV
+"
+Thu Apr  3 19:29:47 2025 [pid 54597] [user02] FTP response: Client "::1", " MDTM
+"
+Thu Apr  3 19:29:47 2025 [pid 54597] [user02] FTP response: Client "::1", " PASV
+"
+Thu Apr  3 19:29:47 2025 [pid 54597] [user02] FTP response: Client "::1", " REST STREAM
+"
+Thu Apr  3 19:29:47 2025 [pid 54597] [user02] FTP response: Client "::1", " SIZE
+"
+Thu Apr  3 19:29:47 2025 [pid 54597] [user02] FTP response: Client "::1", " TVFS
+"
+Thu Apr  3 19:29:47 2025 [pid 54597] [user02] FTP response: Client "::1", " UTF8
+"
+Thu Apr  3 19:29:47 2025 [pid 54597] [user02] FTP response: Client "::1", "211 End"
+Thu Apr  3 19:29:49 2025 [pid 54597] [user02] FTP command: Client "::1", "PWD"
+Thu Apr  3 19:29:49 2025 [pid 54597] [user02] FTP response: Client "::1", "257 "/" is the current directory"
+Thu Apr  3 19:29:55 2025 [pid 54597] [user02] FTP command: Client "::1", "QUIT"
+Thu Apr  3 19:29:55 2025 [pid 54597] [user02] FTP response: Client "::1", "221 Goodbye."
+Thu Apr  3 19:30:10 2025 [pid 54631] CONNECT: Client "::1"
+Thu Apr  3 19:30:10 2025 [pid 54631] FTP response: Client "::1", "220 (vsFTPd 3.0.5)"
+Thu Apr  3 19:30:12 2025 [pid 54631] FTP command: Client "::1", "USER publica"
+Thu Apr  3 19:30:12 2025 [pid 54631] [publica] FTP response: Client "::1", "331 Please specify the password."
+Thu Apr  3 19:30:14 2025 [pid 54631] [publica] FTP command: Client "::1", "PASS <password>"
+Thu Apr  3 19:30:14 2025 [pid 54630] [publica] OK LOGIN: Client "::1"
+Thu Apr  3 19:30:14 2025 [pid 54632] [publica] FTP response: Client "::1", "230 Login successful."
+Thu Apr  3 19:30:14 2025 [pid 54632] [publica] FTP command: Client "::1", "SYST"
+Thu Apr  3 19:30:14 2025 [pid 54632] [publica] FTP response: Client "::1", "215 UNIX Type: L8"
+Thu Apr  3 19:30:14 2025 [pid 54632] [publica] FTP command: Client "::1", "FEAT"
+Thu Apr  3 19:30:14 2025 [pid 54632] [publica] FTP response: Client "::1", "211-Features:"
+Thu Apr  3 19:30:14 2025 [pid 54632] [publica] FTP response: Client "::1", " EPRT
+"
+Thu Apr  3 19:30:14 2025 [pid 54632] [publica] FTP response: Client "::1", " EPSV
+"
+Thu Apr  3 19:30:14 2025 [pid 54632] [publica] FTP response: Client "::1", " MDTM
+"
+Thu Apr  3 19:30:14 2025 [pid 54632] [publica] FTP response: Client "::1", " PASV
+"
+Thu Apr  3 19:30:14 2025 [pid 54632] [publica] FTP response: Client "::1", " REST STREAM
+"
+Thu Apr  3 19:30:14 2025 [pid 54632] [publica] FTP response: Client "::1", " SIZE
+"
+Thu Apr  3 19:30:14 2025 [pid 54632] [publica] FTP response: Client "::1", " TVFS
+"
+Thu Apr  3 19:30:14 2025 [pid 54632] [publica] FTP response: Client "::1", " UTF8
+"
+Thu Apr  3 19:30:14 2025 [pid 54632] [publica] FTP response: Client "::1", "211 End"
+Thu Apr  3 19:30:15 2025 [pid 54632] [publica] FTP command: Client "::1", "PWD"
+Thu Apr  3 19:30:15 2025 [pid 54632] [publica] FTP response: Client "::1", "257 "/home/publica" is the current directory"
+Thu Apr  3 19:30:18 2025 [pid 54632] [publica] FTP command: Client "::1", "QUIT"
+Thu Apr  3 19:30:18 2025 [pid 54632] [publica] FTP response: Client "::1", "221 Goodbye."
+Thu Apr  3 19:30:19 2025 [pid 54636] CONNECT: Client "::1"
+Thu Apr  3 19:30:19 2025 [pid 54636] FTP response: Client "::1", "220 (vsFTPd 3.0.5)"
+Thu Apr  3 19:30:21 2025 [pid 54636] FTP command: Client "::1", "USER user01"
+Thu Apr  3 19:30:21 2025 [pid 54636] [user01] FTP response: Client "::1", "331 Please specify the password."
+Thu Apr  3 19:30:24 2025 [pid 54636] [user01] FTP command: Client "::1", "PASS <password>"
+Thu Apr  3 19:30:24 2025 [pid 54635] [user01] OK LOGIN: Client "::1"
+Thu Apr  3 19:30:24 2025 [pid 54637] [user01] FTP response: Client "::1", "230 Login successful."
+Thu Apr  3 19:30:24 2025 [pid 54637] [user01] FTP command: Client "::1", "SYST"
+Thu Apr  3 19:30:24 2025 [pid 54637] [user01] FTP response: Client "::1", "215 UNIX Type: L8"
+Thu Apr  3 19:30:24 2025 [pid 54637] [user01] FTP command: Client "::1", "FEAT"
+Thu Apr  3 19:30:24 2025 [pid 54637] [user01] FTP response: Client "::1", "211-Features:"
+Thu Apr  3 19:30:24 2025 [pid 54637] [user01] FTP response: Client "::1", " EPRT
+"
+Thu Apr  3 19:30:24 2025 [pid 54637] [user01] FTP response: Client "::1", " EPSV
+"
+Thu Apr  3 19:30:24 2025 [pid 54637] [user01] FTP response: Client "::1", " MDTM
+"
+Thu Apr  3 19:30:24 2025 [pid 54637] [user01] FTP response: Client "::1", " PASV
+"
+Thu Apr  3 19:30:24 2025 [pid 54637] [user01] FTP response: Client "::1", " REST STREAM
+"
+Thu Apr  3 19:30:24 2025 [pid 54637] [user01] FTP response: Client "::1", " SIZE
+"
+Thu Apr  3 19:30:24 2025 [pid 54637] [user01] FTP response: Client "::1", " TVFS
+"
+Thu Apr  3 19:30:24 2025 [pid 54637] [user01] FTP response: Client "::1", " UTF8
+"
+Thu Apr  3 19:30:24 2025 [pid 54637] [user01] FTP response: Client "::1", "211 End"
+Thu Apr  3 19:30:26 2025 [pid 54637] [user01] FTP command: Client "::1", "PWD"
+Thu Apr  3 19:30:26 2025 [pid 54637] [user01] FTP response: Client "::1", "257 "/" is the current directory"
+Thu Apr  3 19:30:53 2025 [pid 54637] [user01] FTP command: Client "::1", "QUIT"
+Thu Apr  3 19:30:53 2025 [pid 54637] [user01] FTP response: Client "::1", "221 Goodbye."
+Thu Apr  3 19:31:11 2025 [pid 54642] CONNECT: Client "::1"
+Thu Apr  3 19:31:11 2025 [pid 54642] FTP response: Client "::1", "220 (vsFTPd 3.0.5)"
+Thu Apr  3 19:31:13 2025 [pid 54642] FTP command: Client "::1", "USER publica"
+Thu Apr  3 19:31:13 2025 [pid 54642] [publica] FTP response: Client "::1", "331 Please specify the password."
+Thu Apr  3 19:31:16 2025 [pid 54642] [publica] FTP command: Client "::1", "PASS <password>"
+Thu Apr  3 19:31:16 2025 [pid 54641] [publica] OK LOGIN: Client "::1"
+Thu Apr  3 19:31:16 2025 [pid 54643] [publica] FTP response: Client "::1", "230 Login successful."
+Thu Apr  3 19:31:16 2025 [pid 54643] [publica] FTP command: Client "::1", "SYST"
+Thu Apr  3 19:31:16 2025 [pid 54643] [publica] FTP response: Client "::1", "215 UNIX Type: L8"
+Thu Apr  3 19:31:16 2025 [pid 54643] [publica] FTP command: Client "::1", "FEAT"
+Thu Apr  3 19:31:16 2025 [pid 54643] [publica] FTP response: Client "::1", "211-Features:"
+Thu Apr  3 19:31:16 2025 [pid 54643] [publica] FTP response: Client "::1", " EPRT
+"
+Thu Apr  3 19:31:16 2025 [pid 54643] [publica] FTP response: Client "::1", " EPSV
+"
+Thu Apr  3 19:31:16 2025 [pid 54643] [publica] FTP response: Client "::1", " MDTM
+"
+Thu Apr  3 19:31:16 2025 [pid 54643] [publica] FTP response: Client "::1", " PASV
+"
+Thu Apr  3 19:31:16 2025 [pid 54643] [publica] FTP response: Client "::1", " REST STREAM
+"
+Thu Apr  3 19:31:16 2025 [pid 54643] [publica] FTP response: Client "::1", " SIZE
+"
+Thu Apr  3 19:31:16 2025 [pid 54643] [publica] FTP response: Client "::1", " TVFS
+"
+Thu Apr  3 19:31:16 2025 [pid 54643] [publica] FTP response: Client "::1", " UTF8
+"
+Thu Apr  3 19:31:16 2025 [pid 54643] [publica] FTP response: Client "::1", "211 End"
+Thu Apr  3 19:31:17 2025 [pid 54643] [publica] FTP command: Client "::1", "PWD"
+Thu Apr  3 19:31:17 2025 [pid 54643] [publica] FTP response: Client "::1", "257 "/home/publica" is the current directory"
+Thu Apr  3 19:31:21 2025 [pid 54643] [publica] FTP command: Client "::1", "QUIT"
+Thu Apr  3 19:31:21 2025 [pid 54643] [publica] FTP response: Client "::1", "221 Goodbye."
+Thu Apr  3 19:32:29 2025 [pid 54682] CONNECT: Client "::1"
+Thu Apr  3 19:32:29 2025 [pid 54682] FTP response: Client "::1", "220 (vsFTPd 3.0.5)"
+Thu Apr  3 19:32:35 2025 [pid 54682] FTP command: Client "::1", "USER user01"
+Thu Apr  3 19:32:35 2025 [pid 54682] [user01] FTP response: Client "::1", "331 Please specify the password."
+Thu Apr  3 19:32:38 2025 [pid 54682] [user01] FTP command: Client "::1", "PASS <password>"
+Thu Apr  3 19:32:38 2025 [pid 54681] [user01] OK LOGIN: Client "::1"
+Thu Apr  3 19:32:38 2025 [pid 54683] [user01] FTP response: Client "::1", "230 Login successful."
+Thu Apr  3 19:32:38 2025 [pid 54683] [user01] FTP command: Client "::1", "SYST"
+Thu Apr  3 19:32:38 2025 [pid 54683] [user01] FTP response: Client "::1", "215 UNIX Type: L8"
+Thu Apr  3 19:32:38 2025 [pid 54683] [user01] FTP command: Client "::1", "FEAT"
+Thu Apr  3 19:32:38 2025 [pid 54683] [user01] FTP response: Client "::1", "211-Features:"
+Thu Apr  3 19:32:38 2025 [pid 54683] [user01] FTP response: Client "::1", " EPRT
+"
+Thu Apr  3 19:32:38 2025 [pid 54683] [user01] FTP response: Client "::1", " EPSV
+"
+Thu Apr  3 19:32:38 2025 [pid 54683] [user01] FTP response: Client "::1", " MDTM
+"
+Thu Apr  3 19:32:38 2025 [pid 54683] [user01] FTP response: Client "::1", " PASV
+"
+Thu Apr  3 19:32:38 2025 [pid 54683] [user01] FTP response: Client "::1", " REST STREAM
+"
+Thu Apr  3 19:32:38 2025 [pid 54683] [user01] FTP response: Client "::1", " SIZE
+"
+Thu Apr  3 19:32:38 2025 [pid 54683] [user01] FTP response: Client "::1", " TVFS
+"
+Thu Apr  3 19:32:38 2025 [pid 54683] [user01] FTP response: Client "::1", " UTF8
+"
+Thu Apr  3 19:32:38 2025 [pid 54683] [user01] FTP response: Client "::1", "211 End"
+Thu Apr  3 19:32:42 2025 [pid 54683] [user01] FTP command: Client "::1", "PWD"
+Thu Apr  3 19:32:42 2025 [pid 54683] [user01] FTP response: Client "::1", "257 "/" is the current directory"
+Thu Apr  3 19:32:47 2025 [pid 54683] [user01] FTP command: Client "::1", "QUIT"
+Thu Apr  3 19:32:47 2025 [pid 54683] [user01] FTP response: Client "::1", "221 Goodbye."
+Thu Apr  3 19:33:46 2025 [pid 54811] CONNECT: Client "::1"
+Thu Apr  3 19:33:46 2025 [pid 54811] FTP response: Client "::1", "220 (vsFTPd 3.0.5)"
+Thu Apr  3 19:33:49 2025 [pid 54811] FTP command: Client "::1", "USER user01"
+Thu Apr  3 19:33:49 2025 [pid 54811] [user01] FTP response: Client "::1", "331 Please specify the password."
+Thu Apr  3 19:33:52 2025 [pid 54811] [user01] FTP command: Client "::1", "PASS <password>"
+Thu Apr  3 19:33:52 2025 [pid 54810] [user01] OK LOGIN: Client "::1"
+Thu Apr  3 19:33:52 2025 [pid 54814] [user01] FTP response: Client "::1", "230 Login successful."
+Thu Apr  3 19:33:52 2025 [pid 54814] [user01] FTP command: Client "::1", "SYST"
+Thu Apr  3 19:33:52 2025 [pid 54814] [user01] FTP response: Client "::1", "215 UNIX Type: L8"
+Thu Apr  3 19:33:52 2025 [pid 54814] [user01] FTP command: Client "::1", "FEAT"
+Thu Apr  3 19:33:52 2025 [pid 54814] [user01] FTP response: Client "::1", "211-Features:"
+Thu Apr  3 19:33:52 2025 [pid 54814] [user01] FTP response: Client "::1", " EPRT
+"
+Thu Apr  3 19:33:52 2025 [pid 54814] [user01] FTP response: Client "::1", " EPSV
+"
+Thu Apr  3 19:33:52 2025 [pid 54814] [user01] FTP response: Client "::1", " MDTM
+"
+Thu Apr  3 19:33:52 2025 [pid 54814] [user01] FTP response: Client "::1", " PASV
+"
+Thu Apr  3 19:33:52 2025 [pid 54814] [user01] FTP response: Client "::1", " REST STREAM
+"
+Thu Apr  3 19:33:52 2025 [pid 54814] [user01] FTP response: Client "::1", " SIZE
+"
+Thu Apr  3 19:33:52 2025 [pid 54814] [user01] FTP response: Client "::1", " TVFS
+"
+Thu Apr  3 19:33:52 2025 [pid 54814] [user01] FTP response: Client "::1", " UTF8
+"
+Thu Apr  3 19:33:52 2025 [pid 54814] [user01] FTP response: Client "::1", "211 End"
+Thu Apr  3 19:33:53 2025 [pid 54814] [user01] FTP command: Client "::1", "PWD"
+Thu Apr  3 19:33:53 2025 [pid 54814] [user01] FTP response: Client "::1", "257 "/" is the current directory"
+Thu Apr  3 19:33:57 2025 [pid 54814] [user01] FTP command: Client "::1", "QUIT"
+Thu Apr  3 19:33:57 2025 [pid 54814] [user01] FTP response: Client "::1", "221 Goodbye."
+Thu Apr  3 19:33:58 2025 [pid 54817] CONNECT: Client "::1"
+Thu Apr  3 19:33:58 2025 [pid 54817] FTP response: Client "::1", "220 (vsFTPd 3.0.5)"
+Thu Apr  3 19:34:01 2025 [pid 54817] FTP command: Client "::1", "USER publica"
+Thu Apr  3 19:34:01 2025 [pid 54817] [publica] FTP response: Client "::1", "331 Please specify the password."
+Thu Apr  3 19:34:04 2025 [pid 54817] [publica] FTP command: Client "::1", "PASS <password>"
+Thu Apr  3 19:34:04 2025 [pid 54816] [publica] OK LOGIN: Client "::1"
+Thu Apr  3 19:34:04 2025 [pid 54819] [publica] FTP response: Client "::1", "230 Login successful."
+Thu Apr  3 19:34:04 2025 [pid 54819] [publica] FTP command: Client "::1", "SYST"
+Thu Apr  3 19:34:04 2025 [pid 54819] [publica] FTP response: Client "::1", "215 UNIX Type: L8"
+Thu Apr  3 19:34:04 2025 [pid 54819] [publica] FTP command: Client "::1", "FEAT"
+Thu Apr  3 19:34:04 2025 [pid 54819] [publica] FTP response: Client "::1", "211-Features:"
+Thu Apr  3 19:34:04 2025 [pid 54819] [publica] FTP response: Client "::1", " EPRT
+"
+Thu Apr  3 19:34:04 2025 [pid 54819] [publica] FTP response: Client "::1", " EPSV
+"
+Thu Apr  3 19:34:04 2025 [pid 54819] [publica] FTP response: Client "::1", " MDTM
+"
+Thu Apr  3 19:34:04 2025 [pid 54819] [publica] FTP response: Client "::1", " PASV
+"
+Thu Apr  3 19:34:04 2025 [pid 54819] [publica] FTP response: Client "::1", " REST STREAM
+"
+Thu Apr  3 19:34:04 2025 [pid 54819] [publica] FTP response: Client "::1", " SIZE
+"
+Thu Apr  3 19:34:04 2025 [pid 54819] [publica] FTP response: Client "::1", " TVFS
+"
+Thu Apr  3 19:34:04 2025 [pid 54819] [publica] FTP response: Client "::1", " UTF8
+"
+Thu Apr  3 19:34:04 2025 [pid 54819] [publica] FTP response: Client "::1", "211 End"
+Thu Apr  3 19:34:05 2025 [pid 54819] [publica] FTP command: Client "::1", "PWD"
+Thu Apr  3 19:34:05 2025 [pid 54819] [publica] FTP response: Client "::1", "257 "/home/publica" is the current directory"
+Thu Apr  3 19:34:08 2025 [pid 54819] [publica] FTP command: Client "::1", "QUIT"
+Thu Apr  3 19:34:08 2025 [pid 54819] [publica] FTP response: Client "::1", "221 Goodbye."
+Thu Apr  3 19:34:53 2025 [pid 54836] CONNECT: Client "::1"
+Thu Apr  3 19:34:53 2025 [pid 54836] FTP response: Client "::1", "220 (vsFTPd 3.0.5)"
+Thu Apr  3 19:34:55 2025 [pid 54836] FTP command: Client "::1", "USER publica"
+Thu Apr  3 19:34:55 2025 [pid 54836] [publica] FTP response: Client "::1", "331 Please specify the password."
+Thu Apr  3 19:34:57 2025 [pid 54836] [publica] FTP command: Client "::1", "PASS <password>"
+Thu Apr  3 19:34:57 2025 [pid 54835] [publica] OK LOGIN: Client "::1"
+Thu Apr  3 19:34:57 2025 [pid 54837] [publica] FTP response: Client "::1", "230 Login successful."
+Thu Apr  3 19:34:57 2025 [pid 54837] [publica] FTP command: Client "::1", "SYST"
+Thu Apr  3 19:34:57 2025 [pid 54837] [publica] FTP response: Client "::1", "215 UNIX Type: L8"
+Thu Apr  3 19:34:57 2025 [pid 54837] [publica] FTP command: Client "::1", "FEAT"
+Thu Apr  3 19:34:57 2025 [pid 54837] [publica] FTP response: Client "::1", "211-Features:"
+Thu Apr  3 19:34:57 2025 [pid 54837] [publica] FTP response: Client "::1", " EPRT
+"
+Thu Apr  3 19:34:57 2025 [pid 54837] [publica] FTP response: Client "::1", " EPSV
+"
+Thu Apr  3 19:34:57 2025 [pid 54837] [publica] FTP response: Client "::1", " MDTM
+"
+Thu Apr  3 19:34:57 2025 [pid 54837] [publica] FTP response: Client "::1", " PASV
+"
+Thu Apr  3 19:34:57 2025 [pid 54837] [publica] FTP response: Client "::1", " REST STREAM
+"
+Thu Apr  3 19:34:57 2025 [pid 54837] [publica] FTP response: Client "::1", " SIZE
+"
+Thu Apr  3 19:34:57 2025 [pid 54837] [publica] FTP response: Client "::1", " TVFS
+"
+Thu Apr  3 19:34:57 2025 [pid 54837] [publica] FTP response: Client "::1", " UTF8
+"
+Thu Apr  3 19:34:57 2025 [pid 54837] [publica] FTP response: Client "::1", "211 End"
+Thu Apr  3 19:34:59 2025 [pid 54837] [publica] FTP command: Client "::1", "PWD"
+Thu Apr  3 19:34:59 2025 [pid 54837] [publica] FTP response: Client "::1", "257 "/" is the current directory"
+Thu Apr  3 19:35:03 2025 [pid 54837] [publica] FTP command: Client "::1", "QUIT"
+Thu Apr  3 19:35:03 2025 [pid 54837] [publica] FTP response: Client "::1", "221 Goodbye."
+Thu Apr  3 19:35:46 2025 [pid 54857] CONNECT: Client "::1"
+Thu Apr  3 19:35:46 2025 [pid 54857] FTP response: Client "::1", "220 (vsFTPd 3.0.5)"
+Thu Apr  3 19:35:50 2025 [pid 54857] FTP command: Client "::1", "USER user01"
+Thu Apr  3 19:35:50 2025 [pid 54857] [user01] FTP response: Client "::1", "331 Please specify the password."
+Thu Apr  3 19:35:53 2025 [pid 54857] [user01] FTP command: Client "::1", "PASS <password>"
+Thu Apr  3 19:35:53 2025 [pid 54856] [user01] OK LOGIN: Client "::1"
+Thu Apr  3 19:35:53 2025 [pid 54858] [user01] FTP response: Client "::1", "230 Login successful."
+Thu Apr  3 19:35:53 2025 [pid 54858] [user01] FTP command: Client "::1", "SYST"
+Thu Apr  3 19:35:53 2025 [pid 54858] [user01] FTP response: Client "::1", "215 UNIX Type: L8"
+Thu Apr  3 19:35:53 2025 [pid 54858] [user01] FTP command: Client "::1", "FEAT"
+Thu Apr  3 19:35:53 2025 [pid 54858] [user01] FTP response: Client "::1", "211-Features:"
+Thu Apr  3 19:35:53 2025 [pid 54858] [user01] FTP response: Client "::1", " EPRT
+"
+Thu Apr  3 19:35:53 2025 [pid 54858] [user01] FTP response: Client "::1", " EPSV
+"
+Thu Apr  3 19:35:53 2025 [pid 54858] [user01] FTP response: Client "::1", " MDTM
+"
+Thu Apr  3 19:35:53 2025 [pid 54858] [user01] FTP response: Client "::1", " PASV
+"
+Thu Apr  3 19:35:53 2025 [pid 54858] [user01] FTP response: Client "::1", " REST STREAM
+"
+Thu Apr  3 19:35:53 2025 [pid 54858] [user01] FTP response: Client "::1", " SIZE
+"
+Thu Apr  3 19:35:53 2025 [pid 54858] [user01] FTP response: Client "::1", " TVFS
+"
+Thu Apr  3 19:35:53 2025 [pid 54858] [user01] FTP response: Client "::1", " UTF8
+"
+Thu Apr  3 19:35:53 2025 [pid 54858] [user01] FTP response: Client "::1", "211 End"
+Thu Apr  3 19:35:54 2025 [pid 54858] [user01] FTP command: Client "::1", "PWD"
+Thu Apr  3 19:35:54 2025 [pid 54858] [user01] FTP response: Client "::1", "257 "/" is the current directory"
+Thu Apr  3 19:35:57 2025 [pid 54858] [user01] FTP command: Client "::1", "QUIT"
+Thu Apr  3 19:35:57 2025 [pid 54858] [user01] FTP response: Client "::1", "221 Goodbye."
+Thu Apr  3 19:35:58 2025 [pid 54861] CONNECT: Client "::1"
+Thu Apr  3 19:35:58 2025 [pid 54861] FTP response: Client "::1", "220 (vsFTPd 3.0.5)"
+Thu Apr  3 19:36:00 2025 [pid 54861] FTP command: Client "::1", "USER user02"
+Thu Apr  3 19:36:00 2025 [pid 54861] [user02] FTP response: Client "::1", "331 Please specify the password."
+Thu Apr  3 19:36:02 2025 [pid 54861] [user02] FTP command: Client "::1", "PASS <password>"
+Thu Apr  3 19:36:02 2025 [pid 54860] [user02] OK LOGIN: Client "::1"
+Thu Apr  3 19:36:02 2025 [pid 54862] [user02] FTP response: Client "::1", "230 Login successful."
+Thu Apr  3 19:36:02 2025 [pid 54862] [user02] FTP command: Client "::1", "SYST"
+Thu Apr  3 19:36:02 2025 [pid 54862] [user02] FTP response: Client "::1", "215 UNIX Type: L8"
+Thu Apr  3 19:36:02 2025 [pid 54862] [user02] FTP command: Client "::1", "FEAT"
+Thu Apr  3 19:36:02 2025 [pid 54862] [user02] FTP response: Client "::1", "211-Features:"
+Thu Apr  3 19:36:02 2025 [pid 54862] [user02] FTP response: Client "::1", " EPRT
+"
+Thu Apr  3 19:36:02 2025 [pid 54862] [user02] FTP response: Client "::1", " EPSV
+"
+Thu Apr  3 19:36:02 2025 [pid 54862] [user02] FTP response: Client "::1", " MDTM
+"
+Thu Apr  3 19:36:02 2025 [pid 54862] [user02] FTP response: Client "::1", " PASV
+"
+Thu Apr  3 19:36:02 2025 [pid 54862] [user02] FTP response: Client "::1", " REST STREAM
+"
+Thu Apr  3 19:36:02 2025 [pid 54862] [user02] FTP response: Client "::1", " SIZE
+"
+Thu Apr  3 19:36:02 2025 [pid 54862] [user02] FTP response: Client "::1", " TVFS
+"
+Thu Apr  3 19:36:02 2025 [pid 54862] [user02] FTP response: Client "::1", " UTF8
+"
+Thu Apr  3 19:36:02 2025 [pid 54862] [user02] FTP response: Client "::1", "211 End"
+Thu Apr  3 19:36:04 2025 [pid 54862] [user02] FTP command: Client "::1", "PWD"
+Thu Apr  3 19:36:04 2025 [pid 54862] [user02] FTP response: Client "::1", "257 "/" is the current directory"
+Thu Apr  3 19:36:06 2025 [pid 54862] [user02] FTP command: Client "::1", "QUIT"
+Thu Apr  3 19:36:06 2025 [pid 54862] [user02] FTP response: Client "::1", "221 Goodbye."
+Thu Apr  3 19:36:07 2025 [pid 54865] CONNECT: Client "::1"
+Thu Apr  3 19:36:07 2025 [pid 54865] FTP response: Client "::1", "220 (vsFTPd 3.0.5)"
+Thu Apr  3 19:36:09 2025 [pid 54865] FTP command: Client "::1", "USER publica"
+Thu Apr  3 19:36:09 2025 [pid 54865] [publica] FTP response: Client "::1", "331 Please specify the password."
+Thu Apr  3 19:36:11 2025 [pid 54865] [publica] FTP command: Client "::1", "PASS <password>"
+Thu Apr  3 19:36:11 2025 [pid 54864] [publica] OK LOGIN: Client "::1"
+Thu Apr  3 19:36:11 2025 [pid 54866] [publica] FTP response: Client "::1", "230 Login successful."
+Thu Apr  3 19:36:11 2025 [pid 54866] [publica] FTP command: Client "::1", "SYST"
+Thu Apr  3 19:36:11 2025 [pid 54866] [publica] FTP response: Client "::1", "215 UNIX Type: L8"
+Thu Apr  3 19:36:11 2025 [pid 54866] [publica] FTP command: Client "::1", "FEAT"
+Thu Apr  3 19:36:11 2025 [pid 54866] [publica] FTP response: Client "::1", "211-Features:"
+Thu Apr  3 19:36:11 2025 [pid 54866] [publica] FTP response: Client "::1", " EPRT
+"
+Thu Apr  3 19:36:11 2025 [pid 54866] [publica] FTP response: Client "::1", " EPSV
+"
+Thu Apr  3 19:36:11 2025 [pid 54866] [publica] FTP response: Client "::1", " MDTM
+"
+Thu Apr  3 19:36:11 2025 [pid 54866] [publica] FTP response: Client "::1", " PASV
+"
+Thu Apr  3 19:36:11 2025 [pid 54866] [publica] FTP response: Client "::1", " REST STREAM
+"
+Thu Apr  3 19:36:11 2025 [pid 54866] [publica] FTP response: Client "::1", " SIZE
+"
+Thu Apr  3 19:36:11 2025 [pid 54866] [publica] FTP response: Client "::1", " TVFS
+"
+Thu Apr  3 19:36:11 2025 [pid 54866] [publica] FTP response: Client "::1", " UTF8
+"
+Thu Apr  3 19:36:11 2025 [pid 54866] [publica] FTP response: Client "::1", "211 End"
+Thu Apr  3 19:36:13 2025 [pid 54866] [publica] FTP command: Client "::1", "PWD"
+Thu Apr  3 19:36:13 2025 [pid 54866] [publica] FTP response: Client "::1", "257 "/" is the current directory"
+Thu Apr  3 19:36:18 2025 [pid 54866] [publica] FTP command: Client "::1", "QUIT"
+Thu Apr  3 19:36:18 2025 [pid 54866] [publica] FTP response: Client "::1", "221 Goodbye."
+Thu Apr  3 19:39:23 2025 [pid 54902] CONNECT: Client "::1"
+Thu Apr  3 19:39:23 2025 [pid 54902] FTP response: Client "::1", "220 (vsFTPd 3.0.5)"
+Thu Apr  3 19:39:25 2025 [pid 54902] FTP command: Client "::1", "USER tso01"
+Thu Apr  3 19:39:25 2025 [pid 54902] [tso01] FTP response: Client "::1", "331 Please specify the password."
+Thu Apr  3 19:39:27 2025 [pid 54902] [tso01] FTP command: Client "::1", "PASS <password>"
+Thu Apr  3 19:39:27 2025 [pid 54901] [tso01] OK LOGIN: Client "::1"
+Thu Apr  3 19:39:27 2025 [pid 54903] [tso01] FTP response: Client "::1", "230 Login successful."
+Thu Apr  3 19:39:27 2025 [pid 54903] [tso01] FTP command: Client "::1", "SYST"
+Thu Apr  3 19:39:27 2025 [pid 54903] [tso01] FTP response: Client "::1", "215 UNIX Type: L8"
+Thu Apr  3 19:39:27 2025 [pid 54903] [tso01] FTP command: Client "::1", "FEAT"
+Thu Apr  3 19:39:27 2025 [pid 54903] [tso01] FTP response: Client "::1", "211-Features:"
+Thu Apr  3 19:39:27 2025 [pid 54903] [tso01] FTP response: Client "::1", " EPRT
+"
+Thu Apr  3 19:39:27 2025 [pid 54903] [tso01] FTP response: Client "::1", " EPSV
+"
+Thu Apr  3 19:39:27 2025 [pid 54903] [tso01] FTP response: Client "::1", " MDTM
+"
+Thu Apr  3 19:39:27 2025 [pid 54903] [tso01] FTP response: Client "::1", " PASV
+"
+Thu Apr  3 19:39:27 2025 [pid 54903] [tso01] FTP response: Client "::1", " REST STREAM
+"
+Thu Apr  3 19:39:27 2025 [pid 54903] [tso01] FTP response: Client "::1", " SIZE
+"
+Thu Apr  3 19:39:27 2025 [pid 54903] [tso01] FTP response: Client "::1", " TVFS
+"
+Thu Apr  3 19:39:27 2025 [pid 54903] [tso01] FTP response: Client "::1", " UTF8
+"
+Thu Apr  3 19:39:27 2025 [pid 54903] [tso01] FTP response: Client "::1", "211 End"
+Thu Apr  3 19:39:29 2025 [pid 54903] [tso01] FTP command: Client "::1", "PWD"
+Thu Apr  3 19:39:29 2025 [pid 54903] [tso01] FTP response: Client "::1", "257 "/" is the current directory"
+Thu Apr  3 19:39:38 2025 [pid 54903] [tso01] FTP command: Client "::1", "QUIT"
+Thu Apr  3 19:39:38 2025 [pid 54903] [tso01] FTP response: Client "::1", "221 Goodbye."
+Thu Apr  3 19:41:03 2025 [pid 54938] CONNECT: Client "::1"
+Thu Apr  3 19:41:03 2025 [pid 54938] FTP response: Client "::1", "220 (vsFTPd 3.0.5)"
+Thu Apr  3 19:41:06 2025 [pid 54938] FTP command: Client "::1", "USER tso01"
+Thu Apr  3 19:41:06 2025 [pid 54938] [tso01] FTP response: Client "::1", "331 Please specify the password."
+Thu Apr  3 19:41:09 2025 [pid 54938] [tso01] FTP command: Client "::1", "PASS <password>"
+Thu Apr  3 19:41:09 2025 [pid 54937] [tso01] OK LOGIN: Client "::1"
+Thu Apr  3 19:41:09 2025 [pid 54939] [tso01] FTP response: Client "::1", "230 Login successful."
+Thu Apr  3 19:41:09 2025 [pid 54939] [tso01] FTP command: Client "::1", "SYST"
+Thu Apr  3 19:41:09 2025 [pid 54939] [tso01] FTP response: Client "::1", "215 UNIX Type: L8"
+Thu Apr  3 19:41:09 2025 [pid 54939] [tso01] FTP command: Client "::1", "FEAT"
+Thu Apr  3 19:41:09 2025 [pid 54939] [tso01] FTP response: Client "::1", "211-Features:"
+Thu Apr  3 19:41:09 2025 [pid 54939] [tso01] FTP response: Client "::1", " EPRT
+"
+Thu Apr  3 19:41:09 2025 [pid 54939] [tso01] FTP response: Client "::1", " EPSV
+"
+Thu Apr  3 19:41:09 2025 [pid 54939] [tso01] FTP response: Client "::1", " MDTM
+"
+Thu Apr  3 19:41:09 2025 [pid 54939] [tso01] FTP response: Client "::1", " PASV
+"
+Thu Apr  3 19:41:09 2025 [pid 54939] [tso01] FTP response: Client "::1", " REST STREAM
+"
+Thu Apr  3 19:41:09 2025 [pid 54939] [tso01] FTP response: Client "::1", " SIZE
+"
+Thu Apr  3 19:41:09 2025 [pid 54939] [tso01] FTP response: Client "::1", " TVFS
+"
+Thu Apr  3 19:41:09 2025 [pid 54939] [tso01] FTP response: Client "::1", " UTF8
+"
+Thu Apr  3 19:41:09 2025 [pid 54939] [tso01] FTP response: Client "::1", "211 End"
+Thu Apr  3 19:41:10 2025 [pid 54939] [tso01] FTP command: Client "::1", "PWD"
+Thu Apr  3 19:41:10 2025 [pid 54939] [tso01] FTP response: Client "::1", "257 "/" is the current directory"
+Thu Apr  3 19:41:14 2025 [pid 54939] [tso01] FTP command: Client "::1", "QUIT"
+Thu Apr  3 19:41:14 2025 [pid 54939] [tso01] FTP response: Client "::1", "221 Goodbye."
+Thu Apr  3 19:41:42 2025 [pid 54957] CONNECT: Client "::1"
+Thu Apr  3 19:41:42 2025 [pid 54957] FTP response: Client "::1", "220 (vsFTPd 3.0.5)"
+Thu Apr  3 19:41:45 2025 [pid 54957] FTP command: Client "::1", "USER tso01"
+Thu Apr  3 19:41:45 2025 [pid 54957] [tso01] FTP response: Client "::1", "331 Please specify the password."
+Thu Apr  3 19:41:47 2025 [pid 54957] [tso01] FTP command: Client "::1", "PASS <password>"
+Thu Apr  3 19:41:47 2025 [pid 54956] [tso01] OK LOGIN: Client "::1"
+Thu Apr  3 19:41:47 2025 [pid 54959] [tso01] FTP response: Client "::1", "230 Login successful."
+Thu Apr  3 19:41:47 2025 [pid 54959] [tso01] FTP command: Client "::1", "SYST"
+Thu Apr  3 19:41:47 2025 [pid 54959] [tso01] FTP response: Client "::1", "215 UNIX Type: L8"
+Thu Apr  3 19:41:47 2025 [pid 54959] [tso01] FTP command: Client "::1", "FEAT"
+Thu Apr  3 19:41:47 2025 [pid 54959] [tso01] FTP response: Client "::1", "211-Features:"
+Thu Apr  3 19:41:47 2025 [pid 54959] [tso01] FTP response: Client "::1", " EPRT
+"
+Thu Apr  3 19:41:47 2025 [pid 54959] [tso01] FTP response: Client "::1", " EPSV
+"
+Thu Apr  3 19:41:47 2025 [pid 54959] [tso01] FTP response: Client "::1", " MDTM
+"
+Thu Apr  3 19:41:47 2025 [pid 54959] [tso01] FTP response: Client "::1", " PASV
+"
+Thu Apr  3 19:41:47 2025 [pid 54959] [tso01] FTP response: Client "::1", " REST STREAM
+"
+Thu Apr  3 19:41:47 2025 [pid 54959] [tso01] FTP response: Client "::1", " SIZE
+"
+Thu Apr  3 19:41:47 2025 [pid 54959] [tso01] FTP response: Client "::1", " TVFS
+"
+Thu Apr  3 19:41:47 2025 [pid 54959] [tso01] FTP response: Client "::1", " UTF8
+"
+Thu Apr  3 19:41:47 2025 [pid 54959] [tso01] FTP response: Client "::1", "211 End"
+Thu Apr  3 19:41:49 2025 [pid 54959] [tso01] FTP command: Client "::1", "PWD"
+Thu Apr  3 19:41:49 2025 [pid 54959] [tso01] FTP response: Client "::1", "257 "/" is the current directory"
+Thu Apr  3 19:41:53 2025 [pid 54959] [tso01] FTP command: Client "::1", "QUIT"
+Thu Apr  3 19:41:53 2025 [pid 54959] [tso01] FTP response: Client "::1", "221 Goodbye."
+Fri Apr  4 19:19:22 2025 [pid 58279] CONNECT: Client "::1"
+Fri Apr  4 19:19:22 2025 [pid 58279] FTP response: Client "::1", "220 (vsFTPd 3.0.5)"
+Fri Apr  4 19:19:29 2025 [pid 58279] FTP command: Client "::1", "USER publica"
+Fri Apr  4 19:19:29 2025 [pid 58279] [publica] FTP response: Client "::1", "331 Please specify the password."
+Fri Apr  4 19:19:31 2025 [pid 58279] [publica] FTP command: Client "::1", "PASS <password>"
+Fri Apr  4 19:19:31 2025 [pid 58278] [publica] OK LOGIN: Client "::1"
+Fri Apr  4 19:19:31 2025 [pid 58284] [publica] FTP response: Client "::1", "230 Login successful."
+Fri Apr  4 19:19:31 2025 [pid 58284] [publica] FTP command: Client "::1", "SYST"
+Fri Apr  4 19:19:31 2025 [pid 58284] [publica] FTP response: Client "::1", "215 UNIX Type: L8"
+Fri Apr  4 19:19:31 2025 [pid 58284] [publica] FTP command: Client "::1", "FEAT"
+Fri Apr  4 19:19:31 2025 [pid 58284] [publica] FTP response: Client "::1", "211-Features:"
+Fri Apr  4 19:19:31 2025 [pid 58284] [publica] FTP response: Client "::1", " EPRT
+"
+Fri Apr  4 19:19:31 2025 [pid 58284] [publica] FTP response: Client "::1", " EPSV
+"
+Fri Apr  4 19:19:31 2025 [pid 58284] [publica] FTP response: Client "::1", " MDTM
+"
+Fri Apr  4 19:19:31 2025 [pid 58284] [publica] FTP response: Client "::1", " PASV
+"
+Fri Apr  4 19:19:31 2025 [pid 58284] [publica] FTP response: Client "::1", " REST STREAM
+"
+Fri Apr  4 19:19:31 2025 [pid 58284] [publica] FTP response: Client "::1", " SIZE
+"
+Fri Apr  4 19:19:31 2025 [pid 58284] [publica] FTP response: Client "::1", " TVFS
+"
+Fri Apr  4 19:19:31 2025 [pid 58284] [publica] FTP response: Client "::1", " UTF8
+"
+Fri Apr  4 19:19:31 2025 [pid 58284] [publica] FTP response: Client "::1", "211 End"
+Fri Apr  4 19:19:35 2025 [pid 58284] [publica] FTP command: Client "::1", "EPSV"
+Fri Apr  4 19:19:35 2025 [pid 58284] [publica] FTP response: Client "::1", "229 Entering Extended Passive Mode (|||30095|)"
+Fri Apr  4 19:19:35 2025 [pid 58284] [publica] FTP command: Client "::1", "LIST"
+Fri Apr  4 19:19:35 2025 [pid 58284] [publica] FTP response: Client "::1", "150 Here comes the directory listing."
+Fri Apr  4 19:19:35 2025 [pid 58284] [publica] FTP response: Client "::1", "226 Directory send OK."
+Fri Apr  4 19:19:39 2025 [pid 58284] [publica] FTP command: Client "::1", "QUIT"
+Fri Apr  4 19:19:39 2025 [pid 58284] [publica] FTP response: Client "::1", "221 Goodbye."
+Fri Apr  4 19:19:44 2025 [pid 58291] CONNECT: Client "::1"
+Fri Apr  4 19:19:44 2025 [pid 58291] FTP response: Client "::1", "220 (vsFTPd 3.0.5)"
+Fri Apr  4 19:19:51 2025 [pid 58291] FTP command: Client "::1", "USER publica"
+Fri Apr  4 19:19:51 2025 [pid 58291] [publica] FTP response: Client "::1", "331 Please specify the password."
+Fri Apr  4 19:19:54 2025 [pid 58291] [publica] FTP command: Client "::1", "PASS <password>"
+Fri Apr  4 19:19:56 2025 [pid 58290] [publica] FAIL LOGIN: Client "::1"
+Fri Apr  4 19:19:57 2025 [pid 58291] [publica] FTP response: Client "::1", "530 Login incorrect."
+Fri Apr  4 19:20:04 2025 [pid 58291] FTP command: Client "::1", "USER publica"
+Fri Apr  4 19:20:04 2025 [pid 58291] [publica] FTP response: Client "::1", "331 Please specify the password."
+Fri Apr  4 19:20:06 2025 [pid 58291] [publica] FTP command: Client "::1", "PASS <password>"
+Fri Apr  4 19:20:06 2025 [pid 58290] [publica] OK LOGIN: Client "::1"
+Fri Apr  4 19:20:06 2025 [pid 58294] [publica] FTP response: Client "::1", "230 Login successful."
+Fri Apr  4 19:20:06 2025 [pid 58294] [publica] FTP command: Client "::1", "SYST"
+Fri Apr  4 19:20:06 2025 [pid 58294] [publica] FTP response: Client "::1", "215 UNIX Type: L8"
+Fri Apr  4 19:20:06 2025 [pid 58294] [publica] FTP command: Client "::1", "FEAT"
+Fri Apr  4 19:20:06 2025 [pid 58294] [publica] FTP response: Client "::1", "211-Features:"
+Fri Apr  4 19:20:06 2025 [pid 58294] [publica] FTP response: Client "::1", " EPRT
+"
+Fri Apr  4 19:20:06 2025 [pid 58294] [publica] FTP response: Client "::1", " EPSV
+"
+Fri Apr  4 19:20:06 2025 [pid 58294] [publica] FTP response: Client "::1", " MDTM
+"
+Fri Apr  4 19:20:06 2025 [pid 58294] [publica] FTP response: Client "::1", " PASV
+"
+Fri Apr  4 19:20:06 2025 [pid 58294] [publica] FTP response: Client "::1", " REST STREAM
+"
+Fri Apr  4 19:20:06 2025 [pid 58294] [publica] FTP response: Client "::1", " SIZE
+"
+Fri Apr  4 19:20:06 2025 [pid 58294] [publica] FTP response: Client "::1", " TVFS
+"
+Fri Apr  4 19:20:06 2025 [pid 58294] [publica] FTP response: Client "::1", " UTF8
+"
+Fri Apr  4 19:20:06 2025 [pid 58294] [publica] FTP response: Client "::1", "211 End"
+Fri Apr  4 19:20:29 2025 [pid 58294] [publica] FTP command: Client "::1", "TYPE I"
+Fri Apr  4 19:20:29 2025 [pid 58294] [publica] FTP response: Client "::1", "200 Switching to Binary mode."
+Fri Apr  4 19:20:29 2025 [pid 58294] [publica] FTP command: Client "::1", "EPSV"
+Fri Apr  4 19:20:29 2025 [pid 58294] [publica] FTP response: Client "::1", "229 Entering Extended Passive Mode (|||30071|)"
+Fri Apr  4 19:20:29 2025 [pid 58294] [publica] FTP command: Client "::1", "STOR autofs.conf"
+Fri Apr  4 19:20:29 2025 [pid 58294] [publica] FTP response: Client "::1", "150 Ok to send data."
+Fri Apr  4 19:20:29 2025 [pid 58294] [publica] OK UPLOAD: Client "::1", "/home/publica/autofs.conf", 16209 bytes, 1662.02Kbyte/sec
+Fri Apr  4 19:20:29 2025 [pid 58294] [publica] FTP response: Client "::1", "226 Transfer complete."
+Fri Apr  4 19:20:30 2025 [pid 58294] [publica] FTP command: Client "::1", "EPSV"
+Fri Apr  4 19:20:30 2025 [pid 58294] [publica] FTP response: Client "::1", "229 Entering Extended Passive Mode (|||30091|)"
+Fri Apr  4 19:20:30 2025 [pid 58294] [publica] FTP command: Client "::1", "STOR autofs_ldap_auth.conf"
+Fri Apr  4 19:20:30 2025 [pid 58294] [publica] FTP response: Client "::1", "150 Ok to send data."
+Fri Apr  4 19:20:30 2025 [pid 58294] [publica] OK UPLOAD: Client "::1", "/home/publica/autofs_ldap_auth.conf", 232 bytes, 363.66Kbyte/sec
+Fri Apr  4 19:20:30 2025 [pid 58294] [publica] FTP response: Client "::1", "226 Transfer complete."
+Fri Apr  4 19:20:30 2025 [pid 58294] [publica] FTP command: Client "::1", "EPSV"
+Fri Apr  4 19:20:30 2025 [pid 58294] [publica] FTP response: Client "::1", "229 Entering Extended Passive Mode (|||30007|)"
+Fri Apr  4 19:20:30 2025 [pid 58294] [publica] FTP command: Client "::1", "STOR blkid.conf"
+Fri Apr  4 19:20:30 2025 [pid 58294] [publica] FTP response: Client "::1", "150 Ok to send data."
+Fri Apr  4 19:20:30 2025 [pid 58294] [publica] OK UPLOAD: Client "::1", "/home/publica/blkid.conf", 135 bytes, 157.51Kbyte/sec
+Fri Apr  4 19:20:30 2025 [pid 58294] [publica] FTP response: Client "::1", "226 Transfer complete."
+Fri Apr  4 19:20:31 2025 [pid 58294] [publica] FTP command: Client "::1", "EPSV"
+Fri Apr  4 19:20:31 2025 [pid 58294] [publica] FTP response: Client "::1", "229 Entering Extended Passive Mode (|||30072|)"
+Fri Apr  4 19:20:31 2025 [pid 58294] [publica] FTP command: Client "::1", "STOR chrony.conf"
+Fri Apr  4 19:20:31 2025 [pid 58294] [publica] FTP response: Client "::1", "150 Ok to send data."
+Fri Apr  4 19:20:31 2025 [pid 58294] [publica] OK UPLOAD: Client "::1", "/home/publica/chrony.conf", 1415 bytes, 1058.07Kbyte/sec
+Fri Apr  4 19:20:31 2025 [pid 58294] [publica] FTP response: Client "::1", "226 Transfer complete."
+Fri Apr  4 19:20:31 2025 [pid 58294] [publica] FTP command: Client "::1", "EPSV"
+Fri Apr  4 19:20:31 2025 [pid 58294] [publica] FTP response: Client "::1", "229 Entering Extended Passive Mode (|||30005|)"
+Fri Apr  4 19:20:31 2025 [pid 58294] [publica] FTP command: Client "::1", "STOR dnsmasq.conf"
+Fri Apr  4 19:20:31 2025 [pid 58294] [publica] FTP response: Client "::1", "150 Ok to send data."
+Fri Apr  4 19:20:31 2025 [pid 58294] [publica] OK UPLOAD: Client "::1", "/home/publica/dnsmasq.conf", 27688 bytes, 3119.77Kbyte/sec
+Fri Apr  4 19:20:31 2025 [pid 58294] [publica] FTP response: Client "::1", "226 Transfer complete."
+Fri Apr  4 19:20:31 2025 [pid 58294] [publica] FTP command: Client "::1", "EPSV"
+Fri Apr  4 19:20:31 2025 [pid 58294] [publica] FTP response: Client "::1", "229 Entering Extended Passive Mode (|||30009|)"
+Fri Apr  4 19:20:31 2025 [pid 58294] [publica] FTP command: Client "::1", "STOR dracut.conf"
+Fri Apr  4 19:20:31 2025 [pid 58294] [publica] FTP response: Client "::1", "150 Ok to send data."
+Fri Apr  4 19:20:31 2025 [pid 58294] [publica] OK UPLOAD: Client "::1", "/home/publica/dracut.conf", 117 bytes, 182.52Kbyte/sec
+Fri Apr  4 19:20:31 2025 [pid 58294] [publica] FTP response: Client "::1", "226 Transfer complete."
+Fri Apr  4 19:20:31 2025 [pid 58294] [publica] FTP command: Client "::1", "EPSV"
+Fri Apr  4 19:20:31 2025 [pid 58294] [publica] FTP response: Client "::1", "229 Entering Extended Passive Mode (|||30008|)"
+Fri Apr  4 19:20:31 2025 [pid 58294] [publica] FTP command: Client "::1", "STOR fuse.conf"
+Fri Apr  4 19:20:31 2025 [pid 58294] [publica] FTP response: Client "::1", "150 Ok to send data."
+Fri Apr  4 19:20:31 2025 [pid 58294] [publica] OK UPLOAD: Client "::1", "/home/publica/fuse.conf", 699 bytes, 1300.22Kbyte/sec
+Fri Apr  4 19:20:31 2025 [pid 58294] [publica] FTP response: Client "::1", "226 Transfer complete."
+Fri Apr  4 19:20:32 2025 [pid 58294] [publica] FTP command: Client "::1", "EPSV"
+Fri Apr  4 19:20:32 2025 [pid 58294] [publica] FTP response: Client "::1", "229 Entering Extended Passive Mode (|||30100|)"
+Fri Apr  4 19:20:32 2025 [pid 58294] [publica] FTP command: Client "::1", "STOR fuse3.conf"
+Fri Apr  4 19:20:32 2025 [pid 58294] [publica] FTP response: Client "::1", "150 Ok to send data."
+Fri Apr  4 19:20:32 2025 [pid 58294] [publica] OK UPLOAD: Client "::1", "/home/publica/fuse3.conf", 694 bytes, 838.78Kbyte/sec
+Fri Apr  4 19:20:32 2025 [pid 58294] [publica] FTP response: Client "::1", "226 Transfer complete."
+Fri Apr  4 19:20:32 2025 [pid 58294] [publica] FTP command: Client "::1", "EPSV"
+Fri Apr  4 19:20:32 2025 [pid 58294] [publica] FTP response: Client "::1", "229 Entering Extended Passive Mode (|||30005|)"
+Fri Apr  4 19:20:32 2025 [pid 58294] [publica] FTP command: Client "::1", "STOR gnome_defaults.conf"
+Fri Apr  4 19:20:32 2025 [pid 58294] [publica] FTP response: Client "::1", "150 Ok to send data."
+Fri Apr  4 19:20:32 2025 [pid 58294] [publica] OK UPLOAD: Client "::1", "/home/publica/gnome_defaults.conf", 3220 bytes, 358.80Kbyte/sec
+Fri Apr  4 19:20:32 2025 [pid 58294] [publica] FTP response: Client "::1", "226 Transfer complete."
+Fri Apr  4 19:21:33 2025 [pid 58309] CONNECT: Client "::ffff:192.168.139.1"
+Fri Apr  4 19:21:33 2025 [pid 58309] FTP response: Client "::ffff:192.168.139.1", "220 (vsFTPd 3.0.5)"
+Fri Apr  4 19:21:37 2025 [pid 58309] FTP command: Client "::ffff:192.168.139.1", "USER publica"
+Fri Apr  4 19:21:37 2025 [pid 58309] [publica] FTP response: Client "::ffff:192.168.139.1", "331 Please specify the password."
+Fri Apr  4 19:21:39 2025 [pid 58309] [publica] FTP command: Client "::ffff:192.168.139.1", "PASS <password>"
+Fri Apr  4 19:21:39 2025 [pid 58308] [publica] OK LOGIN: Client "::ffff:192.168.139.1"
+Fri Apr  4 19:21:39 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "230 Login successful."
+Fri Apr  4 19:21:39 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "SYST"
+Fri Apr  4 19:21:39 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "215 UNIX Type: L8"
+Fri Apr  4 19:21:39 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "FEAT"
+Fri Apr  4 19:21:39 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "211-Features:"
+Fri Apr  4 19:21:39 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", " EPRT
+"
+Fri Apr  4 19:21:39 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", " EPSV
+"
+Fri Apr  4 19:21:39 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", " MDTM
+"
+Fri Apr  4 19:21:39 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", " PASV
+"
+Fri Apr  4 19:21:39 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", " REST STREAM
+"
+Fri Apr  4 19:21:39 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", " SIZE
+"
+Fri Apr  4 19:21:39 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", " TVFS
+"
+Fri Apr  4 19:21:39 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", " UTF8
+"
+Fri Apr  4 19:21:39 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "211 End"
+Fri Apr  4 19:21:39 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "HELP SITE"
+Fri Apr  4 19:21:39 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "214-The following commands are recognized."
+Fri Apr  4 19:21:39 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", " ABOR ACCT ALLO APPE CDUP CWD  DELE EPRT EPSV FEAT HELP LIST MDTM MKD
+"
+Fri Apr  4 19:21:39 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", " MODE NLST NOOP OPTS PASS PASV PORT PWD  QUIT REIN REST RETR RMD  RNFR
+"
+Fri Apr  4 19:21:39 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", " RNTO SITE SIZE SMNT STAT STOR STOU STRU SYST TYPE USER XCUP XCWD XMKD
+"
+Fri Apr  4 19:21:39 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", " XPWD XRMD
+"
+Fri Apr  4 19:21:39 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "214 Help OK."
+Fri Apr  4 19:21:40 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "OPTS UTF8 ON"
+Fri Apr  4 19:21:40 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "200 Always in UTF8 mode."
+Fri Apr  4 19:21:40 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "PWD"
+Fri Apr  4 19:21:40 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "257 "/home/publica" is the current directory"
+Fri Apr  4 19:21:40 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "TYPE A"
+Fri Apr  4 19:21:40 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "200 Switching to ASCII mode."
+Fri Apr  4 19:21:40 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "PORT 192,168,139,1,196,200"
+Fri Apr  4 19:21:40 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "200 PORT command successful. Consider using PASV."
+Fri Apr  4 19:21:40 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "LIST"
+Fri Apr  4 19:21:40 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "150 Here comes the directory listing."
+Fri Apr  4 19:21:40 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "226 Directory send OK."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "TYPE I"
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "200 Switching to Binary mode."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "PORT 192,168,139,1,196,202"
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "200 PORT command successful. Consider using PASV."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "RETR autofs.conf"
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "150 Opening BINARY mode data connection for autofs.conf (16209 bytes)."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] OK DOWNLOAD: Client "::ffff:192.168.139.1", "/home/publica/autofs.conf", 16209 bytes, 3560.30Kbyte/sec
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "226 Transfer complete."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "PORT 192,168,139,1,196,203"
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "200 PORT command successful. Consider using PASV."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "RETR autofs_ldap_auth.conf"
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "150 Opening BINARY mode data connection for autofs_ldap_auth.conf (232 bytes)."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] OK DOWNLOAD: Client "::ffff:192.168.139.1", "/home/publica/autofs_ldap_auth.conf", 232 bytes, 107.63Kbyte/sec
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "226 Transfer complete."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "PORT 192,168,139,1,196,204"
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "200 PORT command successful. Consider using PASV."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "RETR blkid.conf"
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "150 Opening BINARY mode data connection for blkid.conf (135 bytes)."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] OK DOWNLOAD: Client "::ffff:192.168.139.1", "/home/publica/blkid.conf", 135 bytes, 49.53Kbyte/sec
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "226 Transfer complete."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "PORT 192,168,139,1,196,205"
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "200 PORT command successful. Consider using PASV."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "RETR chrony.conf"
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "150 Opening BINARY mode data connection for chrony.conf (1415 bytes)."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] OK DOWNLOAD: Client "::ffff:192.168.139.1", "/home/publica/chrony.conf", 1415 bytes, 393.46Kbyte/sec
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "226 Transfer complete."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "PORT 192,168,139,1,196,206"
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "200 PORT command successful. Consider using PASV."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "RETR dnsmasq.conf"
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "150 Opening BINARY mode data connection for dnsmasq.conf (27688 bytes)."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] OK DOWNLOAD: Client "::ffff:192.168.139.1", "/home/publica/dnsmasq.conf", 27688 bytes, 4620.48Kbyte/sec
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "226 Transfer complete."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "PORT 192,168,139,1,196,207"
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "200 PORT command successful. Consider using PASV."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "RETR dracut.conf"
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "150 Opening BINARY mode data connection for dracut.conf (117 bytes)."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] OK DOWNLOAD: Client "::ffff:192.168.139.1", "/home/publica/dracut.conf", 117 bytes, 77.15Kbyte/sec
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "226 Transfer complete."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "PORT 192,168,139,1,196,208"
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "200 PORT command successful. Consider using PASV."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "RETR fuse.conf"
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "150 Opening BINARY mode data connection for fuse.conf (699 bytes)."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] OK DOWNLOAD: Client "::ffff:192.168.139.1", "/home/publica/fuse.conf", 699 bytes, 444.12Kbyte/sec
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "226 Transfer complete."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "PORT 192,168,139,1,196,209"
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "200 PORT command successful. Consider using PASV."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "RETR fuse3.conf"
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "150 Opening BINARY mode data connection for fuse3.conf (694 bytes)."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] OK DOWNLOAD: Client "::ffff:192.168.139.1", "/home/publica/fuse3.conf", 694 bytes, 488.28Kbyte/sec
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "226 Transfer complete."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "PORT 192,168,139,1,196,210"
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "200 PORT command successful. Consider using PASV."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "RETR gnome_defaults.conf"
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "150 Opening BINARY mode data connection for gnome_defaults.conf (3220 bytes)."
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] OK DOWNLOAD: Client "::ffff:192.168.139.1", "/home/publica/gnome_defaults.conf", 3220 bytes, 1435.20Kbyte/sec
+Fri Apr  4 19:21:52 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "226 Transfer complete."
+Fri Apr  4 19:22:30 2025 [pid 58310] [publica] FTP command: Client "::ffff:192.168.139.1", "QUIT"
+Fri Apr  4 19:22:30 2025 [pid 58310] [publica] FTP response: Client "::ffff:192.168.139.1", "221 Goodbye."
+Fri Apr  4 19:22:36 2025 [pid 58322] CONNECT: Client "::ffff:192.168.139.1"
+Fri Apr  4 19:22:36 2025 [pid 58322] FTP response: Client "::ffff:192.168.139.1", "220 (vsFTPd 3.0.5)"
+Fri Apr  4 19:22:41 2025 [pid 58322] FTP command: Client "::ffff:192.168.139.1", "USER user01"
+Fri Apr  4 19:22:41 2025 [pid 58322] [user01] FTP response: Client "::ffff:192.168.139.1", "331 Please specify the password."
+Fri Apr  4 19:22:44 2025 [pid 58322] [user01] FTP command: Client "::ffff:192.168.139.1", "PASS <password>"
+Fri Apr  4 19:22:44 2025 [pid 58321] [user01] OK LOGIN: Client "::ffff:192.168.139.1"
+Fri Apr  4 19:22:44 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", "230 Login successful."
+Fri Apr  4 19:22:44 2025 [pid 58323] [user01] FTP command: Client "::ffff:192.168.139.1", "SYST"
+Fri Apr  4 19:22:44 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", "215 UNIX Type: L8"
+Fri Apr  4 19:22:44 2025 [pid 58323] [user01] FTP command: Client "::ffff:192.168.139.1", "FEAT"
+Fri Apr  4 19:22:44 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", "211-Features:"
+Fri Apr  4 19:22:44 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", " EPRT
+"
+Fri Apr  4 19:22:44 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", " EPSV
+"
+Fri Apr  4 19:22:44 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", " MDTM
+"
+Fri Apr  4 19:22:44 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", " PASV
+"
+Fri Apr  4 19:22:44 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", " REST STREAM
+"
+Fri Apr  4 19:22:44 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", " SIZE
+"
+Fri Apr  4 19:22:44 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", " TVFS
+"
+Fri Apr  4 19:22:44 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", " UTF8
+"
+Fri Apr  4 19:22:44 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", "211 End"
+Fri Apr  4 19:22:44 2025 [pid 58323] [user01] FTP command: Client "::ffff:192.168.139.1", "HELP SITE"
+Fri Apr  4 19:22:44 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", "214-The following commands are recognized."
+Fri Apr  4 19:22:44 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", " ABOR ACCT ALLO APPE CDUP CWD  DELE EPRT EPSV FEAT HELP LIST MDTM MKD
+"
+Fri Apr  4 19:22:44 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", " MODE NLST NOOP OPTS PASS PASV PORT PWD  QUIT REIN REST RETR RMD  RNFR
+"
+Fri Apr  4 19:22:44 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", " RNTO SITE SIZE SMNT STAT STOR STOU STRU SYST TYPE USER XCUP XCWD XMKD
+"
+Fri Apr  4 19:22:44 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", " XPWD XRMD
+"
+Fri Apr  4 19:22:44 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", "214 Help OK."
+Fri Apr  4 19:22:44 2025 [pid 58323] [user01] FTP command: Client "::ffff:192.168.139.1", "OPTS UTF8 ON"
+Fri Apr  4 19:22:44 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", "200 Always in UTF8 mode."
+Fri Apr  4 19:22:44 2025 [pid 58323] [user01] FTP command: Client "::ffff:192.168.139.1", "PWD"
+Fri Apr  4 19:22:44 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", "257 "/" is the current directory"
+Fri Apr  4 19:22:45 2025 [pid 58323] [user01] FTP command: Client "::ffff:192.168.139.1", "TYPE A"
+Fri Apr  4 19:22:45 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", "200 Switching to ASCII mode."
+Fri Apr  4 19:22:45 2025 [pid 58323] [user01] FTP command: Client "::ffff:192.168.139.1", "PORT 192,168,139,1,196,213"
+Fri Apr  4 19:22:45 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", "200 PORT command successful. Consider using PASV."
+Fri Apr  4 19:22:45 2025 [pid 58323] [user01] FTP command: Client "::ffff:192.168.139.1", "LIST"
+Fri Apr  4 19:22:45 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", "150 Here comes the directory listing."
+Fri Apr  4 19:22:45 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", "226 Directory send OK."
+Fri Apr  4 19:22:55 2025 [pid 58323] [user01] FTP command: Client "::ffff:192.168.139.1", "TYPE I"
+Fri Apr  4 19:22:55 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", "200 Switching to Binary mode."
+Fri Apr  4 19:22:55 2025 [pid 58323] [user01] FTP command: Client "::ffff:192.168.139.1", "PORT 192,168,139,1,196,215"
+Fri Apr  4 19:22:55 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", "200 PORT command successful. Consider using PASV."
+Fri Apr  4 19:22:55 2025 [pid 58323] [user01] FTP command: Client "::ffff:192.168.139.1", "STOR xp123.com-INVEST-series.pdf"
+Fri Apr  4 19:22:55 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", "553 Could not create file."
+Fri Apr  4 19:22:55 2025 [pid 58323] [user01] FAIL UPLOAD: Client "::ffff:192.168.139.1", "/xp123.com-INVEST-series.pdf", 0.00Kbyte/sec
+Fri Apr  4 19:22:58 2025 [pid 58323] [user01] FTP command: Client "::ffff:192.168.139.1", "TYPE A"
+Fri Apr  4 19:22:58 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", "200 Switching to ASCII mode."
+Fri Apr  4 19:22:58 2025 [pid 58323] [user01] FTP command: Client "::ffff:192.168.139.1", "PORT 192,168,139,1,196,216"
+Fri Apr  4 19:22:58 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", "200 PORT command successful. Consider using PASV."
+Fri Apr  4 19:22:58 2025 [pid 58323] [user01] FTP command: Client "::ffff:192.168.139.1", "LIST"
+Fri Apr  4 19:22:58 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", "150 Here comes the directory listing."
+Fri Apr  4 19:22:58 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", "226 Directory send OK."
+Fri Apr  4 19:23:03 2025 [pid 58323] [user01] FTP command: Client "::ffff:192.168.139.1", "MKD test"
+Fri Apr  4 19:23:03 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", "550 Create directory operation failed."
+Fri Apr  4 19:23:03 2025 [pid 58323] [user01] FAIL MKDIR: Client "::ffff:192.168.139.1", "/test"
+Fri Apr  4 19:23:07 2025 [pid 58323] [user01] FTP command: Client "::ffff:192.168.139.1", "QUIT"
+Fri Apr  4 19:23:07 2025 [pid 58323] [user01] FTP response: Client "::ffff:192.168.139.1", "221 Goodbye."
+Fri Apr  4 19:23:58 2025 [pid 58361] CONNECT: Client "::1"
+Fri Apr  4 19:23:58 2025 [pid 58361] FTP response: Client "::1", "220 (vsFTPd 3.0.5)"
+Fri Apr  4 19:24:07 2025 [pid 58361] FTP command: Client "::1", "USER tso01"
+Fri Apr  4 19:24:07 2025 [pid 58361] [tso01] FTP response: Client "::1", "331 Please specify the password."
+Fri Apr  4 19:24:10 2025 [pid 58361] [tso01] FTP command: Client "::1", "PASS <password>"
+Fri Apr  4 19:24:10 2025 [pid 58360] [tso01] OK LOGIN: Client "::1"
+Fri Apr  4 19:24:10 2025 [pid 58364] [tso01] FTP response: Client "::1", "230 Login successful."
+Fri Apr  4 19:24:10 2025 [pid 58364] [tso01] FTP command: Client "::1", "SYST"
+Fri Apr  4 19:24:10 2025 [pid 58364] [tso01] FTP response: Client "::1", "215 UNIX Type: L8"
+Fri Apr  4 19:24:10 2025 [pid 58364] [tso01] FTP command: Client "::1", "FEAT"
+Fri Apr  4 19:24:10 2025 [pid 58364] [tso01] FTP response: Client "::1", "211-Features:"
+Fri Apr  4 19:24:10 2025 [pid 58364] [tso01] FTP response: Client "::1", " EPRT
+"
+Fri Apr  4 19:24:10 2025 [pid 58364] [tso01] FTP response: Client "::1", " EPSV
+"
+Fri Apr  4 19:24:10 2025 [pid 58364] [tso01] FTP response: Client "::1", " MDTM
+"
+Fri Apr  4 19:24:10 2025 [pid 58364] [tso01] FTP response: Client "::1", " PASV
+"
+Fri Apr  4 19:24:10 2025 [pid 58364] [tso01] FTP response: Client "::1", " REST STREAM
+"
+Fri Apr  4 19:24:10 2025 [pid 58364] [tso01] FTP response: Client "::1", " SIZE
+"
+Fri Apr  4 19:24:10 2025 [pid 58364] [tso01] FTP response: Client "::1", " TVFS
+"
+Fri Apr  4 19:24:10 2025 [pid 58364] [tso01] FTP response: Client "::1", " UTF8
+"
+Fri Apr  4 19:24:10 2025 [pid 58364] [tso01] FTP response: Client "::1", "211 End"
+Fri Apr  4 19:24:13 2025 [pid 58364] [tso01] FTP command: Client "::1", "MKD test"
+Fri Apr  4 19:24:13 2025 [pid 58364] [tso01] OK MKDIR: Client "::1", "/test"
+Fri Apr  4 19:24:13 2025 [pid 58364] [tso01] FTP response: Client "::1", "257 "/test" created"
+Fri Apr  4 19:24:20 2025 [pid 58367] CONNECT: Client "::ffff:192.168.139.1"
+Fri Apr  4 19:24:20 2025 [pid 58367] FTP response: Client "::ffff:192.168.139.1", "220 (vsFTPd 3.0.5)"
+Fri Apr  4 19:24:25 2025 [pid 58367] FTP command: Client "::ffff:192.168.139.1", "USER tso01"
+Fri Apr  4 19:24:25 2025 [pid 58367] [tso01] FTP response: Client "::ffff:192.168.139.1", "331 Please specify the password."
+Fri Apr  4 19:24:29 2025 [pid 58367] [tso01] FTP command: Client "::ffff:192.168.139.1", "PASS <password>"
+Fri Apr  4 19:24:29 2025 [pid 58366] [tso01] OK LOGIN: Client "::ffff:192.168.139.1"
+Fri Apr  4 19:24:29 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "230 Login successful."
+Fri Apr  4 19:24:29 2025 [pid 58374] [tso01] FTP command: Client "::ffff:192.168.139.1", "SYST"
+Fri Apr  4 19:24:29 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "215 UNIX Type: L8"
+Fri Apr  4 19:24:29 2025 [pid 58374] [tso01] FTP command: Client "::ffff:192.168.139.1", "FEAT"
+Fri Apr  4 19:24:29 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "211-Features:"
+Fri Apr  4 19:24:29 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", " EPRT
+"
+Fri Apr  4 19:24:29 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", " EPSV
+"
+Fri Apr  4 19:24:29 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", " MDTM
+"
+Fri Apr  4 19:24:29 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", " PASV
+"
+Fri Apr  4 19:24:29 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", " REST STREAM
+"
+Fri Apr  4 19:24:29 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", " SIZE
+"
+Fri Apr  4 19:24:29 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", " TVFS
+"
+Fri Apr  4 19:24:29 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", " UTF8
+"
+Fri Apr  4 19:24:29 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "211 End"
+Fri Apr  4 19:24:29 2025 [pid 58374] [tso01] FTP command: Client "::ffff:192.168.139.1", "HELP SITE"
+Fri Apr  4 19:24:29 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "214-The following commands are recognized."
+Fri Apr  4 19:24:29 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", " ABOR ACCT ALLO APPE CDUP CWD  DELE EPRT EPSV FEAT HELP LIST MDTM MKD
+"
+Fri Apr  4 19:24:29 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", " MODE NLST NOOP OPTS PASS PASV PORT PWD  QUIT REIN REST RETR RMD  RNFR
+"
+Fri Apr  4 19:24:29 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", " RNTO SITE SIZE SMNT STAT STOR STOU STRU SYST TYPE USER XCUP XCWD XMKD
+"
+Fri Apr  4 19:24:29 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", " XPWD XRMD
+"
+Fri Apr  4 19:24:29 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "214 Help OK."
+Fri Apr  4 19:24:29 2025 [pid 58374] [tso01] FTP command: Client "::ffff:192.168.139.1", "OPTS UTF8 ON"
+Fri Apr  4 19:24:29 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "200 Always in UTF8 mode."
+Fri Apr  4 19:24:29 2025 [pid 58374] [tso01] FTP command: Client "::ffff:192.168.139.1", "PWD"
+Fri Apr  4 19:24:29 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "257 "/" is the current directory"
+Fri Apr  4 19:24:30 2025 [pid 58374] [tso01] FTP command: Client "::ffff:192.168.139.1", "TYPE A"
+Fri Apr  4 19:24:30 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "200 Switching to ASCII mode."
+Fri Apr  4 19:24:30 2025 [pid 58374] [tso01] FTP command: Client "::ffff:192.168.139.1", "PORT 192,168,139,1,196,232"
+Fri Apr  4 19:24:30 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "200 PORT command successful. Consider using PASV."
+Fri Apr  4 19:24:30 2025 [pid 58374] [tso01] FTP command: Client "::ffff:192.168.139.1", "LIST"
+Fri Apr  4 19:24:30 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "150 Here comes the directory listing."
+Fri Apr  4 19:24:30 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "226 Directory send OK."
+Fri Apr  4 19:25:16 2025 [pid 58374] [tso01] FTP command: Client "::ffff:192.168.139.1", "TYPE I"
+Fri Apr  4 19:25:16 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "200 Switching to Binary mode."
+Fri Apr  4 19:25:16 2025 [pid 58374] [tso01] FTP command: Client "::ffff:192.168.139.1", "PORT 192,168,139,1,196,238"
+Fri Apr  4 19:25:16 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "200 PORT command successful. Consider using PASV."
+Fri Apr  4 19:25:16 2025 [pid 58374] [tso01] FTP command: Client "::ffff:192.168.139.1", "STOR xp123.com-INVEST-series.pdf"
+Fri Apr  4 19:25:16 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "150 Ok to send data."
+Fri Apr  4 19:25:16 2025 [pid 58374] [tso01] OK UPLOAD: Client "::ffff:192.168.139.1", "/xp123.com-INVEST-series.pdf", 189719 bytes, 8930.51Kbyte/sec
+Fri Apr  4 19:25:16 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "226 Transfer complete."
+Fri Apr  4 19:25:16 2025 [pid 58374] [tso01] FTP command: Client "::ffff:192.168.139.1", "SIZE xp123.com-INVEST-series.pdf"
+Fri Apr  4 19:25:16 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "213 189719"
+Fri Apr  4 19:25:16 2025 [pid 58374] [tso01] FTP command: Client "::ffff:192.168.139.1", "TYPE A"
+Fri Apr  4 19:25:16 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "200 Switching to ASCII mode."
+Fri Apr  4 19:25:16 2025 [pid 58374] [tso01] FTP command: Client "::ffff:192.168.139.1", "PORT 192,168,139,1,196,239"
+Fri Apr  4 19:25:16 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "200 PORT command successful. Consider using PASV."
+Fri Apr  4 19:25:16 2025 [pid 58374] [tso01] FTP command: Client "::ffff:192.168.139.1", "LIST"
+Fri Apr  4 19:25:16 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "150 Here comes the directory listing."
+Fri Apr  4 19:25:16 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "226 Directory send OK."
+Fri Apr  4 19:25:32 2025 [pid 58294] [publica] FTP response: Client "::1", "421 Timeout."
+Fri Apr  4 19:26:33 2025 [pid 58364] [tso01] FTP command: Client "::1", "QUIT"
+Fri Apr  4 19:26:33 2025 [pid 58364] [tso01] FTP response: Client "::1", "221 Goodbye."
+Fri Apr  4 19:29:38 2025 [pid 58374] [tso01] FTP command: Client "::ffff:192.168.139.1", "TYPE I"
+Fri Apr  4 19:29:38 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "200 Switching to Binary mode."
+Fri Apr  4 19:29:38 2025 [pid 58374] [tso01] FTP command: Client "::ffff:192.168.139.1", "PORT 192,168,139,1,197,30"
+Fri Apr  4 19:29:38 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "200 PORT command successful. Consider using PASV."
+Fri Apr  4 19:29:38 2025 [pid 58374] [tso01] FTP command: Client "::ffff:192.168.139.1", "STOR 3.jpg"
+Fri Apr  4 19:29:38 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "150 Ok to send data."
+Fri Apr  4 19:29:38 2025 [pid 58374] [tso01] OK UPLOAD: Client "::ffff:192.168.139.1", "/3.jpg", 63253 bytes, 7005.84Kbyte/sec
+Fri Apr  4 19:29:38 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "226 Transfer complete."
+Fri Apr  4 19:29:38 2025 [pid 58374] [tso01] FTP command: Client "::ffff:192.168.139.1", "SIZE 3.jpg"
+Fri Apr  4 19:29:38 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "213 63253"
+Fri Apr  4 19:29:38 2025 [pid 58374] [tso01] FTP command: Client "::ffff:192.168.139.1", "TYPE A"
+Fri Apr  4 19:29:38 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "200 Switching to ASCII mode."
+Fri Apr  4 19:29:38 2025 [pid 58374] [tso01] FTP command: Client "::ffff:192.168.139.1", "PORT 192,168,139,1,197,31"
+Fri Apr  4 19:29:38 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "200 PORT command successful. Consider using PASV."
+Fri Apr  4 19:29:38 2025 [pid 58374] [tso01] FTP command: Client "::ffff:192.168.139.1", "LIST"
+Fri Apr  4 19:29:38 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "150 Here comes the directory listing."
+Fri Apr  4 19:29:38 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "226 Directory send OK."
+Fri Apr  4 19:34:38 2025 [pid 58374] [tso01] FTP response: Client "::ffff:192.168.139.1", "421 Timeout."
+Fri Apr  4 19:34:38 2025 vsftpd [pid 58366]: "tso01" from "::ffff:192.168.139.1": priv_sock_get_cmdMon Apr  7 21:30:30 2025 [pid 1613] CONNECT: Client "::ffff:192.168.139.1"
+Mon Apr  7 21:30:30 2025 [pid 1613] FTP response: Client "::ffff:192.168.139.1", "220 (vsFTPd 3.0.5)"
+Mon Apr  7 21:30:30 2025 [pid 1613] FTP command: Client "::ffff:192.168.139.1", "OPTS UTF8 ON"
+Mon Apr  7 21:30:30 2025 [pid 1613] FTP response: Client "::ffff:192.168.139.1", "200 Always in UTF8 mode."
+Mon Apr  7 21:30:44 2025 [pid 1613] FTP command: Client "::ffff:192.168.139.1", "USER"
+Mon Apr  7 21:30:44 2025 [pid 1613] FTP response: Client "::ffff:192.168.139.1", "331 Please specify the password."
+Mon Apr  7 21:30:44 2025 vsftpd [pid 1613]: "" from "::ffff:192.168.139.1": vsf_sysutil_recv_peek

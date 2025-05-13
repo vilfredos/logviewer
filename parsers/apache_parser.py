@@ -212,6 +212,17 @@ class ApacheParser:
                             if code_match:
                                 error_code = code_match.group(1)
                             
+                            # Extraer dirección IP del cliente (si existe)
+                            cliente = None
+                            client_match = re.search(r'\[client ([^\]]+)\]', message)
+                            if client_match:
+                                cliente = client_match.group(1)
+                                # Eliminar el puerto si está presente (192.168.1.1:8080 -> 192.168.1.1)
+                                if ':' in cliente:
+                                    cliente = cliente.split(':', 1)[0]
+                                # Eliminar la parte "[client IP:PORT]" del mensaje
+                                message = re.sub(r'\[client [^\]]+\] ', '', message)
+                            
                             entry = {
                                 'fecha_hora': fecha_hora,
                                 'modulo': module,
@@ -221,7 +232,8 @@ class ApacheParser:
                                 'codigo_error': error_code,
                                 'mensaje': message,
                                 'archivo': file_info or '',
-                                'linea': line_number
+                                'linea': line_number,
+                                'cliente': cliente or ''  # Asegurarse de que el campo cliente existe
                             }
                             entries.append(entry)
                         else:
@@ -246,11 +258,47 @@ class ApacheParser:
                                     level = module_level[1] if len(module_level) > 1 else 'unknown'
                             
                             # Buscar una dirección IP
-                            client_ip = None
-                            ip_pattern = r'\b(?:\d{1,3}\.){3}\d{1,3}\b'
-                            ip_match = re.search(ip_pattern, line)
-                            if ip_match:
-                                client_ip = ip_match.group(0)
+                            cliente = None
+                            # Intentar encontrar [client IP:PORT]
+                            client_match = re.search(r'\[client ([^\]]+)\]', line)
+                            if client_match:
+                                cliente = client_match.group(1)
+                                # Eliminar el puerto si está presente
+                                if ':' in cliente:
+                                    cliente = cliente.split(':', 1)[0]
+                                # Eliminar la parte "[client IP:PORT]" del mensaje para el campo mensaje
+                                line_msg = re.sub(r'\[client [^\]]+\] ', '', line)
+                            else:
+                                # Intentar encontrar cualquier IP
+                                ip_pattern = r'\b(?:\d{1,3}\.){3}\d{1,3}\b'
+                                ip_match = re.search(ip_pattern, line)
+                                if ip_match:
+                                    cliente = ip_match.group(0)
+                                line_msg = line
+                            
+                            # Buscar referencias a archivos
+                            file_info = ''
+                            line_number = 0
+                            
+                            # Varios patrones comunes para encontrar archivos en logs
+                            file_patterns = [
+                                r"'([^']+\.(?:php|py|js|html))'",  # 'archivo.php'
+                                r'"([^"]+\.(?:php|py|js|html))"',   # "archivo.php"
+                                r'\b(/[^\s:]+):(\d+)',             # /ruta/archivo.php:123
+                                r'\b(/[^\s:]+\.(?:php|py|js|html))' # /ruta/archivo.php
+                            ]
+                            
+                            for pattern in file_patterns:
+                                f_match = re.search(pattern, line)
+                                if f_match:
+                                    file_info = f_match.group(1)
+                                    # Si hay un grupo para el número de línea
+                                    if len(f_match.groups()) > 1:
+                                        try:
+                                            line_number = int(f_match.group(2))
+                                        except:
+                                            pass
+                                    break
                                 
                             entry = {
                                 'fecha_hora': fecha_hora,
@@ -259,9 +307,10 @@ class ApacheParser:
                                 'pid': 0,
                                 'tid': '',
                                 'codigo_error': '',
-                                'mensaje': line,
-                                'archivo': '',
-                                'linea': 0
+                                'mensaje': line_msg,
+                                'archivo': file_info,
+                                'linea': line_number,
+                                'cliente': cliente or ''  # Asegurarse de que el campo cliente existe
                             }
                             entries.append(entry)
                     except Exception as e:

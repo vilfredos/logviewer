@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block title %}Alertas{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+<button onclick="window.history.back()" class="btn btn-outline-secondary">← Volver</button>
+
+    <h2>Alertas y Errores</h2>
+    
+    <div class="card mb-4">
+        <div class="card-header bg-danger text-white">
+            <h4>Tabla activa: {{ table_name if table_name else "Ninguna tabla contiene datos" }}</h4>
+        </div>
+        <div class="card-body">
+            {% if not table_name %}
+                <div class="alert alert-warning">
+                    No se encontró ninguna tabla con datos en la base de datos.
+                </div>
+            {% elif not error_logs %}
+                <div class="alert alert-info">
+                    No se encontraron errores en la tabla {{ table_name }}.
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    Se encontraron {{ error_logs|length }} errores en la tabla {{ table_name }}.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if error_logs %}
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+            <h4>Listado de Errores</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="thead-dark">
+                        {% if table_name == 'registros_acceso' %}
+                        <tr>
+                            <th>Fecha/Hora</th>
+                            <th>IP</th>
+                            <th>Método</th>
+                            <th>Ruta</th>
+                            <th>Código Estado</th>
+                        </tr>
+                        {% elif table_name == 'registros_error' %}
+                        <tr>
+                            <th>Fecha/Hora</th>
+                            <th>Nivel Error</th>
+                            <th>Cliente</th>
+                            <th>Mensaje</th>
+                        </tr>
+                        {% elif table_name == 'registros_ftp' %}
+                        <tr>
+                            <th>ID</th>
+                            <th>Fecha/Hora</th>
+                            <th>Usuario</th>
+                            <th>IP</th>
+                            <th>Acción</th>
+                            <th>Archivo</th>
+                            <th>Detalles</th>
+                        </tr>
+                        {% elif table_name == 'transferencias_ftp' %}
+                        <tr>
+                            <th>ID</th>
+                            <th>Fecha/Hora</th>
+                            <th>IP Remota</th>
+                            <th>Archivo</th>
+                            <th>Acción Especial</th>
+                            <th>Usuario</th>
+                            <th>Servicio</th>
+                        </tr>
+                        {% endif %}
+                    </thead>
+                    <tbody>
+                        {% if table_name == 'registros_acceso' %}
+                            {% for log in error_logs %}
+                            <tr class="{% if log.codigo_estado >= 500 %}table-danger{% else %}table-warning{% endif %}">
+                               
+                                <td>{{ log.fecha_hora }}</td>
+                                <td>{{ log.ip }}</td>
+                                <td>{{ log.metodo }}</td>
+                                <td>{{ log.ruta }}</td>
+                                <td>{{ log.codigo_estado }}</td>
+                            </tr>
+                            {% endfor %}
+                        {% elif table_name == 'registros_error' %}
+                            {% for log in error_logs %}
+                            <tr class="{% if log.nivel_error == 'error' or log.nivel_error == 'crit' %}table-danger{% else %}table-warning{% endif %}">
+                                <td>{{ log.fecha_hora }}</td>
+                                <td>{{ log.nivel_error }}</td>
+                                <td>{{ log.cliente }}</td>
+                                <td>{{ log.mensaje }}</td>
+                            </tr>
+                            {% endfor %}
+                        {% elif table_name == 'registros_ftp' %}
+                            {% for log in error_logs %}
+                            <tr>
+                                <td>{{ log.id }}</td>
+                                <td>{{ log.fecha_hora }}</td>
+                                <td>{{ log.usuario }}</td>
+                                <td>{{ log.ip }}</td>
+                                <td>{{ log.accion }}</td>
+                                <td>{{ log.archivo }}</td>
+                                <td>{{ log.detalles }}</td>
+                            </tr>
+                            {% endfor %}
+                        {% elif table_name == 'transferencias_ftp' %}
+                            {% for log in error_logs %}
+                            <tr>
+                                <td>{{ log.id }}</td>
+                                <td>{{ log.fecha_hora }}</td>
+                                <td>{{ log.ip_remota }}</td>
+                                <td>{{ log.archivo }}</td>
+                                <td>{{ log.accion_especial }}</td>
+                                <td>{{ log.usuario }}</td>
+                                <td>{{ log.servicio }}</td>
+                            </tr>
+                            {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

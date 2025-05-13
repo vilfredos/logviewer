@@ -38,9 +38,6 @@
 {% block content %}
 
 <div class="d-flex justify-content-between mb-3">
-    <form action="{{ url_for('clear_database_route') }}" method="POST">
-        <button type="submit" class="btn btn-danger">Salir</button>
-    </form>
     
     <button id="copySelectedBtn" class="btn btn-primary copy-button" disabled>Copiar selección</button>
 </div>
@@ -147,6 +144,7 @@
                                     <th>Referencia</th>
                                     <th>Navegador</th>
                                     <th>Bytes Enviados</th>
+                                    <th>tiempo</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -165,6 +163,7 @@
                                     <td>{{ log.referer }}</td>
                                     <td>{{ log.user_agent }}</td>
                                     <td>{{ log.bytes_enviados }}</td>
+                                    <td>{{ log.tiempo_respuesta }}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>

@@ -3,3 +3,8 @@ Werkzeug==2.2.3
 pymysql==1.0.3
 python-dateutil==2.8.2
 regex==2023.3.23
+mysql-connector-python==8.0.33
+sqlalchemy==2.0.15
+python-dotenv==1.0.0
+pandas
+matplotlib==3.8.4
