@@ -10,8 +10,8 @@ MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # 16 MB límite de subida
 # Configuración de la base de datos
 DB_CONFIG = {
     'host': 'localhost',
-    'user': 'root',
-    'password': 'vilfredos',
+    'user': 'gabriel',
+    'password': 'gabo123',
     'database': 'bdlogs2',
 }
 

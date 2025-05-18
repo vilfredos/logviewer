@@ -9,8 +9,8 @@ class AlertsHandler:
         """Constructor para AlertsHandler"""
         self.config = {
             'host': 'localhost',
-            'user': 'root',
-            'password': 'vilfredos',
+            'user': 'gabriel',
+            'password': 'gabo123',
             'database': 'bdlogs2'
         }
     

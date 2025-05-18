@@ -1,0 +1,200 @@
+[Tue Apr 15 23:00:03 2025] [warn] [client -] Error processing request: Invalid input, referer: /opt/app/data.db:367
+[Wed Apr 16 02:12:22 2025] [warn] [client 127.101.44.251] Error processing request: Database connection failed, referer: /home/user/file.txt:427
+[Wed Apr 16 05:39:43 2025] [notice] [client 121.76.228.180] Error processing request: Database connection failed, referer: /var/www/html/index.html:152
+[Wed Apr 16 09:01:29 2025] [warn] [client 45.148.86.94] Error processing request: File not found, referer: /home/user/Documents/report.pdf:442
+[Wed Apr 16 11:44:20 2025] [notice] [client 109.217.42.80] Error processing request: File not found
+[Wed Apr 16 17:36:50 2025] [info] [client -] Error processing request: Permission denied, referer: /var/www/html/index.html:502
+[Wed Apr 16 19:01:07 2025] [warn] [client 239.157.205.200] Error processing request: Database connection failed, referer: /etc/config.conf:996
+[Wed Apr 16 23:01:46 2025] [warn] [client 105.14.169.101] Error processing request: Invalid input
+[Thu Apr 17 04:35:17 2025] [notice] [client 58.77.90.3] Error processing request: Memory limit exceeded, referer: /var/www/html/index.html:294
+[Thu Apr 17 06:36:09 2025] [info] [client -] Error processing request: File not found
+[Thu Apr 17 10:31:08 2025] [crit] [client 181.9.78.14] Error processing request: File not found, referer: /home/user/file.txt:352
+[Thu Apr 17 13:33:34 2025] [error] [client 96.242.144.214] Error processing request: Memory limit exceeded, referer: /etc/config.conf:928
+[Thu Apr 17 18:53:00 2025] [warn] [client 131.251.136.40] Error processing request: Permission denied
+[Thu Apr 17 20:53:05 2025] [warn] [client 10.34.167.211] Error processing request: Database connection failed, referer: /home/user/file.txt:222
+[Fri Apr 18 00:55:00 2025] [warn] [client 176.87.244.99] Error processing request: Memory limit exceeded, referer: /home/user/Documents/report.pdf:16
+[Fri Apr 18 05:31:07 2025] [info] [client 236.59.119.189] Error processing request: Database connection failed
+[Fri Apr 18 08:25:27 2025] [info] [client -] Error processing request: Database connection failed
+[Fri Apr 18 11:15:13 2025] [crit] [client 23.165.174.29] Error processing request: Timeout exceeded, referer: /etc/config.conf:351
+[Fri Apr 18 15:55:02 2025] [notice] [client 26.171.176.114] Error processing request: Memory limit exceeded, referer: /home/user/Documents/report.pdf:725
+[Fri Apr 18 19:38:42 2025] [alert] [client 28.80.187.127] Error processing request: Invalid input, referer: /home/user/Documents/report.pdf:949
+[Fri Apr 18 22:47:03 2025] [warn] [client 171.134.77.23] Error processing request: Memory limit exceeded
+[Sat Apr 19 02:57:17 2025] [crit] [client -] Error processing request: Database connection failed, referer: /var/www/html/index.html:792
+[Sat Apr 19 05:41:17 2025] [warn] [client 140.120.89.97] Error processing request: Timeout exceeded, referer: /var/log/messages:192
+[Sat Apr 19 08:12:20 2025] [notice] [client 151.240.224.104] Error processing request: Database connection failed
+[Sat Apr 19 11:21:07 2025] [notice] [client 220.26.0.164] Error processing request: Memory limit exceeded
+[Sat Apr 19 17:46:11 2025] [error] [client 69.93.187.53] Error processing request: File not found, referer: /var/log/messages:838
+[Sat Apr 19 19:35:09 2025] [notice] [client 228.171.93.66] Error processing request: Invalid input
+[Sun Apr 20 00:02:34 2025] [warn] [client -] Error processing request: Database connection failed
+[Sun Apr 20 04:01:23 2025] [warn] [client -] Error processing request: Timeout exceeded, referer: /usr/local/bin/script.sh:716
+[Sun Apr 20 05:41:59 2025] [warn] [client 157.54.180.96] Error processing request: File not found, referer: /opt/app/data.db:302
+[Sun Apr 20 10:35:21 2025] [notice] [client -] Error processing request: File not found, referer: /home/user/file.txt:816
+[Sun Apr 20 13:03:39 2025] [info] [client 165.63.197.249] Error processing request: Database connection failed
+[Sun Apr 20 16:38:03 2025] [info] [client -] Error processing request: Invalid input, referer: /home/user/Documents/report.pdf:871
+[Sun Apr 20 22:21:04 2025] [notice] [client 215.88.16.15] Error processing request: Permission denied
+[Mon Apr 21 02:11:14 2025] [warn] [client 97.64.143.42] Error processing request: Memory limit exceeded
+[Mon Apr 21 03:57:31 2025] [info] [client 21.202.83.196] Error processing request: Timeout exceeded, referer: /home/user/Pictures/image.jpg:868
+[Mon Apr 21 08:50:57 2025] [notice] [client 169.155.115.171] Error processing request: Invalid input
+[Mon Apr 21 10:37:00 2025] [info] [client 39.232.35.46] Error processing request: Timeout exceeded, referer: /var/log/messages:826
+[Mon Apr 21 14:46:13 2025] [alert] [client 33.84.55.165] Error processing request: Invalid input, referer: /home/user/file.txt:469
+[Mon Apr 21 17:34:17 2025] [alert] [client 196.58.104.69] Error processing request: Invalid input
+[Mon Apr 21 21:51:14 2025] [crit] [client 197.101.35.193] Error processing request: Database connection failed
+[Tue Apr 22 02:01:44 2025] [info] [client -] Error processing request: Memory limit exceeded
+[Tue Apr 22 04:37:06 2025] [warn] [client -] Error processing request: File not found, referer: /home/user/file.txt:440
+[Tue Apr 22 10:29:48 2025] [warn] [client 50.193.46.35] Error processing request: File not found
+[Tue Apr 22 12:42:56 2025] [notice] [client 83.124.91.118] Error processing request: File not found
+[Tue Apr 22 17:07:15 2025] [info] [client 248.112.208.50] Error processing request: Invalid input, referer: /etc/config.conf:452
+[Tue Apr 22 20:19:32 2025] [notice] [client -] Error processing request: Permission denied, referer: /usr/local/bin/script.sh:185
+[Tue Apr 22 23:28:58 2025] [error] [client 115.141.60.65] Error processing request: Database connection failed
+[Wed Apr 23 03:51:45 2025] [notice] [client 251.2.53.248] Error processing request: Invalid input, referer: /usr/local/bin/script.sh:780
+[Wed Apr 23 08:04:26 2025] [warn] [client -] Error processing request: File not found
+[Wed Apr 23 10:06:25 2025] [info] [client 48.64.223.148] Error processing request: Invalid input, referer: /usr/local/bin/script.sh:671
+[Wed Apr 23 15:12:25 2025] [notice] [client -] Error processing request: Memory limit exceeded, referer: /usr/local/bin/script.sh:557
+[Wed Apr 23 18:07:26 2025] [error] [client 193.243.249.245] Error processing request: Timeout exceeded, referer: /home/user/Documents/report.pdf:538
+[Wed Apr 23 21:13:16 2025] [info] [client -] Error processing request: File not found
+[Wed Apr 23 23:36:48 2025] [notice] [client 41.193.35.63] Error processing request: File not found, referer: /home/user/file.txt:16
+[Thu Apr 24 04:58:49 2025] [warn] [client 92.30.25.216] Error processing request: Database connection failed
+[Thu Apr 24 07:23:51 2025] [warn] [client 25.172.130.126] Error processing request: File not found, referer: /usr/local/bin/script.sh:674
+[Thu Apr 24 11:33:58 2025] [notice] [client 52.176.244.180] Error processing request: File not found
+[Thu Apr 24 16:23:32 2025] [warn] [client 215.143.191.250] Error processing request: Invalid input, referer: /opt/app/data.db:569
+[Thu Apr 24 17:55:45 2025] [warn] [client 106.15.151.246] Error processing request: Timeout exceeded
+[Thu Apr 24 22:17:35 2025] [info] [client -] Error processing request: Invalid input, referer: /usr/local/bin/script.sh:230
+[Fri Apr 25 02:25:12 2025] [info] [client 85.15.70.18] Error processing request: Timeout exceeded
+[Fri Apr 25 06:09:04 2025] [info] [client 69.212.40.241] Error processing request: Timeout exceeded
+[Fri Apr 25 08:39:25 2025] [notice] [client -] Error processing request: Database connection failed, referer: /etc/config.conf:152
+[Fri Apr 25 11:37:04 2025] [notice] [client -] Error processing request: Memory limit exceeded, referer: /var/www/html/index.html:217
+[Fri Apr 25 16:46:35 2025] [warn] [client 217.116.220.13] Error processing request: File not found, referer: /home/user/file.txt:360
+[Fri Apr 25 18:34:39 2025] [info] [client 73.1.90.82] Error processing request: Invalid input, referer: /home/user/Pictures/image.jpg:343
+[Fri Apr 25 22:18:24 2025] [notice] [client 37.96.166.249] Error processing request: File not found
+[Sat Apr 26 03:59:23 2025] [notice] [client 249.50.160.224] Error processing request: Timeout exceeded
+[Sat Apr 26 07:31:08 2025] [warn] [client 78.118.40.65] Error processing request: Permission denied
+[Sat Apr 26 08:58:31 2025] [notice] [client -] Error processing request: Permission denied, referer: /opt/app/data.db:606
+[Sat Apr 26 13:31:13 2025] [notice] [client 62.59.57.173] Error processing request: Permission denied, referer: /var/www/html/index.html:641
+[Sat Apr 26 18:45:43 2025] [warn] [client -] Error processing request: Timeout exceeded, referer: /home/user/Documents/report.pdf:879
+[Sat Apr 26 22:13:43 2025] [warn] [client 123.79.60.77] Error processing request: Timeout exceeded, referer: /home/user/Documents/report.pdf:800
+[Sat Apr 26 23:49:21 2025] [notice] [client 42.212.26.163] Error processing request: Memory limit exceeded
+[Sun Apr 27 04:22:54 2025] [crit] [client 141.107.126.153] Error processing request: Timeout exceeded, referer: /var/log/messages:99
+[Sun Apr 27 08:00:32 2025] [info] [client -] Error processing request: Timeout exceeded
+[Sun Apr 27 10:32:41 2025] [warn] [client 234.62.18.10] Error processing request: Timeout exceeded, referer: /opt/app/data.db:864
+[Sun Apr 27 15:08:34 2025] [info] [client -] Error processing request: Database connection failed
+[Sun Apr 27 18:14:32 2025] [info] [client 28.101.143.156] Error processing request: Timeout exceeded
+[Sun Apr 27 21:55:48 2025] [info] [client 208.174.186.144] Error processing request: Timeout exceeded, referer: /opt/app/data.db:534
+[Mon Apr 28 01:36:03 2025] [warn] [client 143.192.33.53] Error processing request: Permission denied, referer: /var/www/html/index.html:277
+[Mon Apr 28 04:26:22 2025] [info] [client -] Error processing request: Memory limit exceeded, referer: /opt/app/data.db:423
+[Mon Apr 28 07:59:56 2025] [warn] [client 33.121.251.223] Error processing request: Database connection failed
+[Mon Apr 28 11:41:23 2025] [info] [client 10.251.157.78] Error processing request: Invalid input
+[Mon Apr 28 16:33:38 2025] [notice] [client 34.225.80.245] Error processing request: Database connection failed, referer: /home/user/Pictures/image.jpg:690
+[Mon Apr 28 19:26:52 2025] [error] [client 34.222.30.21] Error processing request: File not found, referer: /home/user/file.txt:818
+[Mon Apr 28 23:35:34 2025] [warn] [client 138.240.228.119] Error processing request: Permission denied
+[Tue Apr 29 02:28:37 2025] [warn] [client 13.48.52.173] Error processing request: Invalid input, referer: /var/www/html/index.html:594
+[Tue Apr 29 07:34:29 2025] [info] [client 165.209.55.144] Error processing request: Invalid input, referer: /home/user/file.txt:589
+[Tue Apr 29 10:57:53 2025] [notice] [client -] Error processing request: Invalid input, referer: /var/log/messages:940
+[Tue Apr 29 14:32:10 2025] [warn] [client -] Error processing request: Permission denied
+[Tue Apr 29 17:53:57 2025] [notice] [client 219.188.99.86] Error processing request: Memory limit exceeded
+[Tue Apr 29 22:33:17 2025] [info] [client -] Error processing request: Database connection failed, referer: /etc/config.conf:837
+[Wed Apr 30 00:10:16 2025] [warn] [client 44.252.87.209] Error processing request: Timeout exceeded, referer: /usr/local/bin/script.sh:100
+[Wed Apr 30 04:36:23 2025] [info] [client 196.85.44.0] Error processing request: File not found
+[Wed Apr 30 07:19:51 2025] [notice] [client 96.37.79.247] Error processing request: Database connection failed, referer: /opt/app/data.db:237
+[Wed Apr 30 11:44:44 2025] [notice] [client -] Error processing request: Database connection failed, referer: /var/log/messages:265
+[Wed Apr 30 16:09:23 2025] [warn] [client -] Error processing request: File not found
+[Wed Apr 30 19:52:49 2025] [info] [client 42.211.227.228] Error processing request: Database connection failed, referer: /home/user/Pictures/image.jpg:870
+[Wed Apr 30 22:18:27 2025] [warn] [client 45.104.101.154] Error processing request: Timeout exceeded
+[Thu May 01 01:34:53 2025] [warn] [client -] Error processing request: Permission denied
+[Thu May 01 04:58:00 2025] [error] [client 80.48.21.127] Error processing request: Database connection failed
+[Thu May 01 10:10:53 2025] [warn] [client 205.92.136.249] Error processing request: Permission denied, referer: /etc/config.conf:183
+[Thu May 01 14:00:26 2025] [crit] [client 113.206.71.137] Error processing request: Permission denied
+[Thu May 01 17:18:06 2025] [notice] [client -] Error processing request: Database connection failed, referer: /var/www/html/index.html:53
+[Thu May 01 18:52:33 2025] [warn] [client 187.18.74.85] Error processing request: File not found, referer: /home/user/Pictures/image.jpg:921
+[Thu May 01 23:13:47 2025] [info] [client 134.153.91.128] Error processing request: File not found
+[Fri May 02 03:26:03 2025] [warn] [client 18.141.9.226] Error processing request: File not found
+[Fri May 02 06:33:50 2025] [warn] [client 88.50.39.74] Error processing request: Database connection failed
+[Fri May 02 09:43:17 2025] [notice] [client -] Error processing request: Database connection failed
+[Fri May 02 13:04:06 2025] [info] [client 170.209.86.137] Error processing request: Permission denied
+[Fri May 02 16:45:34 2025] [notice] [client 40.88.14.127] Error processing request: Timeout exceeded, referer: /home/user/file.txt:98
+[Fri May 02 20:56:31 2025] [warn] [client -] Error processing request: Database connection failed, referer: /etc/config.conf:364
+[Sat May 03 00:35:14 2025] [info] [client -] Error processing request: File not found, referer: /etc/config.conf:895
+[Sat May 03 05:44:21 2025] [notice] [client -] Error processing request: Timeout exceeded, referer: /home/user/file.txt:205
+[Sat May 03 07:37:32 2025] [info] [client -] Error processing request: File not found
+[Sat May 03 12:25:01 2025] [notice] [client -] Error processing request: Permission denied, referer: /home/user/file.txt:119
+[Sat May 03 16:20:47 2025] [notice] [client 246.86.29.197] Error processing request: File not found, referer: /var/log/messages:220
+[Sat May 03 17:45:43 2025] [info] [client -] Error processing request: Database connection failed, referer: /var/log/messages:164
+[Sat May 03 23:32:14 2025] [warn] [client -] Error processing request: Permission denied
+[Sun May 04 01:04:16 2025] [info] [client 112.150.112.248] Error processing request: Permission denied
+[Sun May 04 06:13:56 2025] [warn] [client -] Error processing request: Database connection failed, referer: /var/log/messages:568
+[Sun May 04 07:46:15 2025] [notice] [client -] Error processing request: Permission denied
+[Sun May 04 14:04:56 2025] [error] [client -] Error processing request: Invalid input, referer: /home/user/Pictures/image.jpg:99
+[Sun May 04 17:40:04 2025] [crit] [client -] Error processing request: Invalid input, referer: /opt/app/data.db:807
+[Sun May 04 21:01:01 2025] [info] [client 216.143.170.142] Error processing request: Permission denied
+[Sun May 04 23:44:06 2025] [error] [client 249.184.237.142] Error processing request: Timeout exceeded
+[Mon May 05 02:01:47 2025] [info] [client 197.31.232.209] Error processing request: Invalid input, referer: /var/log/messages:666
+[Mon May 05 07:45:09 2025] [emerg] [client -] Error processing request: Invalid input
+[Mon May 05 09:41:19 2025] [info] [client 18.137.167.112] Error processing request: Timeout exceeded, referer: /home/user/Documents/report.pdf:179
+[Mon May 05 14:34:06 2025] [warn] [client 164.15.123.30] Error processing request: Database connection failed, referer: /home/user/Documents/report.pdf:368
+[Mon May 05 17:59:34 2025] [info] [client 92.21.177.219] Error processing request: Permission denied, referer: /home/user/Documents/report.pdf:356
+[Mon May 05 21:23:15 2025] [warn] [client 42.144.185.167] Error processing request: Memory limit exceeded, referer: /usr/local/bin/script.sh:21
+[Tue May 06 00:19:04 2025] [notice] [client 205.237.196.233] Error processing request: Memory limit exceeded
+[Tue May 06 03:31:57 2025] [warn] [client 248.19.44.177] Error processing request: Permission denied, referer: /var/log/messages:878
+[Tue May 06 06:34:44 2025] [warn] [client 14.139.233.135] Error processing request: Invalid input, referer: /etc/config.conf:542
+[Tue May 06 10:14:23 2025] [crit] [client 104.45.80.134] Error processing request: Database connection failed, referer: /home/user/Pictures/image.jpg:660
+[Tue May 06 14:54:22 2025] [warn] [client -] Error processing request: File not found
+[Tue May 06 18:51:22 2025] [warn] [client 223.237.221.84] Error processing request: File not found
+[Tue May 06 21:30:57 2025] [info] [client 20.173.105.62] Error processing request: Database connection failed
+[Wed May 07 01:02:54 2025] [notice] [client 198.80.67.88] Error processing request: Memory limit exceeded
+[Wed May 07 06:42:18 2025] [error] [client 171.102.83.210] Error processing request: Memory limit exceeded
+[Wed May 07 10:23:07 2025] [notice] [client 15.90.17.142] Error processing request: Permission denied
+[Wed May 07 11:49:10 2025] [warn] [client -] Error processing request: Memory limit exceeded
+[Wed May 07 15:51:52 2025] [error] [client -] Error processing request: Database connection failed, referer: /var/log/messages:35
+[Wed May 07 21:00:54 2025] [notice] [client -] Error processing request: Timeout exceeded
+[Wed May 07 22:38:38 2025] [error] [client 223.35.169.143] Error processing request: Timeout exceeded, referer: /usr/local/bin/script.sh:884
+[Thu May 08 04:28:58 2025] [warn] [client 70.121.13.204] Error processing request: Timeout exceeded, referer: /opt/app/data.db:143
+[Thu May 08 05:29:04 2025] [info] [client 24.120.178.182] Error processing request: Database connection failed, referer: /etc/config.conf:211
+[Thu May 08 09:13:17 2025] [notice] [client 174.197.96.76] Error processing request: Permission denied
+[Thu May 08 14:30:20 2025] [warn] [client 244.29.133.18] Error processing request: Timeout exceeded, referer: /etc/config.conf:885
+[Thu May 08 17:35:35 2025] [error] [client -] Error processing request: Permission denied
+[Thu May 08 22:08:17 2025] [warn] [client 117.100.136.14] Error processing request: Timeout exceeded
+[Fri May 09 00:42:12 2025] [warn] [client 216.101.73.233] Error processing request: Timeout exceeded
+[Fri May 09 03:45:34 2025] [warn] [client 79.175.223.213] Error processing request: Timeout exceeded
+[Fri May 09 07:06:23 2025] [error] [client 125.48.250.184] Error processing request: Timeout exceeded
+[Fri May 09 12:45:09 2025] [notice] [client 171.149.206.29] Error processing request: Memory limit exceeded
+[Fri May 09 14:41:13 2025] [notice] [client 148.28.140.29] Error processing request: Invalid input
+[Fri May 09 17:24:04 2025] [notice] [client -] Error processing request: Timeout exceeded, referer: /etc/config.conf:603
+[Fri May 09 23:18:28 2025] [notice] [client 93.21.218.202] Error processing request: Permission denied
+[Sat May 10 00:49:36 2025] [info] [client 119.201.81.179] Error processing request: Memory limit exceeded, referer: /etc/config.conf:517
+[Sat May 10 05:12:41 2025] [warn] [client -] Error processing request: Invalid input
+[Sat May 10 08:34:23 2025] [notice] [client 20.191.188.114] Error processing request: Timeout exceeded, referer: /var/www/html/index.html:477
+[Sat May 10 12:16:44 2025] [notice] [client 195.235.153.177] Error processing request: Invalid input, referer: /home/user/Documents/report.pdf:126
+[Sat May 10 15:44:19 2025] [notice] [client 55.250.222.141] Error processing request: Permission denied
+[Sat May 10 19:55:56 2025] [warn] [client 112.99.252.155] Error processing request: Database connection failed, referer: /usr/local/bin/script.sh:144
+[Sat May 10 23:38:14 2025] [warn] [client 205.45.160.0] Error processing request: Database connection failed, referer: /opt/app/data.db:683
+[Sun May 11 02:03:56 2025] [info] [client 106.120.219.109] Error processing request: Permission denied, referer: /var/www/html/index.html:648
+[Sun May 11 07:58:07 2025] [info] [client 32.242.99.58] Error processing request: Timeout exceeded
+[Sun May 11 09:58:31 2025] [emerg] [client 105.182.164.30] Error processing request: Permission denied
+[Sun May 11 12:39:02 2025] [info] [client 7.170.232.129] Error processing request: Timeout exceeded
+[Sun May 11 16:29:33 2025] [warn] [client 124.228.173.214] Error processing request: Invalid input
+[Sun May 11 21:32:17 2025] [alert] [client -] Error processing request: Database connection failed, referer: /opt/app/data.db:12
+[Mon May 12 01:10:51 2025] [notice] [client -] Error processing request: Permission denied
+[Mon May 12 03:22:47 2025] [error] [client 138.72.80.147] Error processing request: Database connection failed
+[Mon May 12 09:09:48 2025] [alert] [client 235.77.36.244] Error processing request: File not found
+[Mon May 12 12:26:42 2025] [warn] [client 162.78.91.121] Error processing request: Permission denied
+[Mon May 12 14:14:45 2025] [error] [client 19.85.184.126] Error processing request: Invalid input
+[Mon May 12 18:50:41 2025] [warn] [client 68.74.17.0] Error processing request: Permission denied, referer: /etc/config.conf:351
+[Mon May 12 20:59:11 2025] [notice] [client 9.211.132.214] Error processing request: Timeout exceeded
+[Tue May 13 02:29:56 2025] [info] [client 109.100.61.207] Error processing request: Database connection failed
+[Tue May 13 04:25:34 2025] [warn] [client -] Error processing request: Database connection failed
+[Tue May 13 08:09:50 2025] [info] [client 87.153.83.90] Error processing request: Invalid input, referer: /usr/local/bin/script.sh:898
+[Tue May 13 11:47:37 2025] [notice] [client 227.2.254.43] Error processing request: File not found, referer: /home/user/Pictures/image.jpg:890
+[Tue May 13 17:24:44 2025] [warn] [client 84.6.109.89] Error processing request: Permission denied
+[Tue May 13 18:36:15 2025] [warn] [client 105.73.175.106] Error processing request: Memory limit exceeded
+[Wed May 14 00:21:54 2025] [crit] [client 220.222.66.138] Error processing request: Timeout exceeded, referer: /usr/local/bin/script.sh:491
+[Wed May 14 03:13:44 2025] [info] [client 67.11.127.179] Error processing request: File not found
+[Wed May 14 07:30:07 2025] [info] [client 84.39.151.23] Error processing request: Permission denied
+[Wed May 14 09:26:31 2025] [info] [client -] Error processing request: File not found
+[Wed May 14 14:06:31 2025] [info] [client 237.59.204.163] Error processing request: Permission denied
+[Wed May 14 18:29:30 2025] [info] [client 41.70.227.183] Error processing request: Memory limit exceeded
+[Wed May 14 20:16:32 2025] [notice] [client 86.79.238.39] Error processing request: Invalid input, referer: /home/user/Documents/report.pdf:879
+[Thu May 15 01:36:09 2025] [alert] [client 73.133.186.140] Error processing request: Database connection failed, referer: /opt/app/data.db:857
+[Thu May 15 03:27:20 2025] [info] [client 104.204.73.216] Error processing request: Timeout exceeded, referer: /var/www/html/index.html:220
+[Thu May 15 09:12:51 2025] [notice] [client 165.97.49.178] Error processing request: Memory limit exceeded, referer: /home/user/Documents/report.pdf:370
+[Thu May 15 11:13:59 2025] [warn] [client -] Error processing request: Invalid input, referer: /usr/local/bin/script.sh:667
+[Thu May 15 16:21:22 2025] [warn] [client 147.58.130.9] Error processing request: Permission denied, referer: /opt/app/data.db:391
+[Thu May 15 19:01:36 2025] [info] [client -] Error processing request: Permission denied
