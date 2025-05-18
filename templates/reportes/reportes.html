@@ -5,10 +5,10 @@
 {% block content %}
 <h1 class="mb-4">Reportes</h1>
 
-<div class="row">
-  <!-- Filtros a la izquierda -->
-  <div class="col-md-4">
-    <form method="POST" class="row g-3 mb-4">
+<!-- Formulario arriba, de ancho completo -->
+<div class="card mb-4 shadow-sm">
+  <div class="card-body">
+    <form method="POST" class="row g-3">
       <div class="col-md-4">
         <label for="texto" class="form-label">Texto a buscar:</label>
         <input type="text" name="texto" id="texto" class="form-control">
@@ -32,16 +32,18 @@
         <input type="date" name="hasta" class="form-control">
       </div>
 
-      <div class="col-12">
+      <div class="col-12 text-end">
         <button type="submit" class="btn btn-primary">Buscar</button>
       </div>
     </form>
   </div>
+</div>
 
-  <!-- Contenido a la derecha -->
-  <div class="col-md-8">
+<!-- Contenido principal con pestañas -->
+<div class="card shadow-sm">
+  <div class="card-body">
     <!-- Tabs -->
-    <ul class="nav nav-tabs" id="reportesTabs" role="tablist">
+    <ul class="nav nav-tabs mb-3" id="reportesTabs" role="tablist">
       <li class="nav-item" role="presentation">
         <button class="nav-link active" id="vsftpd-tab" data-bs-toggle="tab" data-bs-target="#vsftpd" type="button" role="tab">
           Logs VSFTPD
@@ -55,85 +57,46 @@
     </ul>
 
     <!-- Tab panes -->
-    <div class="tab-content border p-3 border-top-0">
+    <div class="tab-content">
       <div class="tab-pane fade show active" id="vsftpd" role="tabpanel">
         <div class="bg-white p-3 rounded shadow-sm mb-4" style="overflow-x: auto;">
-          <canvas id="grafico" style="min-width: 700px;"></canvas>
+          <img src="{{ grafico_cantidad }}" class="img-fluid" alt="Gráfico de logs FTP">
         </div>
-        <script>
-          const ctx = document.getElementById('grafico').getContext('2d');
-        
-          const grafico = new Chart(ctx, {
-            type: 'bar', 
-            data: {
-              labels: {{ grafico_cant['tiempo']|tojson }},
-              datasets: [{
-                label: 'Cantidad',
-                data: {{ grafico_cant['cantidad']|tojson }},
-                backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
-              }]
-            },
-            options: {
-              responsive: true,
-              scales: {
-                x: {
-                  title: {
-                    display: true,
-                    text: 'Tiempo'
-                  }
-                },
-                y: {
-                  beginAtZero: true,
-                  title: {
-                    display: true,
-                    text: 'Cantidad'
-                  }
-                }
-              }
-            }
-          });
-        </script>
 
-    
-        <h5 class="mt-5">Tabla de logs FTP</h5>
+        <h5 class="mt-4">Tabla de logs FTP</h5>
 
         {% if resultados %}
         <div class="table-responsive bg-white shadow-sm rounded p-3">
-          <h4>Resultados:</h4>
           <table class="table table-bordered table-striped">
             <thead>
               <tr>
-                
-                  <th>fecha y hora</th>
-                  <th>usuario</th>
-                  <th>ip</th>
-                  <th>accion</th>
-                  <th>archivo</th>
-                  <th>detalles</th>
-                
+                <th>Fecha y hora</th>
+                <th>Usuario</th>
+                <th>IP</th>
+                <th>Acción</th>
+                <th>Archivo</th>
+                <th>Detalles</th>
               </tr>
             </thead>
             <tbody>
               {% for fila in resultados %}
-                <tr>
-                
-                    <td>{{fila['fecha_hora']}}</td>
-                    <td>{{fila['usuario']}}</td>
-                    <td>{{fila['ip']}}</td>
-                    <td>{{fila['accion']}}</td>
-                    <td>{{fila['archivo']}}</td>
-                    <td>{{fila['detalles']}}</td>
-                  
-                </tr>
+              <tr>
+                <td>{{fila['fecha_hora']}}</td>
+                <td>{{fila['usuario']}}</td>
+                <td>{{fila['ip']}}</td>
+                <td>{{fila['accion']}}</td>
+                <td>{{fila['archivo']}}</td>
+                <td>{{fila['detalles']}}</td>
+              </tr>
               {% endfor %}
             </tbody>
           </table>
         </div>
+        {% else %}
+        <p class="text-muted">No se encontraron resultados.</p>
         {% endif %}
-        
       </div>
+
       <div class="tab-pane fade" id="apache" role="tabpanel">
         <h5>Logs del servidor Apache</h5>
         <pre>{{ apache_logs }}</pre>
@@ -142,16 +105,13 @@
   </div>
 </div>
 
-
+<!-- Script -->
 <script>
   function toggleFechas() {
     const modo = document.getElementById("modo").value;
     const fechaDiv = document.getElementById("fechas");
     fechaDiv.style.display = (modo === "rango") ? "block" : "none";
   }
-
   window.addEventListener("DOMContentLoaded", toggleFechas);
 </script>
-    
 {% endblock %}
-

@@ -149,13 +149,11 @@ class ReportAnalyzer2:
             hoy = datetime.now()
             anio = hoy.year
             mes = hoy.month
-            primer_dia = f"{anio}-{mes:02d}-01 00:00:00"
-            # Último día del mes
-            ultimo_dia_num = calendar.monthrange(anio, mes)[1]
-            ultimo_dia = f"{anio}-{mes:02d}-{ultimo_dia_num} 23:59:59"
+            primer_dia = f"{anio}-01-01 00:00:00"
+            ultimo_dia = f"{anio}-12-31 23:59:59"
 
             query += """
-                SELECT DATE_FORMAT(fecha_hora, '%Y-%m') AS tiempo, COUNT(*) AS cantidad
+                SELECT MONTH(fecha_hora) AS tiempo, COUNT(*) AS cantidad
                 FROM registros_ftp
                 WHERE (
                     usuario LIKE %s
@@ -198,6 +196,8 @@ class ReportAnalyzer2:
                     OR archivo LIKE %s
                     OR detalles LIKE %s
                 )
+                GROUP BY tiempo
+                ORDER BY tiempo
                 """
 
         
@@ -206,14 +206,12 @@ class ReportAnalyzer2:
             cursor = connection.cursor()
             cursor.execute(query,params)
             resultado = cursor.fetchall()
-            grafico_datos = {
-                'tiempo': [fila['tiempo'] for fila in resultado],
-                'cantidad': [fila['cantidad'] for fila in resultado]
-            }
+            resultado = pd.DataFrame(resultado, columns=["tiempo", "cantidad"])
+            resultado['tiempo'] = resultado['tiempo'].astype(str)
             grafico = self._create_bar_chart(
-                    grafico_datos['tiempo'],
-                    grafico_datos['cantidad'],
-                    'Logs en el tiempo', 'Tiempo', 'Cantidad'
+                resultado['tiempo'],
+                resultado['cantidad'],
+                'Logs en el tiempo', 'Tiempo', 'Cantidad'
             )
             
         finally:

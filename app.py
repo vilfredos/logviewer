@@ -405,6 +405,7 @@ def reportes():
     db_config = config.DB_CONFIG
     report_analyzer2 = ReportAnalyzer2(db_config)
     resultados = []
+    grafico_cantidad = []
     if request.method == "POST":
         texto = request.form.get("texto", "")
         texto = texto.lower().strip()
@@ -412,14 +413,10 @@ def reportes():
         desde = request.form.get("desde")
         hasta = request.form.get("hasta")
         resultados = report_analyzer2.get_ftp_filtrado(texto,modo,desde,hasta)
-        grafico_cantidad = report_analyzer2.get_ftp_filtrado_conteo(texto,modo,desde,hasta)
-        grafico_cant = {
-            'tiempo': [fila['tiempo'] for fila in grafico_cantidad],
-            'cantidad': [fila['cantidad'] for fila in grafico_cantidad]
-        }
+        grafico_cantidad = report_analyzer2.get_ftp_filtrado_grafico(texto,modo,desde,hasta)
         
 
-    return render_template("reportes/reportes.html", resultados=resultados, grafico_cant = grafico_cant)
+    return render_template("reportes/reportes.html", resultados=resultados, grafico_cantidad = grafico_cantidad)
 
 @app.route('/reports', methods=['GET', 'POST'])
 def reports():
