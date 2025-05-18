@@ -1,0 +1,200 @@
+Tue Apr 15 23:39:56 2025 [pid 3482] OK UPLOAD: Client "117.170.61.143", "/etc/config.conf", 5779091 bytes
+Wed Apr 16 01:10:08 2025 [pid 3403] Client "206.254.93.248" connected
+Wed Apr 16 06:52:58 2025 [pid 1795] OK UPLOAD: Client "198.112.238.224", "/opt/app/data.db", 3096452 bytes
+Wed Apr 16 07:53:15 2025 [pid 9180] RMD 
+Wed Apr 16 13:14:19 2025 [pid 1749] 
+Wed Apr 16 15:26:06 2025 [pid 5732] OK DOWNLOAD: Client "216.82.213.163", "/opt/app/data.db", 5764206 bytes
+Wed Apr 16 20:23:56 2025 [pid 6588] OK DOWNLOAD: Client "251.81.143.158", "/var/log/messages", 110801 bytes
+Wed Apr 16 22:13:53 2025 [pid 5384] Client "218.172.132.184" connected
+Thu Apr 17 02:20:19 2025 [pid 6907] MKD 
+Thu Apr 17 06:00:14 2025 [pid 9072] RMD 
+Thu Apr 17 11:14:41 2025 [pid 3447] CWD 
+Thu Apr 17 14:33:36 2025 [pid 8197] MKD 
+Thu Apr 17 18:29:11 2025 [pid 5681] OK UPLOAD: Client "165.128.4.37", "/var/log/messages", 2278237 bytes
+Thu Apr 17 21:39:08 2025 [pid 1886] OK UPLOAD: Client "194.226.108.47", "/home/user/file.txt", 9810190 bytes
+Fri Apr 18 00:02:31 2025 [pid 1045] OK DOWNLOAD: Client "168.34.106.118", "/opt/app/data.db", 8394617 bytes
+Fri Apr 18 02:59:09 2025 [pid 5155] Client "34.145.143.78" connected
+Fri Apr 18 08:15:51 2025 [pid 7408] OK DOWNLOAD: Client "245.102.248.74", "/home/user/Documents/report.pdf", 9347405 bytes
+Fri Apr 18 10:21:51 2025 [pid 8383] [webmaster] OK LOGIN: Client "26.174.81.134"
+Fri Apr 18 16:30:47 2025 [pid 8951] [webmaster] OK DOWNLOAD: Client "196.228.221.31", "/var/www/html/index.html", 4979126 bytes
+Fri Apr 18 19:59:25 2025 [pid 8768] [user2] OK LOGIN: Client "115.188.12.214"
+Fri Apr 18 22:38:11 2025 [pid 3537] [user2] OK UPLOAD: Client "34.176.20.189", "/opt/app/data.db", 5095991 bytes
+Sat Apr 19 01:55:24 2025 [pid 1393] [user2] 
+Sat Apr 19 06:51:47 2025 [pid 4211] [user2] CWD 
+Sat Apr 19 10:03:42 2025 [pid 4459] [user2] OK DOWNLOAD: Client "30.85.199.159", "/home/user/file.txt", 5474881 bytes
+Sat Apr 19 11:54:06 2025 [pid 8763] [user2] LIST
+Sat Apr 19 15:01:03 2025 [pid 3888] [anonymous] OK LOGIN: Client "64.182.119.173"
+Sat Apr 19 21:02:05 2025 [pid 7097] [anonymous] DELE /home/user/Pictures/image.jpg
+Sat Apr 19 22:53:08 2025 [pid 4549] [test] OK LOGIN: Client "67.109.153.161"
+Sun Apr 20 02:20:51 2025 [pid 4737] [test] RMD 
+Sun Apr 20 07:59:14 2025 [pid 9394] [webmaster] OK LOGIN: Client "42.246.80.74"
+Sun Apr 20 11:38:04 2025 [pid 1773] [webmaster] OK UPLOAD: Client "79.253.196.244", "/usr/local/bin/script.sh", 1816558 bytes
+Sun Apr 20 12:46:11 2025 [pid 1420] [webmaster] CWD 
+Sun Apr 20 16:10:59 2025 [pid 5010] [webmaster] LIST
+Sun Apr 20 20:29:10 2025 [pid 9426] [webmaster] 
+Mon Apr 21 01:43:05 2025 [pid 9499] Client "126.196.57.99" connected
+Mon Apr 21 03:44:57 2025 [pid 2671] [webmaster] DELE /var/log/messages
+Mon Apr 21 06:59:10 2025 [pid 1167] Client "50.221.3.1" connected
+Mon Apr 21 12:39:01 2025 [pid 5685] [webmaster] CWD 
+Mon Apr 21 13:55:08 2025 [pid 6049] [webmaster] OK DOWNLOAD: Client "57.95.211.198", "/home/user/file.txt", 7415974 bytes
+Mon Apr 21 20:10:44 2025 [pid 7928] [webmaster] OK DOWNLOAD: Client "116.185.121.18", "/etc/config.conf", 5926123 bytes
+Mon Apr 21 23:48:41 2025 [pid 7486] [webmaster] DELE /home/user/Pictures/image.jpg
+Tue Apr 22 01:15:24 2025 [pid 7411] [webmaster] DELE /opt/app/data.db
+Tue Apr 22 05:35:17 2025 [pid 4714] [webmaster] OK DOWNLOAD: Client "190.194.32.153", "/opt/app/data.db", 2240036 bytes
+Tue Apr 22 09:25:54 2025 [pid 3822] [webmaster] LIST
+Tue Apr 22 13:07:22 2025 [pid 8991] [webmaster] OK DOWNLOAD: Client "154.39.142.141", "/home/user/file.txt", 5065108 bytes
+Tue Apr 22 17:03:41 2025 [pid 4739] [webmaster] OK UPLOAD: Client "45.48.203.243", "/home/user/Pictures/image.jpg", 2325321 bytes
+Tue Apr 22 19:26:28 2025 [pid 4150] [webmaster] OK DOWNLOAD: Client "122.72.122.232", "/home/user/Documents/report.pdf", 3377150 bytes
+Wed Apr 23 00:24:55 2025 [pid 2137] [webmaster] CWD 
+Wed Apr 23 02:23:37 2025 [pid 5346] [webmaster] CWD 
+Wed Apr 23 07:26:04 2025 [pid 9170] [webmaster] OK UPLOAD: Client "227.64.86.168", "/home/user/file.txt", 1187451 bytes
+Wed Apr 23 11:47:20 2025 [pid 8193] [webmaster] OK DOWNLOAD: Client "193.78.35.234", "/etc/config.conf", 9600999 bytes
+Wed Apr 23 13:26:50 2025 [pid 7306] [backup] OK LOGIN: Client "13.44.96.28"
+Wed Apr 23 18:05:20 2025 [pid 1258] [anonymous] OK LOGIN: Client "141.235.46.6"
+Wed Apr 23 20:00:29 2025 [pid 3347] [anonymous] OK UPLOAD: Client "185.65.255.42", "/home/user/file.txt", 6427660 bytes
+Thu Apr 24 01:42:38 2025 [pid 1627] [anonymous] OK DOWNLOAD: Client "94.0.150.249", "/opt/app/data.db", 6657292 bytes
+Thu Apr 24 05:06:25 2025 [pid 4332] [anonymous] OK UPLOAD: Client "71.56.105.251", "/home/user/Pictures/image.jpg", 6744349 bytes
+Thu Apr 24 08:04:51 2025 [pid 5383] [anonymous] OK UPLOAD: Client "135.19.22.160", "/opt/app/data.db", 627527 bytes
+Thu Apr 24 11:49:20 2025 [pid 9039] [anonymous] OK DOWNLOAD: Client "121.146.6.8", "/var/www/html/index.html", 7210762 bytes
+Thu Apr 24 15:48:23 2025 [pid 8599] [anonymous] CWD 
+Thu Apr 24 18:10:08 2025 [pid 3018] [anonymous] CWD 
+Thu Apr 24 21:45:01 2025 [pid 3595] Client "37.7.218.155" connected
+Fri Apr 25 02:55:37 2025 [pid 3370] [anonymous] CWD 
+Fri Apr 25 04:32:16 2025 [pid 1336] [ftpuser] OK LOGIN: Client "113.202.43.85"
+Fri Apr 25 08:57:07 2025 [pid 5144] [admin] OK LOGIN: Client "21.69.113.167"
+Fri Apr 25 11:41:50 2025 [pid 3969] [webmaster] OK LOGIN: Client "233.13.90.14"
+Fri Apr 25 15:27:22 2025 [pid 3932] [webmaster] MKD 
+Fri Apr 25 18:44:37 2025 [pid 7040] [webmaster] OK DOWNLOAD: Client "40.94.234.104", "/home/user/file.txt", 7923400 bytes
+Fri Apr 25 22:40:20 2025 [pid 7145] Client "184.254.218.250" connected
+Sat Apr 26 03:55:36 2025 [pid 4032] Client "139.47.166.100" connected
+Sat Apr 26 07:26:33 2025 [pid 1522] [webmaster] MKD 
+Sat Apr 26 10:15:32 2025 [pid 3039] [webmaster] 
+Sat Apr 26 14:34:26 2025 [pid 5343] [webmaster] DELE /usr/local/bin/script.sh
+Sat Apr 26 17:48:41 2025 [pid 5120] [webmaster] OK DOWNLOAD: Client "203.115.156.177", "/opt/app/data.db", 7919224 bytes
+Sat Apr 26 21:31:33 2025 [pid 8877] [webmaster] OK UPLOAD: Client "57.21.90.224", "/var/www/html/index.html", 4746886 bytes
+Sat Apr 26 23:52:07 2025 [pid 4056] [webmaster] LIST
+Sun Apr 27 03:00:01 2025 [pid 4027] [webmaster] CWD 
+Sun Apr 27 08:36:02 2025 [pid 1175] [webmaster] OK DOWNLOAD: Client "203.0.11.243", "/home/user/Pictures/image.jpg", 1449424 bytes
+Sun Apr 27 11:26:15 2025 [pid 3908] [webmaster] OK UPLOAD: Client "228.135.79.230", "/usr/local/bin/script.sh", 7443487 bytes
+Sun Apr 27 14:09:19 2025 [pid 1894] [webmaster] OK UPLOAD: Client "14.180.132.32", "/var/log/messages", 6634 bytes
+Sun Apr 27 17:53:04 2025 [pid 6416] Client "25.37.71.118" connected
+Sun Apr 27 22:22:09 2025 [pid 5809] Client "24.108.10.131" connected
+Mon Apr 28 02:10:03 2025 [pid 4927] [webmaster] CWD 
+Mon Apr 28 06:18:02 2025 [pid 3443] [backup] OK LOGIN: Client "93.185.152.220"
+Mon Apr 28 08:21:42 2025 [pid 4517] [backup] OK DOWNLOAD: Client "103.6.110.68", "/usr/local/bin/script.sh", 909792 bytes
+Mon Apr 28 12:38:34 2025 [pid 1511] Client "184.95.140.113" connected
+Mon Apr 28 16:46:40 2025 [pid 7330] [backup] OK UPLOAD: Client "12.137.52.112", "/etc/config.conf", 6512330 bytes
+Mon Apr 28 21:01:11 2025 [pid 8537] [backup] OK UPLOAD: Client "174.32.226.165", "/etc/config.conf", 7581097 bytes
+Tue Apr 29 00:47:00 2025 [pid 6497] [backup] LIST
+Tue Apr 29 02:46:53 2025 [pid 8921] [backup] LIST
+Tue Apr 29 07:16:47 2025 [pid 6423] [backup] OK UPLOAD: Client "189.139.112.19", "/usr/local/bin/script.sh", 5213837 bytes
+Tue Apr 29 10:27:34 2025 [pid 5243] [backup] CWD 
+Tue Apr 29 12:40:53 2025 [pid 9123] [backup] CWD 
+Tue Apr 29 17:39:50 2025 [pid 1774] [backup] 
+Tue Apr 29 22:16:05 2025 [pid 1075] [backup] OK UPLOAD: Client "116.240.6.207", "/usr/local/bin/script.sh", 1967022 bytes
+Tue Apr 29 23:22:50 2025 [pid 2310] [test] OK LOGIN: Client "73.116.138.216"
+Wed Apr 30 05:39:58 2025 [pid 1524] [test] 
+Wed Apr 30 06:34:09 2025 [pid 1974] [test] OK DOWNLOAD: Client "56.148.80.3", "/opt/app/data.db", 110139 bytes
+Wed Apr 30 12:34:50 2025 [pid 7225] [test] LIST
+Wed Apr 30 16:07:40 2025 [pid 5192] [test] OK UPLOAD: Client "124.181.136.214", "/etc/config.conf", 8781419 bytes
+Wed Apr 30 19:34:45 2025 [pid 8208] [test] DELE /home/user/Documents/report.pdf
+Wed Apr 30 21:26:01 2025 [pid 7952] [test] 
+Thu May 01 02:06:55 2025 [pid 9651] [test] DELE /opt/app/data.db
+Thu May 01 05:00:28 2025 [pid 7450] [test] MKD 
+Thu May 01 09:56:36 2025 [pid 3651] [test] OK DOWNLOAD: Client "82.130.214.19", "/home/user/Documents/report.pdf", 4928018 bytes
+Thu May 01 12:47:15 2025 [pid 7363] Client "198.107.232.7" connected
+Thu May 01 16:39:24 2025 [pid 6574] [test] OK DOWNLOAD: Client "154.49.68.210", "/home/user/file.txt", 3205751 bytes
+Thu May 01 20:26:15 2025 [pid 9212] Client "151.246.227.192" connected
+Fri May 02 00:01:36 2025 [pid 7318] Client "86.200.101.94" connected
+Fri May 02 03:07:59 2025 [pid 9594] [test] OK UPLOAD: Client "0.62.213.10", "/var/www/html/index.html", 8252199 bytes
+Fri May 02 06:26:19 2025 [pid 3262] [test] LIST
+Fri May 02 10:27:56 2025 [pid 9926] [test] DELE /home/user/Documents/report.pdf
+Fri May 02 12:35:52 2025 [pid 3259] [test] DELE /var/www/html/index.html
+Fri May 02 18:16:43 2025 [pid 6987] [backup] OK LOGIN: Client "95.153.18.19"
+Fri May 02 22:32:49 2025 [pid 3801] [backup] MKD 
+Fri May 02 23:54:01 2025 [pid 1144] [backup] OK DOWNLOAD: Client "73.109.26.164", "/home/user/Pictures/image.jpg", 8821909 bytes
+Sat May 03 05:37:17 2025 [pid 1327] [user2] OK LOGIN: Client "65.13.89.255"
+Sat May 03 07:18:10 2025 [pid 1709] [user2] 
+Sat May 03 10:43:18 2025 [pid 4743] [user2] MKD 
+Sat May 03 14:16:44 2025 [pid 8833] [user2] OK UPLOAD: Client "20.165.217.24", "/usr/local/bin/script.sh", 5998201 bytes
+Sat May 03 18:27:21 2025 [pid 1233] [user2] OK DOWNLOAD: Client "156.181.125.6", "/var/www/html/index.html", 8938994 bytes
+Sat May 03 23:28:34 2025 [pid 3313] [user2] LIST
+Sun May 04 02:42:05 2025 [pid 4513] Client "82.50.116.62" connected
+Sun May 04 06:21:08 2025 [pid 7486] [user2] OK UPLOAD: Client "178.174.160.236", "/usr/local/bin/script.sh", 4212904 bytes
+Sun May 04 09:21:12 2025 [pid 5064] [user2] OK DOWNLOAD: Client "40.197.94.232", "/etc/config.conf", 1929357 bytes
+Sun May 04 14:10:49 2025 [pid 7322] Client "2.230.192.141" connected
+Sun May 04 15:37:56 2025 [pid 4034] [user2] OK DOWNLOAD: Client "180.29.19.169", "/home/user/file.txt", 9637966 bytes
+Sun May 04 19:09:03 2025 [pid 6352] [user2] CWD 
+Mon May 05 00:37:16 2025 [pid 2339] [user2] CWD 
+Mon May 05 01:50:23 2025 [pid 3533] [user2] OK DOWNLOAD: Client "35.217.171.46", "/opt/app/data.db", 6169257 bytes
+Mon May 05 08:05:31 2025 [pid 9333] [user2] OK UPLOAD: Client "24.227.255.131", "/home/user/Pictures/image.jpg", 4628539 bytes
+Mon May 05 11:20:33 2025 [pid 4003] [test] OK LOGIN: Client "1.215.164.2"
+Mon May 05 13:02:04 2025 [pid 9400] [user2] OK LOGIN: Client "39.7.61.33"
+Mon May 05 17:52:33 2025 [pid 5452] [user2] CWD 
+Mon May 05 21:09:47 2025 [pid 9640] [user2] OK DOWNLOAD: Client "221.202.36.239", "/home/user/Documents/report.pdf", 4667746 bytes
+Mon May 05 23:23:10 2025 [pid 4116] [user2] OK DOWNLOAD: Client "12.43.76.215", "/home/user/Pictures/image.jpg", 6034376 bytes
+Tue May 06 03:11:09 2025 [pid 1344] [user2] LIST
+Tue May 06 07:22:17 2025 [pid 3652] [webmaster] OK LOGIN: Client "246.28.186.128"
+Tue May 06 12:53:35 2025 [pid 6274] [anonymous] OK LOGIN: Client "133.88.181.244"
+Tue May 06 15:01:25 2025 [pid 9490] [anonymous] DELE /var/log/messages
+Tue May 06 20:05:11 2025 [pid 1814] [anonymous] MKD 
+Tue May 06 22:33:53 2025 [pid 8918] [anonymous] LIST
+Wed May 07 02:18:15 2025 [pid 2578] Client "87.58.69.169" connected
+Wed May 07 06:38:41 2025 [pid 3087] [anonymous] OK DOWNLOAD: Client "18.131.41.102", "/home/user/Pictures/image.jpg", 7359676 bytes
+Wed May 07 07:51:39 2025 [pid 2651] [anonymous] LIST
+Wed May 07 13:47:24 2025 [pid 8401] [anonymous] 
+Wed May 07 15:13:18 2025 [pid 8204] [user1] OK LOGIN: Client "109.99.31.177"
+Wed May 07 18:50:40 2025 [pid 1763] [backup] FAIL LOGIN: Client "105.233.145.226", user not found
+Wed May 07 22:10:26 2025 [pid 2256] [backup] 
+Thu May 08 03:56:19 2025 [pid 7995] [webmaster] OK LOGIN: Client "171.211.81.117"
+Thu May 08 06:18:22 2025 [pid 2997] [backup] OK LOGIN: Client "97.128.104.43"
+Thu May 08 09:23:58 2025 [pid 4553] [backup] DELE /var/www/html/index.html
+Thu May 08 12:44:29 2025 [pid 2992] [backup] LIST
+Thu May 08 18:32:16 2025 [pid 5696] [backup] OK DOWNLOAD: Client "56.51.134.49", "/var/www/html/index.html", 1232636 bytes
+Thu May 08 21:11:47 2025 [pid 1648] Client "255.94.59.234" connected
+Fri May 09 02:00:49 2025 [pid 8685] [backup] DELE /home/user/Pictures/image.jpg
+Fri May 09 04:58:33 2025 [pid 4207] [backup] OK DOWNLOAD: Client "56.189.146.27", "/home/user/Documents/report.pdf", 1613742 bytes
+Fri May 09 09:11:59 2025 [pid 5006] [backup] MKD 
+Fri May 09 11:57:03 2025 [pid 3965] Client "10.209.147.76" connected
+Fri May 09 14:32:14 2025 [pid 6405] [backup] MKD 
+Fri May 09 18:27:20 2025 [pid 8986] [backup] CWD 
+Fri May 09 22:43:57 2025 [pid 6497] [backup] OK DOWNLOAD: Client "98.31.95.104", "/home/user/file.txt", 4937497 bytes
+Sat May 10 02:01:04 2025 [pid 8211] [backup] OK LOGIN: Client "72.217.77.187"
+Sat May 10 06:36:22 2025 [pid 8847] [backup] OK UPLOAD: Client "90.213.204.181", "/var/www/html/index.html", 6965938 bytes
+Sat May 10 09:45:15 2025 [pid 5859] [backup] OK UPLOAD: Client "37.45.178.78", "/home/user/file.txt", 1945887 bytes
+Sat May 10 12:50:55 2025 [pid 8579] [backup] OK DOWNLOAD: Client "58.0.178.185", "/home/user/Pictures/image.jpg", 9896453 bytes
+Sat May 10 16:12:38 2025 [pid 3857] [backup] CWD 
+Sat May 10 18:46:34 2025 [pid 1120] [backup] OK UPLOAD: Client "47.40.153.179", "/home/user/Pictures/image.jpg", 8952070 bytes
+Sun May 11 00:45:52 2025 [pid 9487] [backup] MKD 
+Sun May 11 01:45:05 2025 [pid 9410] [webmaster] OK LOGIN: Client "221.127.220.250"
+Sun May 11 05:32:32 2025 [pid 7673] [webmaster] OK DOWNLOAD: Client "175.186.186.177", "/var/www/html/index.html", 8210953 bytes
+Sun May 11 10:09:49 2025 [pid 7184] [webmaster] CWD 
+Sun May 11 14:34:56 2025 [pid 7885] [webmaster] CWD 
+Sun May 11 16:16:39 2025 [pid 3260] [webmaster] OK DOWNLOAD: Client "108.202.156.76", "/usr/local/bin/script.sh", 7804988 bytes
+Sun May 11 20:10:25 2025 [pid 5036] Client "8.22.145.78" connected
+Sun May 11 23:46:47 2025 [pid 6571] [webmaster] MKD 
+Mon May 12 05:47:36 2025 [pid 6467] Client "69.41.235.96" connected
+Mon May 12 09:04:43 2025 [pid 2174] [webmaster] LIST
+Mon May 12 11:06:38 2025 [pid 4692] Client "95.161.31.94" connected
+Mon May 12 16:32:59 2025 [pid 7163] [admin] OK LOGIN: Client "104.237.107.163"
+Mon May 12 17:36:09 2025 [pid 9232] [admin] LIST
+Mon May 12 23:17:52 2025 [pid 6394] Client "170.183.44.93" connected
+Tue May 13 02:58:19 2025 [pid 7308] [admin] DELE /home/user/Documents/report.pdf
+Tue May 13 05:37:39 2025 [pid 8207] [admin] OK DOWNLOAD: Client "130.157.158.47", "/opt/app/data.db", 8194824 bytes
+Tue May 13 08:05:57 2025 [pid 6097] [admin] OK UPLOAD: Client "145.119.17.48", "/var/log/messages", 3137588 bytes
+Tue May 13 13:20:09 2025 [pid 2267] [admin] CWD 
+Tue May 13 16:29:59 2025 [pid 6224] [admin] RMD 
+Tue May 13 19:20:25 2025 [pid 4991] [admin] OK UPLOAD: Client "251.88.25.243", "/home/user/Documents/report.pdf", 5806161 bytes
+Wed May 14 00:48:04 2025 [pid 5658] [admin] OK DOWNLOAD: Client "163.105.14.125", "/etc/config.conf", 1227346 bytes
+Wed May 14 02:44:46 2025 [pid 3339] [admin] LIST
+Wed May 14 06:26:12 2025 [pid 9710] [admin] OK DOWNLOAD: Client "65.195.247.154", "/var/log/messages", 4671742 bytes
+Wed May 14 10:41:45 2025 [pid 4592] [admin] LIST
+Wed May 14 15:03:50 2025 [pid 3760] [admin] OK UPLOAD: Client "247.160.199.116", "/opt/app/data.db", 8680620 bytes
+Wed May 14 17:59:50 2025 [pid 8976] [admin] OK UPLOAD: Client "248.114.18.180", "/var/log/messages", 1562056 bytes
+Wed May 14 21:16:02 2025 [pid 4087] [anonymous] OK LOGIN: Client "37.214.49.242"
+Thu May 15 01:43:43 2025 [pid 7105] [user1] OK LOGIN: Client "128.115.237.230"
+Thu May 15 04:08:58 2025 [pid 2583] [anonymous] OK LOGIN: Client "104.107.160.33"
+Thu May 15 06:58:13 2025 [pid 6863] [anonymous] OK UPLOAD: Client "242.216.36.83", "/home/user/Documents/report.pdf", 3078096 bytes
+Thu May 15 12:25:45 2025 [pid 4226] [admin] OK LOGIN: Client "200.153.181.71"
+Thu May 15 15:54:54 2025 [pid 7896] [admin] OK DOWNLOAD: Client "27.32.54.63", "/usr/local/bin/script.sh", 2615363 bytes
+Thu May 15 19:01:05 2025 [pid 9423] [admin] CWD 

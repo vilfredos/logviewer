@@ -1,0 +1,157 @@
+{% extends "reportes/layout.html" %}
+
+{% block title %}Reportes{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Reportes</h1>
+
+<div class="row">
+  <!-- Filtros a la izquierda -->
+  <div class="col-md-4">
+    <form method="POST" class="row g-3 mb-4">
+      <div class="col-md-4">
+        <label for="texto" class="form-label">Texto a buscar:</label>
+        <input type="text" name="texto" id="texto" class="form-control">
+      </div>
+
+      <div class="col-md-4">
+        <label for="modo" class="form-label">Modo:</label>
+        <select name="modo" id="modo" class="form-select" onchange="toggleFechas()">
+          <option value="todo">Todo</option>
+          <option value="diario">Diario</option>
+          <option value="semanal">Semanal</option>
+          <option value="mensual">Mensual</option>
+          <option value="rango">Por rango</option>
+        </select>
+      </div>
+
+      <div class="col-md-4" id="fechas" style="display: none;">
+        <label class="form-label">Desde:</label>
+        <input type="date" name="desde" class="form-control mb-2">
+        <label class="form-label">Hasta:</label>
+        <input type="date" name="hasta" class="form-control">
+      </div>
+
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Contenido a la derecha -->
+  <div class="col-md-8">
+    <!-- Tabs -->
+    <ul class="nav nav-tabs" id="reportesTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="vsftpd-tab" data-bs-toggle="tab" data-bs-target="#vsftpd" type="button" role="tab">
+          Logs VSFTPD
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="apache-tab" data-bs-toggle="tab" data-bs-target="#apache" type="button" role="tab">
+          Logs Apache
+        </button>
+      </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content border p-3 border-top-0">
+      <div class="tab-pane fade show active" id="vsftpd" role="tabpanel">
+        <div class="bg-white p-3 rounded shadow-sm mb-4" style="overflow-x: auto;">
+          <canvas id="grafico" style="min-width: 700px;"></canvas>
+        </div>
+        <script>
+          const ctx = document.getElementById('grafico').getContext('2d');
+        
+          const grafico = new Chart(ctx, {
+            type: 'bar', 
+            data: {
+              labels: {{ grafico_cant['tiempo']|tojson }},
+              datasets: [{
+                label: 'Cantidad',
+                data: {{ grafico_cant['cantidad']|tojson }},
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+              }]
+            },
+            options: {
+              responsive: true,
+              scales: {
+                x: {
+                  title: {
+                    display: true,
+                    text: 'Tiempo'
+                  }
+                },
+                y: {
+                  beginAtZero: true,
+                  title: {
+                    display: true,
+                    text: 'Cantidad'
+                  }
+                }
+              }
+            }
+          });
+        </script>
+
+    
+        <h5 class="mt-5">Tabla de logs FTP</h5>
+
+        {% if resultados %}
+        <div class="table-responsive bg-white shadow-sm rounded p-3">
+          <h4>Resultados:</h4>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                
+                  <th>fecha y hora</th>
+                  <th>usuario</th>
+                  <th>ip</th>
+                  <th>accion</th>
+                  <th>archivo</th>
+                  <th>detalles</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              {% for fila in resultados %}
+                <tr>
+                
+                    <td>{{fila['fecha_hora']}}</td>
+                    <td>{{fila['usuario']}}</td>
+                    <td>{{fila['ip']}}</td>
+                    <td>{{fila['accion']}}</td>
+                    <td>{{fila['archivo']}}</td>
+                    <td>{{fila['detalles']}}</td>
+                  
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% endif %}
+        
+      </div>
+      <div class="tab-pane fade" id="apache" role="tabpanel">
+        <h5>Logs del servidor Apache</h5>
+        <pre>{{ apache_logs }}</pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  function toggleFechas() {
+    const modo = document.getElementById("modo").value;
+    const fechaDiv = document.getElementById("fechas");
+    fechaDiv.style.display = (modo === "rango") ? "block" : "none";
+  }
+
+  window.addEventListener("DOMContentLoaded", toggleFechas);
+</script>
+    
+{% endblock %}
+

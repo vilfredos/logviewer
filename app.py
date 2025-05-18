@@ -1,11 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 import os
+import datetime
+
 from werkzeug.utils import secure_filename
 from models.database import Database
 from parsers.apache_parser import ApacheParser
 from parsers.ftp_parser import FTPParser
 from utils.report_analyzer import ReportAnalyzer
 from utils.alerts_handler import get_alerts
+from utils.reportes_2 import ReportAnalyzer2
 import config
 import re
 
@@ -396,8 +399,29 @@ def search_logs():
         flash(f'Error al realizar la búsqueda: {str(e)}', 'danger')
         return redirect(url_for('logs_view'))   
 
- 
-@app.route('/reports')
+## inicio CBRV 
+@app.route('/reportes', methods=['GET', 'POST'])
+def reportes():
+    db_config = config.DB_CONFIG
+    report_analyzer2 = ReportAnalyzer2(db_config)
+    resultados = []
+    if request.method == "POST":
+        texto = request.form.get("texto", "")
+        texto = texto.lower().strip()
+        modo = request.form.get("modo")
+        desde = request.form.get("desde")
+        hasta = request.form.get("hasta")
+        resultados = report_analyzer2.get_ftp_filtrado(texto,modo,desde,hasta)
+        grafico_cantidad = report_analyzer2.get_ftp_filtrado_conteo(texto,modo,desde,hasta)
+        grafico_cant = {
+            'tiempo': [fila['tiempo'] for fila in grafico_cantidad],
+            'cantidad': [fila['cantidad'] for fila in grafico_cantidad]
+        }
+        
+
+    return render_template("reportes/reportes.html", resultados=resultados, grafico_cant = grafico_cant)
+
+@app.route('/reports', methods=['GET', 'POST'])
 def reports():
     """Render the reports page with statistical analysis."""
     db_config = config.DB_CONFIG
