@@ -289,7 +289,6 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const selectAllCheckbox = document.getElementById('selectAll');
-        const rowCheckboxes = document.querySelectorAll('.row-checkbox');
         const copySelectedBtn = document.getElementById('copySelectedBtn');
         const logTable = document.getElementById('logTable');
         const searchButton = document.getElementById('searchButton');
@@ -346,7 +345,7 @@
         }
         
         // Configurar eventos para validaciones
-        document.addEventListener('DOMContentLoaded', setMaxDateToday);
+        setMaxDateToday();
         startDateInput.addEventListener('change', function() {
             validateFutureDate(startDateInput);
             validateDateRange();
@@ -356,158 +355,176 @@
             validateDateRange();
         });
         
-    advancedSearchCheckbox.addEventListener('change', function() {
-        advancedOptions.style.display = this.checked ? 'block' : 'none';
-    });
-
-    // Reset functionality
-    resetButton.addEventListener('click', function() {
-        // Show all rows
-        const rows = logTable.querySelectorAll('tbody tr');
-        rows.forEach(row => {
-            row.classList.remove('hidden');
-            // Remove highlights
-            row.innerHTML = row.innerHTML.replace(/<mark>/g, '').replace(/<\/mark>/g, '');
-        });
-    });
-
-    // Search functionality
-    searchButton.addEventListener('click', function() {
-        // Reset previous search
-        const rows = logTable.querySelectorAll('tbody tr');
-        rows.forEach(row => {
-            row.classList.remove('hidden');
-            row.innerHTML = row.innerHTML.replace(/<mark>/g, '').replace(/<\/mark>/g, '');
+        advancedSearchCheckbox.addEventListener('change', function() {
+            advancedOptions.style.display = this.checked ? 'block' : 'none';
         });
 
-        // Get search parameters
-        const basicSearchTerm = searchTerm.value.toLowerCase().trim();
-        const isAdvancedSearch = advancedSearchCheckbox.checked;
+        // Reset functionality
+        resetButton.addEventListener('click', function() {
+            // Show all rows
+            const rows = logTable.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                row.classList.remove('hidden');
+                // Remove highlights
+                row.innerHTML = row.innerHTML.replace(/<mark>/g, '').replace(/<\/mark>/g, '');
+            });
+        });
 
-        // Advanced search parameters
-        const startDate = isAdvancedSearch ? document.getElementById('startDate').value : null;
-        const endDate = isAdvancedSearch ? document.getElementById('endDate').value : null;
-        const term1 = isAdvancedSearch ? document.getElementById('term1').value.toLowerCase().trim() : null;
-        const term2 = isAdvancedSearch ? document.getElementById('term2').value.toLowerCase().trim() : null;
-        const logicOperator = isAdvancedSearch ? document.getElementById('logicOperator').value : null;
+        // Search functionality
+        searchButton.addEventListener('click', function() {
+            // Reset previous search
+            const rows = logTable.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                row.classList.remove('hidden');
+                row.innerHTML = row.innerHTML.replace(/<mark>/g, '').replace(/<\/mark>/g, '');
+            });
 
-        // Function to highlight search term in text
-        function highlightText(text, term) {
-            if (!term) return text;
-            const regex = new RegExp(`(${term})`, 'gi');
-            return text.replace(regex, '<mark>$1</mark>');
-        }
+            // Get search parameters
+            const basicSearchTerm = searchTerm.value.toLowerCase().trim();
+            const isAdvancedSearch = advancedSearchCheckbox.checked;
 
-        // Iterate through rows and apply filtering
-        rows.forEach(row => {
-            let shouldShow = true;
-            const cells = row.querySelectorAll('td:not(.checkbox-column)');
-            const cellTexts = Array.from(cells).map(cell => cell.textContent.toLowerCase());
-            
-            // Basic search
-            if (basicSearchTerm) {
-                const basicMatch = cellTexts.some(text => text.includes(basicSearchTerm));
-                shouldShow = shouldShow && basicMatch;
+            // Advanced search parameters
+            const startDate = isAdvancedSearch ? document.getElementById('startDate').value : null;
+            const endDate = isAdvancedSearch ? document.getElementById('endDate').value : null;
+            const term1 = isAdvancedSearch ? document.getElementById('term1').value.toLowerCase().trim() : null;
+            const term2 = isAdvancedSearch ? document.getElementById('term2').value.toLowerCase().trim() : null;
+            const logicOperator = isAdvancedSearch ? document.getElementById('logicOperator').value : null;
+
+            // Function to highlight search term in text
+            function highlightText(text, term) {
+                if (!term) return text;
+                const regex = new RegExp(`(${term})`, 'gi');
+                return text.replace(regex, '<mark>$1</mark>');
             }
 
-            // Advanced search options
-            if (isAdvancedSearch) {
-                // Date range filtering
-                if (startDate || endDate) {
-                    const rowDateCell = row.querySelector('td:nth-child(2)'); // Assuming date is in 2nd column
-                    const rowDate = new Date(rowDateCell.textContent);
-                    const startDateTime = startDate ? new Date(startDate) : null;
-                    const endDateTime = endDate ? new Date(endDate) : null;
-
-                    if (startDateTime && rowDate < startDateTime) shouldShow = false;
-                    if (endDateTime && rowDate > endDateTime) shouldShow = false;
+            // Iterate through rows and apply filtering
+            rows.forEach(row => {
+                let shouldShow = true;
+                const cells = row.querySelectorAll('td:not(.checkbox-column)');
+                const cellTexts = Array.from(cells).map(cell => cell.textContent.toLowerCase());
+                
+                // Basic search
+                if (basicSearchTerm) {
+                    const basicMatch = cellTexts.some(text => text.includes(basicSearchTerm));
+                    shouldShow = shouldShow && basicMatch;
                 }
 
-                // Logical operators search with term matching
-                if ((term1 || term2) && logicOperator) {
-                    const term1Match = term1 ? cellTexts.some(text => text.includes(term1)) : true;
-                    const term2Match = term2 ? cellTexts.some(text => text.includes(term2)) : true;
+                // Advanced search options
+                if (isAdvancedSearch) {
+                    // Date range filtering
+                    if (startDate || endDate) {
+                        const rowDateCell = row.querySelector('td:nth-child(2)'); // Assuming date is in 2nd column
+                        const rowDate = new Date(rowDateCell.textContent);
+                        const startDateTime = startDate ? new Date(startDate) : null;
+                        const endDateTime = endDate ? new Date(endDate) : null;
 
-                    if (logicOperator === 'AND') {
-                        // If both terms provided, both must match
-                        if (term1 && term2) {
-                            shouldShow = shouldShow && term1Match && term2Match;
-                        } 
-                        // If only one term, that term must match
-                        else if (term1) {
-                            shouldShow = shouldShow && term1Match;
-                        } 
-                        else if (term2) {
-                            shouldShow = shouldShow && term2Match;
-                        }
-                    } else if (logicOperator === 'OR') {
-                        // If both terms provided, at least one must match
-                        if (term1 && term2) {
-                            shouldShow = shouldShow && (term1Match || term2Match);
-                        } 
-                        // If only one term, that term must match
-                        else if (term1) {
-                            shouldShow = shouldShow && term1Match;
-                        } 
-                        else if (term2) {
-                            shouldShow = shouldShow && term2Match;
+                        if (startDateTime && rowDate < startDateTime) shouldShow = false;
+                        if (endDateTime && rowDate > endDateTime) shouldShow = false;
+                    }
+
+                    // Logical operators search with term matching
+                    if ((term1 || term2) && logicOperator) {
+                        const term1Match = term1 ? cellTexts.some(text => text.includes(term1)) : true;
+                        const term2Match = term2 ? cellTexts.some(text => text.includes(term2)) : true;
+
+                        if (logicOperator === 'AND') {
+                            // If both terms provided, both must match
+                            if (term1 && term2) {
+                                shouldShow = shouldShow && term1Match && term2Match;
+                            } 
+                            // If only one term, that term must match
+                            else if (term1) {
+                                shouldShow = shouldShow && term1Match;
+                            } 
+                            else if (term2) {
+                                shouldShow = shouldShow && term2Match;
+                            }
+                        } else if (logicOperator === 'OR') {
+                            // If both terms provided, at least one must match
+                            if (term1 && term2) {
+                                shouldShow = shouldShow && (term1Match || term2Match);
+                            } 
+                            // If only one term, that term must match
+                            else if (term1) {
+                                shouldShow = shouldShow && term1Match;
+                            } 
+                            else if (term2) {
+                                shouldShow = shouldShow && term2Match;
+                            }
                         }
                     }
                 }
-            }
 
-            // Apply filtering
-            if (shouldShow) {
-                row.classList.remove('hidden');
-                
-                // Highlight basic search term
-                if (basicSearchTerm) {
-                    cells.forEach(cell => {
-                        cell.innerHTML = highlightText(cell.textContent, basicSearchTerm);
-                    });
+                // Apply filtering
+                if (shouldShow) {
+                    row.classList.remove('hidden');
+                    
+                    // Highlight basic search term
+                    if (basicSearchTerm) {
+                        cells.forEach(cell => {
+                            cell.innerHTML = highlightText(cell.textContent, basicSearchTerm);
+                        });
+                    }
+                } else {
+                    row.classList.add('hidden');
                 }
-            } else {
-                row.classList.add('hidden');
-            }
+            });
+            
+            // Re-inicializar la funcionalidad de checkboxes después de la búsqueda
+            initCheckboxFunctionality();
         });
-    });
 
-        // Existing checkbox and copy functionality remains the same as in the previous script
-        
-
+        // Usar delegación de eventos para los checkboxes
         function updateCopyButtonState() {
-            const anyChecked = Array.from(rowCheckboxes).some(checkbox => checkbox.checked);
+            const visibleRowCheckboxes = document.querySelectorAll('tbody tr:not(.hidden) .row-checkbox');
+            const anyChecked = Array.from(visibleRowCheckboxes).some(checkbox => checkbox.checked);
             copySelectedBtn.disabled = !anyChecked;
         }
-
-        // Evento para el checkbox "Seleccionar todo"
-        if (selectAllCheckbox) {
-            selectAllCheckbox.addEventListener('change', function() {
-                rowCheckboxes.forEach(checkbox => {
-                    checkbox.checked = selectAllCheckbox.checked;
-                });
-                updateCopyButtonState();
-            });
+        
+        // Inicializar y actualizar el estado de los checkboxes y botón de copia
+        function initCheckboxFunctionality() {
+            // Inicializar el botón de copiar
+            updateCopyButtonState();
+            
+            // Asegurarse de que el evento para "Seleccionar todo" esté configurado
+            if (selectAllCheckbox) {
+                // Remover evento anterior si existe para evitar duplicados
+                selectAllCheckbox.removeEventListener('change', selectAllHandler);
+                // Añadir el evento
+                selectAllCheckbox.addEventListener('change', selectAllHandler);
+            }
         }
-
-        // Eventos para los checkboxes de cada fila
-        rowCheckboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
-                // Verificar si todos los checkboxes están marcados
-                const allChecked = Array.from(rowCheckboxes).every(cb => cb.checked);
+        
+        // Manejador para el checkbox "Seleccionar todo"
+        function selectAllHandler() {
+            const visibleRowCheckboxes = document.querySelectorAll('tbody tr:not(.hidden) .row-checkbox');
+            visibleRowCheckboxes.forEach(checkbox => {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+            updateCopyButtonState();
+        }
+        
+        // Usar delegación de eventos para los checkboxes de filas (evitar desconexión tras búsqueda)
+        document.addEventListener('change', function(event) {
+            if (event.target.classList.contains('row-checkbox')) {
+                const visibleRowCheckboxes = document.querySelectorAll('tbody tr:not(.hidden) .row-checkbox');
+                const allChecked = Array.from(visibleRowCheckboxes).every(cb => cb.checked);
+                const someChecked = Array.from(visibleRowCheckboxes).some(cb => cb.checked);
+                
                 if (selectAllCheckbox) {
                     selectAllCheckbox.checked = allChecked;
-                    selectAllCheckbox.indeterminate = !allChecked && Array.from(rowCheckboxes).some(cb => cb.checked);
+                    selectAllCheckbox.indeterminate = someChecked && !allChecked;
                 }
                 updateCopyButtonState();
-            });
+            }
         });
 
         // Función para copiar las filas seleccionadas
         copySelectedBtn.addEventListener('click', function() {
             const selectedRows = [];
+            const visibleRowCheckboxes = document.querySelectorAll('tbody tr:not(.hidden) .row-checkbox');
             
-            rowCheckboxes.forEach((checkbox, index) => {
+            visibleRowCheckboxes.forEach((checkbox) => {
                 if (checkbox.checked) {
                     const row = checkbox.closest('tr');
                     const rowData = [];
@@ -521,25 +538,20 @@
                 }
             });
             
-            if (selectedRows.length > 0) {
-                // Copiar al portapapeles
-                const textToCopy = selectedRows.join('\n');
-                navigator.clipboard.writeText(textToCopy)
-                    .then(() => {
-                        alert('Filas seleccionadas copiadas al portapapeles');
-                    })
-                    .catch(err => {
-                        console.error('Error al copiar: ', err);
-                        alert('Error al copiar. Intente nuevamente.');
-                    });
-            } else {
-                // Mostrar mensaje claro cuando no hay selección
-                alert('No hay filas seleccionadas. Seleccione al menos un registro para copiar.');
-            }
+            // Copiar al portapapeles
+            const textToCopy = selectedRows.join('\n');
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => {
+                    alert('Filas seleccionadas copiadas al portapapeles');
+                })
+                .catch(err => {
+                    console.error('Error al copiar: ', err);
+                    alert('Error al copiar. Intente nuevamente.');
+                });
         });
 
-        // Initialize copy button state
-        updateCopyButtonState();
+        // Inicializar la funcionalidad al cargar la página
+        initCheckboxFunctionality();
     });
 </script>
 
