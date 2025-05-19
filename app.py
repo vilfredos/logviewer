@@ -1,11 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, session
 import os
+import datetime
+
 from werkzeug.utils import secure_filename
 from models.database import Database
 from parsers.apache_parser import ApacheParser
 from parsers.ftp_parser import FTPParser
 from utils.report_analyzer import ReportAnalyzer
 from utils.alerts_handler import get_alerts
+from utils.reportes_2 import ReportAnalyzer2
 import config
 import re
 
@@ -42,7 +45,7 @@ def allowed_file(filename):
 
 @app.route('/')
 def index():
-    return render_template('recoleccion.html')
+    return render_template('dashboard.html')
 
 @app.route('/logs/view')
 def logs_view():
@@ -403,33 +406,38 @@ def search_logs():
         return redirect(url_for('logs_view'))   
 
  
-@app.route('/reports')
-def reports():
-    """Render the reports page with statistical analysis."""
+@app.route('/reportes', methods=['GET', 'POST'])
+def reportes():
     db_config = config.DB_CONFIG
-    
-    # Create report analyzer instance
-    report_analyzer = ReportAnalyzer(db_config)
-    
-    # Get active table information
-    active_table, count = report_analyzer.identify_active_table()
-    
-    # Generate report based on active table
-    report_data = report_analyzer.generate_report()
-    
-    return render_template(
-        'reports.html', 
-        active_table=active_table,
-        record_count=count,
-        report_data=report_data
-    )
+    report_analyzer2 = ReportAnalyzer2(db_config)
+    resultados = []
+    grafico_cantidad = []
+    texto = ""
+    modo = ""
+    desde = ""
+    hasta = ""
+    if request.method == "POST":
+        texto = request.form.get("texto", "")
+        texto = texto.lower().strip()
+        modo = request.form.get("modo")
+        desde = request.form.get("desde")
+        hasta = request.form.get("hasta")
+        resultados = report_analyzer2.get_ftp_filtrado(texto,modo,desde,hasta)
+    grafico_cantidad = report_analyzer2.get_ftp_filtrado_grafico(texto,modo,desde,hasta)  
+        
+    return render_template("reportes/reportes.html", resultados=resultados, grafico_cantidad = grafico_cantidad)
 
-@app.route('/alerts')
+@app.route('/alertas', methods=['GET', 'POST'])
 def alerts():
     """Alertas y errores en los logs"""
     alerts_data = get_alerts()
-    table_name = alerts_data['table']
-    error_logs = alerts_data['logs']
+    
+    if alerts_data:  # para evitar error si la lista está vacía
+        table_name = alerts_data[0]['table']
+        error_logs = alerts_data[0]['logs']
+    else:
+        table_name = ""
+        error_logs = []
     
     return render_template(
         'alerts.html', 

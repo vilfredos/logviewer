@@ -18,7 +18,7 @@
 <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
         <li class="nav-item">
-            <a class="nav-link {% if request.path == url_for('reports') %}active{% endif %}" href="{{ url_for('reports') }}">Reportes</a>
+            <a class="nav-link {% if request.path == url_for('reportes') %}active{% endif %}" href="{{ url_for('reportes') }}">Reportes</a>
         </li>
         <li class="nav-item">
             <a class="nav-link {% if request.path == url_for('alerts') %}active{% endif %}" href="{{ url_for('alerts') }}">Alertas</a>
@@ -273,7 +273,64 @@
         const searchTerm = document.getElementById('searchTerm');
         const advancedSearchCheckbox = document.getElementById('advancedSearch');
         const advancedOptions = document.getElementById('advancedOptions');
+         const startDateInput = document.getElementById('startDate');
+        const endDateInput = document.getElementById('endDate');
         
+        // Función para establecer la fecha máxima (actual)
+        function setMaxDateToday() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0'); // Meses son 0-indexados
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            
+            // Formato requerido para datetime-local: YYYY-MM-DDThh:mm
+            const formattedDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+            
+            // Configurar fecha máxima para ambos inputs
+            startDateInput.max = formattedDateTime;
+            endDateInput.max = formattedDateTime;
+        }
+        
+        // Validar que la fecha de inicio no sea mayor que la fecha de fin
+        function validateDateRange() {
+            if (startDateInput.value && endDateInput.value) {
+                const startDate = new Date(startDateInput.value);
+                const endDate = new Date(endDateInput.value);
+                
+                if (startDate > endDate) {
+                    alert('La fecha de inicio no puede ser mayor que la fecha de fin');
+                    // Limpiar ambos campos para evitar confusión
+                    startDateInput.value = '';
+                    endDateInput.value = '';
+                }
+            }
+        }
+        
+        // Validar que no se seleccionen fechas futuras
+        function validateFutureDate(inputElement) {
+            if (inputElement.value) {
+                const selectedDate = new Date(inputElement.value);
+                const currentDate = new Date();
+                
+                if (selectedDate > currentDate) {
+                    alert('No se puede seleccionar una fecha y hora futura');
+                    inputElement.value = ''; // Limpiar el campo con fecha futura
+                }
+            }
+        }
+        
+        // Configurar eventos para validaciones
+        document.addEventListener('DOMContentLoaded', setMaxDateToday);
+        startDateInput.addEventListener('change', function() {
+            validateFutureDate(startDateInput);
+            validateDateRange();
+        });
+        endDateInput.addEventListener('change', function() {
+            validateFutureDate(endDateInput);
+            validateDateRange();
+        });
     advancedSearchCheckbox.addEventListener('change', function() {
         advancedOptions.style.display = this.checked ? 'block' : 'none';
     });
@@ -451,6 +508,9 @@
                         console.error('Error al copiar: ', err);
                         alert('Error al copiar. Intente nuevamente.');
                     });
+            }else {
+                // Mostrar mensaje claro cuando no hay selección
+                alert('No hay filas seleccionadas. Seleccione al menos un registro para copiar.');
             }
         });
 

@@ -231,3 +231,17 @@ class Database:
             print(f"Error al limpiar la base de datos: {e}")
         finally:
             conn.close()
+
+    def get_reportes_ftp(self,query,count_query,error_query,params):
+        
+        total_logs = 0
+        total_errores = 0
+        registros = []
+        conn = self.get_connection()
+        registros = conn.execute(query, params).fetchall()
+        total_logs = conn.execute(count_query, params).fetchone()[0]
+        total_errores = conn.execute(error_query, params).fetchone()[0]
+        conn.close()
+
+        return {'registros':registros, 'total_logs':total_logs, 'total_errores':total_errores}
+    #CBRV
