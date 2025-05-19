@@ -1,34 +1,31 @@
 {% extends "base.html" %}
 
 {% block title %}Dashboard - LogViewer{% endblock %}
+{% block extra_head %}
+ <link rel="stylesheet" href="{{ url_for('static', filename='css/recoleccion.css') }}">
 
+{% endblock %}
 {% block content %}
-<div class="row">
-    <div class="col-12">
-        <h1 class="mb-4">Dashboard</h1>
-    </div>
-</div>
-
-<div class="row mb-4">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8">
+        <div class="card shadow rounded border-0">
+            <div class="card-header bg-primary text-white fw-bold">
                 Cargar archivo de log
             </div>
             <div class="card-body">
+                <h4 class="text-center text-primary mb-4">Recolección de logs</h4>
                 <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="logfile" class="form-label">Seleccione un archivo de log</label>
                         <input class="form-control" type="file" id="logfile" name="logfile" accept=".log,.txt">
-                        <div class="form-text">Formatos soportados: logs de Apache (acceso y error) y logs FTP</div>
+                        <small class="form-text text-muted">Formatos soportados: logs de Apache (acceso y error) y logs FTP</small>
                     </div>
-                    <button type="submit" class="btn btn-primary">Subir y procesar</button>
+                    <button type="submit" class="btn btn-primary w-100">Subir y procesar</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
 {% endblock %}
 
 {% block extra_js %}

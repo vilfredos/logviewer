@@ -5,8 +5,14 @@
 {% block content %}
 <h1 class="mb-4">Reportes</h1>
 
+<<<<<<< HEAD
 <!-- Formulario arriba, de ancho completo -->
 <div class="card mb-12 shadow-sm">
+=======
+
+  <!-- Formulario arriba, de ancho completo -->
+<div class="card mb-4 shadow-sm">
+>>>>>>> origin
   <div class="card-body">
     <form method="POST" class="row g-3">
       <div class="col-md-4">
@@ -37,21 +43,30 @@
       </div>
     </form>
   </div>
+<<<<<<< HEAD
 </div>
 
 <!-- Contenido principal con pestañas -->
+=======
+
+  <!-- Contenido principal con pestañas -->
+>>>>>>> origin
 <div class="card shadow-sm">
   <div class="card-body">
     <!-- Tabs -->
     <ul class="nav nav-tabs mb-3" id="reportesTabs" role="tablist">
       <li class="nav-item" role="presentation">
         <button class="nav-link active" id="vsftpd-tab" data-bs-toggle="tab" data-bs-target="#vsftpd" type="button" role="tab">
+<<<<<<< HEAD
           FTP logs
         </button>
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="xfer-tab" data-bs-toggle="tab" data-bs-target="#xfer" type="button" role="tab">
           FTP xferlogs
+=======
+          Logs VSFTPD
+>>>>>>> origin
         </button>
       </li>
       <li class="nav-item" role="presentation">
@@ -59,16 +74,20 @@
           Logs Apache
         </button>
       </li>
+<<<<<<< HEAD
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="error_apache-tab" data-bs-toggle="tab" data-bs-target="#error_apache" type="button" role="tab">
           Errors Apache
         </button>
       </li>
+=======
+>>>>>>> origin
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
       <div class="tab-pane fade show active" id="vsftpd" role="tabpanel">
+<<<<<<< HEAD
         <h5 class="mt-4 text-center">Conteo de entradas</h5>
 
         <div class="bg-white p-3 rounded shadow-sm mb-4 text-center" style="overflow-x: auto;">
@@ -83,17 +102,41 @@
           <table class="table table-bordered table-striped">
             <thead>
               <tr>
+=======
+        <div class="bg-white p-3 rounded shadow-sm mb-4" style="overflow-x: auto;">
+          <img src="{{ grafico_cantidad }}" class="img-fluid" alt="Gráfico de logs FTP">
+        </div>
+        
+    
+        <h5 class="mt-4">Tabla de logs FTP</h5>
+
+        {% if resultados %}
+        <div class="table-responsive bg-white shadow-sm rounded p-3">
+          
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                
+>>>>>>> origin
                 <th>Fecha y hora</th>
                 <th>Usuario</th>
                 <th>IP</th>
                 <th>Acción</th>
                 <th>Archivo</th>
                 <th>Detalles</th>
+<<<<<<< HEAD
+=======
+                
+>>>>>>> origin
               </tr>
             </thead>
             <tbody>
               {% for fila in resultados %}
+<<<<<<< HEAD
               <tr>
+=======
+                <tr>
+>>>>>>> origin
                 <td>{{fila['fecha_hora']}}</td>
                 <td>{{fila['usuario']}}</td>
                 <td>{{fila['ip']}}</td>
@@ -108,6 +151,7 @@
         {% else %}
         <p class="text-muted">No se encontraron resultados.</p>
         {% endif %}
+<<<<<<< HEAD
       </div>
 
       <div class="tab-pane fade" id="xfer" role="tabpanel">
@@ -164,26 +208,44 @@
         {% else %}
         <p class="text-muted">No se encontraron resultados.</p>
         {% endif %}
+=======
+        
+>>>>>>> origin
       </div>
       <div class="tab-pane fade" id="apache" role="tabpanel">
         <h5>Logs del servidor Apache</h5>
         <pre>{{ apache_logs }}</pre>
       </div>
+<<<<<<< HEAD
       <div class="tab-pane fade" id="error_apache" role="tabpanel">
         <h5>Errores del servidor Apache</h5>
         <pre>{{ apache_logs }}</pre>
       </div>
+=======
+>>>>>>> origin
     </div>
   </div>
 </div>
 
+<<<<<<< HEAD
 <!-- Script -->
+=======
+
+>>>>>>> origin
 <script>
   function toggleFechas() {
     const modo = document.getElementById("modo").value;
     const fechaDiv = document.getElementById("fechas");
     fechaDiv.style.display = (modo === "rango") ? "block" : "none";
   }
+<<<<<<< HEAD
   window.addEventListener("DOMContentLoaded", toggleFechas);
 </script>
 {% endblock %}
+=======
+
+  window.addEventListener("DOMContentLoaded", toggleFechas);
+</script>
+    
+{% endblock %}
+>>>>>>> origin

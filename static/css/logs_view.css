@@ -1,0 +1,65 @@
+.card-body div{
+
+
+border-radius: 8px;
+
+}
+
+
+.btn{
+font-family: 'Arial Black', Arial, sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+ font-weight:700;
+  padding: 0.5rem 1.2rem; 
+  font-size: 16px;       
+  border: none;
+  border-radius: 6px;     
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  color: rgb(255, 255, 255);
+}
+
+
+#resetButton {
+  background-color: #f44336;
+}
+
+#resetButton:hover {
+  background-color: #d32f2f;
+  animation: bounce 0.4s;
+}
+
+#resetButton i {
+  transition: transform 0.3s ease;
+}
+
+#resetButton:hover i {
+  transform: rotate(180deg);
+}
+
+/* Search Button específico */
+#searchButton {
+  background-color: #007BFF;
+}
+
+#searchButton:hover {
+  background-color: #0056b3;
+}
+.archivo-subido {
+    font-size: 1.1rem;
+    background-color: #f8f9fa;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border-left: 4px solid #0d6efd;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+td, th {
+  padding: 10px;
+  
+  text-align: left;
+}

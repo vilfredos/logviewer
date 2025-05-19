@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, session
 import os
 import datetime
 
@@ -16,6 +16,10 @@ app = Flask(__name__)
 app.config.from_object('config')
 app.secret_key = config.SECRET_KEY
 
+@app.context_processor
+def inject_log_subido():
+    return dict(log_subido=session.get('log_subido', False))
+    
 db = Database()
 
 
@@ -38,17 +42,18 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in config.ALLOWED_EXTENSIONS
 
+
 @app.route('/')
 def index():
     return render_template('dashboard.html')
 
 @app.route('/logs/view')
 def logs_view():
-    return render_template('logs_view.html')
+    return render_template('logs_view.html', log_subido=log_subido)
 
 @app.route('/search')
 def search():
-    return render_template('search.html')
+    return render_template('search.html', log_subido=log_subido)
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -71,7 +76,8 @@ def upload_file():
             # Detectar el tipo de log y procesarlo
             log_type = detect_log_type(filepath)
             process_log_file(filepath, log_type)
-            
+            session['log_subido'] = True
+
             flash(f'Archivo {filename} cargado y procesado correctamente como {log_type}', 'success')
             return redirect(url_for('view_log', filename=filename, log_type=log_type))
         except Exception as e:
@@ -399,6 +405,7 @@ def search_logs():
         flash(f'Error al realizar la búsqueda: {str(e)}', 'danger')
         return redirect(url_for('logs_view'))   
 
+<<<<<<< HEAD
 ## inicio CBRV 
 @app.route('/reportes', methods=['GET', 'POST'])
 def reportes():
@@ -429,30 +436,41 @@ def reportes():
 @app.route('/reports', methods=['GET', 'POST'])
 def reports():
     """Render the reports page with statistical analysis."""
+=======
+ 
+@app.route('/reportes', methods=['GET', 'POST'])
+def reportes():
+>>>>>>> origin
     db_config = config.DB_CONFIG
-    
-    # Create report analyzer instance
-    report_analyzer = ReportAnalyzer(db_config)
-    
-    # Get active table information
-    active_table, count = report_analyzer.identify_active_table()
-    
-    # Generate report based on active table
-    report_data = report_analyzer.generate_report()
-    
-    return render_template(
-        'reports.html', 
-        active_table=active_table,
-        record_count=count,
-        report_data=report_data
-    )
+    report_analyzer2 = ReportAnalyzer2(db_config)
+    resultados = []
+    grafico_cantidad = []
+    texto = ""
+    modo = ""
+    desde = ""
+    hasta = ""
+    if request.method == "POST":
+        texto = request.form.get("texto", "")
+        texto = texto.lower().strip()
+        modo = request.form.get("modo")
+        desde = request.form.get("desde")
+        hasta = request.form.get("hasta")
+        resultados = report_analyzer2.get_ftp_filtrado(texto,modo,desde,hasta)
+    grafico_cantidad = report_analyzer2.get_ftp_filtrado_grafico(texto,modo,desde,hasta)  
+        
+    return render_template("reportes/reportes.html", resultados=resultados, grafico_cantidad = grafico_cantidad)
 
-@app.route('/alerts')
+@app.route('/alertas', methods=['GET', 'POST'])
 def alerts():
     """Alertas y errores en los logs"""
     alerts_data = get_alerts()
-    table_name = alerts_data['table']
-    error_logs = alerts_data['logs']
+    
+    if alerts_data:  # para evitar error si la lista está vacía
+        table_name = alerts_data[0]['table']
+        error_logs = alerts_data[0]['logs']
+    else:
+        table_name = ""
+        error_logs = []
     
     return render_template(
         'alerts.html', 
