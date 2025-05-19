@@ -412,11 +412,19 @@ def reportes():
         modo = request.form.get("modo")
         desde = request.form.get("desde")
         hasta = request.form.get("hasta")
+
         resultados = report_analyzer2.get_ftp_filtrado(texto,modo,desde,hasta)
         grafico_cantidad = report_analyzer2.get_ftp_filtrado_grafico(texto,modo,desde,hasta)
+        logs_xfer = report_analyzer2.get_xfer_filtrado(texto,modo,desde,hasta)
+        grafico_logs_xfer = report_analyzer2.get_xfer_filtrado_grafico(texto,modo,desde,hasta)
+
         
 
-    return render_template("reportes/reportes.html", resultados=resultados, grafico_cantidad = grafico_cantidad)
+    return render_template("reportes/reportes.html", 
+                           resultados=resultados,
+                           grafico_cantidad = grafico_cantidad,
+                           logs_xfer=logs_xfer,
+                           grafico_logs_xfer=grafico_logs_xfer,)
 
 @app.route('/reports', methods=['GET', 'POST'])
 def reports():
