@@ -405,9 +405,42 @@ def search_logs():
         flash(f'Error al realizar la búsqueda: {str(e)}', 'danger')
         return redirect(url_for('logs_view'))   
 
+<<<<<<< HEAD
+## inicio CBRV 
+@app.route('/reportes', methods=['GET', 'POST'])
+def reportes():
+    db_config = config.DB_CONFIG
+    report_analyzer2 = ReportAnalyzer2(db_config)
+    resultados = []
+    grafico_cantidad = []
+    if request.method == "POST":
+        texto = request.form.get("texto", "")
+        texto = texto.lower().strip()
+        modo = request.form.get("modo")
+        desde = request.form.get("desde")
+        hasta = request.form.get("hasta")
+
+        resultados = report_analyzer2.get_ftp_filtrado(texto,modo,desde,hasta)
+        grafico_cantidad = report_analyzer2.get_ftp_filtrado_grafico(texto,modo,desde,hasta)
+        logs_xfer = report_analyzer2.get_xfer_filtrado(texto,modo,desde,hasta)
+        grafico_logs_xfer = report_analyzer2.get_xfer_filtrado_grafico(texto,modo,desde,hasta)
+
+        
+
+    return render_template("reportes/reportes.html", 
+                           resultados=resultados,
+                           grafico_cantidad = grafico_cantidad,
+                           logs_xfer=logs_xfer,
+                           grafico_logs_xfer=grafico_logs_xfer,)
+
+@app.route('/reports', methods=['GET', 'POST'])
+def reports():
+    """Render the reports page with statistical analysis."""
+=======
  
 @app.route('/reportes', methods=['GET', 'POST'])
 def reportes():
+>>>>>>> origin
     db_config = config.DB_CONFIG
     report_analyzer2 = ReportAnalyzer2(db_config)
     resultados = []
