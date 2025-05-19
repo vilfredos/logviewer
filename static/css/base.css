@@ -1,0 +1,36 @@
+body{
+    background-color: #e6e4e4!important;
+}
+.titulo {
+  color: #f7faf7; 
+  font-weight: bold;
+  font-size: 18px;
+}
+
+#nav {
+  display: flex;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+  margin-left: 23em;
+ 
+  
+
+}
+
+#nav li a {
+  color: white;
+  padding: 10px 15px;
+  text-decoration: none;
+}
+
+#nav li a:hover {
+  background-color: #648cd1;
+  border-radius: 5px;
+}
+
+.salir{
+    margin-right: 20px;
+    font-weight: 500;
+}

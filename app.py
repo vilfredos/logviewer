@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, session
 import os
 from werkzeug.utils import secure_filename
 from models.database import Database
@@ -13,6 +13,10 @@ app = Flask(__name__)
 app.config.from_object('config')
 app.secret_key = config.SECRET_KEY
 
+@app.context_processor
+def inject_log_subido():
+    return dict(log_subido=session.get('log_subido', False))
+    
 db = Database()
 
 
@@ -35,17 +39,18 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in config.ALLOWED_EXTENSIONS
 
+
 @app.route('/')
 def index():
-    return render_template('dashboard.html')
+    return render_template('recoleccion.html')
 
 @app.route('/logs/view')
 def logs_view():
-    return render_template('logs_view.html')
+    return render_template('logs_view.html', log_subido=log_subido)
 
 @app.route('/search')
 def search():
-    return render_template('search.html')
+    return render_template('search.html', log_subido=log_subido)
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -68,7 +73,8 @@ def upload_file():
             # Detectar el tipo de log y procesarlo
             log_type = detect_log_type(filepath)
             process_log_file(filepath, log_type)
-            
+            session['log_subido'] = True
+
             flash(f'Archivo {filename} cargado y procesado correctamente como {log_type}', 'success')
             return redirect(url_for('view_log', filename=filename, log_type=log_type))
         except Exception as e:
