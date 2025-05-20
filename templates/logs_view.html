@@ -248,6 +248,7 @@
                                 {% endfor %}
                             </tbody>
                         </table>
+                        
                     {% else %}
                         <div class="p-4 text-center">
                             <p>Seleccione un tipo de log para visualizar</p>
@@ -255,9 +256,47 @@
                     {% endif %}
                 </div>
             </div>
+            
+  <ul class="pagination">
+  <!-- Anterior -->
+  {% if page > 1 %}
+    <li><a class="page-link" href="{{ url_for('view_log', log_type=log_type, filename=filename, page=page-1) }}">←</a></li>
+  {% endif %}
+
+  <!-- Primera página -->
+  {% if page > 3 %}
+    <li><a class="page-link" href="{{ url_for('view_log', log_type=log_type, filename=filename, page=1) }}">1</a></li>
+    <li><span class="page-ellipsis">...</span></li>
+  {% endif %}
+
+  <!-- Páginas cercanas -->
+  {% for p in range(page-2, page+3) %}
+    {% if p > 0 and p <= total_pages %}
+      <li class="{% if p == page %}active{% endif %}">
+        <a class="page-link" href="{{ url_for('view_log', log_type=log_type, filename=filename, page=p) }}">{{ p }}</a>
+      </li>
+    {% endif %}
+  {% endfor %}
+
+  <!-- Última página -->
+  {% if page < total_pages - 2 %}
+    <li><span class="page-ellipsis">...</span></li>
+    <li><a class="page-link" href="{{ url_for('view_log', log_type=log_type, filename=filename, page=total_pages) }}">{{ total_pages }}</a></li>
+  {% endif %}
+
+  <!-- Siguiente -->
+  {% if page < total_pages %}
+    <li><a class="page-link" href="{{ url_for('view_log', log_type=log_type, filename=filename, page=page+1) }}">→</a></li>
+  {% endif %}
+</ul>
+  
+</div>
+
+</div>
         </div>
     </div>
 </div>
+
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -518,17 +557,7 @@
         updateCopyButtonState();
     });
 
-     $(document).ready(function() {
-        $('#logTable').DataTable({
-            paging: true,
-            pageLength: 10,
-            lengthChange: true,
-            searching: false,  // Desactiva búsqueda interna si usas la tuya propia
-            ordering: true,
-            info: true,
-            autoWidth: false
-        });
-    });
+     
 </script>
 
 {% endblock %}

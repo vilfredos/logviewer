@@ -49,7 +49,7 @@ def index():
 
 @app.route('/logs/view')
 def logs_view():
-    return render_template('logs_view.html', log_subido=log_subido)
+    return render_template('logs_view.html')
 
 @app.route('/search')
 def search():
@@ -207,7 +207,7 @@ def process_log_file(filepath, log_type):
 def view_log(log_type, filename):
     """Muestra los logs procesados según su tipo"""
     page = request.args.get('page', 1, type=int)
-    per_page = 50
+    per_page = 10
     
     if log_type == 'apache_access':
         logs = db.get_access_logs(page, per_page)
@@ -234,13 +234,14 @@ def view_log(log_type, filename):
                            log_type=log_type, 
                            filename=filename,
                            page=page,
-                           total_pages=total_pages)
+                           total_pages=total_pages,
+                           total=total)
 
 @app.route('/api/logs/<log_type>')
 def api_get_logs(log_type):
     """API para obtener logs en formato JSON"""
     page = request.args.get('page', 1, type=int)
-    per_page = 50
+    per_page = 100
     
     if log_type == 'apache_access':
         logs = db.get_access_logs(page, per_page)
