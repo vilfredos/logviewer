@@ -32,4 +32,6 @@ class AlertasClass:
         return []
     
 
-    def get_
+    def get_ftp(self,texto,modo,desde,hasta):
+        
+        return []
