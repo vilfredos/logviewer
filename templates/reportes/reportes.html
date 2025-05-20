@@ -5,9 +5,8 @@
 {% block content %}
 <h1 class="mb-4">Reportes</h1>
 
-
-  <!-- Formulario arriba, de ancho completo -->
-<div class="card mb-4 shadow-sm">
+<!-- Formulario arriba, de ancho completo -->
+<div class="card mb-12 shadow-sm">
   <div class="card-body">
     <form method="POST" class="row g-3">
       <div class="col-md-4">
@@ -38,15 +37,21 @@
       </div>
     </form>
   </div>
+</div>
 
-  <!-- Contenido principal con pestañas -->
+<!-- Contenido principal con pestañas -->
 <div class="card shadow-sm">
   <div class="card-body">
     <!-- Tabs -->
     <ul class="nav nav-tabs mb-3" id="reportesTabs" role="tablist">
       <li class="nav-item" role="presentation">
         <button class="nav-link active" id="vsftpd-tab" data-bs-toggle="tab" data-bs-target="#vsftpd" type="button" role="tab">
-          Logs VSFTPD
+          FTP logs
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="xfer-tab" data-bs-toggle="tab" data-bs-target="#xfer" type="button" role="tab">
+          FTP xferlogs
         </button>
       </li>
       <li class="nav-item" role="presentation">
@@ -54,37 +59,41 @@
           Logs Apache
         </button>
       </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="error_apache-tab" data-bs-toggle="tab" data-bs-target="#error_apache" type="button" role="tab">
+          Errors Apache
+        </button>
+      </li>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
       <div class="tab-pane fade show active" id="vsftpd" role="tabpanel">
-        <div class="bg-white p-3 rounded shadow-sm mb-4" style="overflow-x: auto;">
+        <h5 class="mt-4 text-center">Conteo de entradas</h5>
+
+        <div class="bg-white p-3 rounded shadow-sm mb-4 text-center" style="overflow-x: auto;">
           <img src="{{ grafico_cantidad }}" class="img-fluid" alt="Gráfico de logs FTP">
         </div>
-        
-    
+
+
         <h5 class="mt-4">Tabla de logs FTP</h5>
 
         {% if resultados %}
-        <div class="table-responsive bg-white shadow-sm rounded p-3">
-          
+        <div class="bg-white shadow-sm rounded p-3" style="max-height: 500px; overflow: scroll;">
           <table class="table table-bordered table-striped">
             <thead>
               <tr>
-                
                 <th>Fecha y hora</th>
                 <th>Usuario</th>
                 <th>IP</th>
                 <th>Acción</th>
                 <th>Archivo</th>
                 <th>Detalles</th>
-                
               </tr>
             </thead>
             <tbody>
               {% for fila in resultados %}
-                <tr>
+              <tr>
                 <td>{{fila['fecha_hora']}}</td>
                 <td>{{fila['usuario']}}</td>
                 <td>{{fila['ip']}}</td>
@@ -98,25 +107,82 @@
         </div>
         
         {% endif %}
+      </div>
+
+      <div class="tab-pane fade" id="xfer" role="tabpanel">
+        <h5 class="mt-4 text-center">Conteo de entradas</h5>
+        <div class="bg-white p-3 rounded shadow-sm mb-4 text-center" style="overflow-x: auto;">
+          <img src="{{ grafico_logs_xfer }}" class="img-fluid" alt="Gráfico de logs FTP">
+        </div>
+
+        <h5 class="mt-4">Tabla tipo xfer_logs FTP</h5>
+        {% if logs_xfer %}
+
+        <div class="bg-white shadow-sm rounded p-3" style="max-height: 500px; overflow: scroll;">
+          <div class="table-responsive bg-white shadow-sm rounded p-3" style="overflow-x: auto;">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Fecha y hora</th>
+                  <th>Tiempo de Transferencia</th>
+                  <th>Host remoto</th>
+                  <th>Tamaño del archivo</th>
+                  <th>Nombre del archivo</th>
+                  <th>Tipo de transferencia</th>
+                  <th>Acción especial</th>
+                  <th>Direccion</th>
+                  <th>Usuario</th>
+                  <th>Servicio</th>
+                  <th>Método de autenticación</th>
+                  <th>Usuario autenticado</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for fila in logs_xfer %}
+                <tr>
+                  <td>{{fila['fecha_hora']}}</td>
+                  <td>{{fila['duracion']}}</td>
+                  <td>{{fila['servidor']}}</td>
+                  <td>{{fila['tamaño_archivo']}}</td>
+                  <td>{{fila['archivo']}}</td>
+                  <td>{{fila['tipo_transferencia']}}</td>
+                  <td>{{fila['accion_especial']}}</td>
+                  <td>{{fila['direccion']}}</td>
+                  <td>{{fila['usuario']}}</td>
+                  <td>{{fila['servicio']}}</td>
+                  <td>{{fila['metodo_autenticacion']}}</td>
+                  <td>{{fila['usuario_id']}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+        </div>
         
+        {% else %}
+        <p class="text-muted">No se encontraron resultados.</p>
+        {% endif %}
       </div>
       <div class="tab-pane fade" id="apache" role="tabpanel">
         <h5>Logs del servidor Apache</h5>
+        <pre>{{ apache_logs }}</pre>
+      </div>
+      <div class="tab-pane fade" id="error_apache" role="tabpanel">
+        <h5>Errores del servidor Apache</h5>
         <pre>{{ apache_logs }}</pre>
       </div>
     </div>
   </div>
 </div>
 
-
+<!-- Script -->
 <script>
   function toggleFechas() {
     const modo = document.getElementById("modo").value;
     const fechaDiv = document.getElementById("fechas");
     fechaDiv.style.display = (modo === "rango") ? "block" : "none";
   }
-
   window.addEventListener("DOMContentLoaded", toggleFechas);
 </script>
-    
 {% endblock %}

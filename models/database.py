@@ -232,6 +232,7 @@ class Database:
         finally:
             conn.close()
 
+    #CBRV
     def get_reportes_ftp(self,query,count_query,error_query,params):
         
         total_logs = 0
@@ -245,3 +246,4 @@ class Database:
 
         return {'registros':registros, 'total_logs':total_logs, 'total_errores':total_errores}
     #CBRV
+        
