@@ -27,7 +27,24 @@ class ReportAnalyzer2:
             cursorclass=pymysql.cursors.DictCursor
         )
 
+    
+    def get_todo(self,texto,modo,desde,hasta):
+
+        ftp = self.get_ftp_filtrado(texto,modo,desde,hasta)
+        ftp_g1 = self.get_ftp_filtrado_grafico(texto,modo,desde,hasta)
         
+        xfer = self.get_xfer_filtrado(texto,modo,desde,hasta)
+        xfer_g1 = self.get_xfer_filtrado_grafico(texto,modo,desde,hasta)
+        
+        resultado = {
+            'ftp':{'tabla':ftp,
+                   'g1':ftp_g1
+                  },
+            'xfer':{'tabla':xfer,
+                    'g1':xfer_g1
+                   }
+        }
+        return resultado
  
     def get_xfer_filtrado(self,texto,modo,desde,hasta):
 

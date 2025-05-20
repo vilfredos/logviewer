@@ -8,6 +8,7 @@ from parsers.apache_parser import ApacheParser
 from parsers.ftp_parser import FTPParser
 from utils.report_analyzer import ReportAnalyzer
 from utils.alerts_handler import get_alerts
+from utils.alertas_2 import AlertasClass
 from utils.reportes_2 import ReportAnalyzer2
 import config
 import re
@@ -407,73 +408,71 @@ def search_logs():
         return redirect(url_for('logs_view'))   
 
 ## inicio CBRV 
-@app.route('/reportes', methods=['GET', 'POST'])
+@app.route('/reportes', methods=['GET'])
 def reportes():
+
     db_config = config.DB_CONFIG
     report_analyzer2 = ReportAnalyzer2(db_config)
-    resultados = []
-    grafico_cantidad = []
-    logs_xfer = []
-    grafico_logs_xfer = []
-    if request.method == "POST":
-        texto = request.form.get("texto", "")
-        texto = texto.lower().strip()
-        modo = request.form.get("modo")
-        desde = request.form.get("desde")
-        hasta = request.form.get("hasta")
+    resultados = report_analyzer2.get_todo("", 'todo', '', '')  # Carga inicial
 
-        resultados = report_analyzer2.get_ftp_filtrado(texto,modo,desde,hasta)
-        grafico_cantidad = report_analyzer2.get_ftp_filtrado_grafico(texto,modo,desde,hasta)
-        logs_xfer = report_analyzer2.get_xfer_filtrado(texto,modo,desde,hasta)
-        grafico_logs_xfer = report_analyzer2.get_xfer_filtrado_grafico(texto,modo,desde,hasta)
+    return render_template("reportes/reportes.html", resultados=resultados)
 
-        
 
-    return render_template("reportes/reportes.html", 
-                           resultados=resultados,
-                           grafico_cantidad = grafico_cantidad,
-                           logs_xfer=logs_xfer,
-                           grafico_logs_xfer=grafico_logs_xfer,)
-
-@app.route('/reports', methods=['GET', 'POST'])
-def reports():
-    """Render the reports page with statistical analysis."""
+@app.route('/filtros_registro/<tipo_log>', methods=['POST'])
+def filtros_registro(tipo_log):
     db_config = config.DB_CONFIG
     report_analyzer2 = ReportAnalyzer2(db_config)
-    resultados = []
-    grafico_cantidad = []
-    texto = ""
-    modo = ""
-    desde = ""
-    hasta = ""
-    if request.method == "POST":
-        texto = request.form.get("texto", "")
-        texto = texto.lower().strip()
-        modo = request.form.get("modo")
-        desde = request.form.get("desde")
-        hasta = request.form.get("hasta")
-        resultados = report_analyzer2.get_ftp_filtrado(texto,modo,desde,hasta)
-    grafico_cantidad = report_analyzer2.get_ftp_filtrado_grafico(texto,modo,desde,hasta)  
-        
-    return render_template("reportes/reportes.html", resultados=resultados, grafico_cantidad = grafico_cantidad)
 
-@app.route('/alertas', methods=['GET', 'POST'])
-def alerts():
-    """Alertas y errores en los logs"""
-    alerts_data = get_alerts()
-    
-    if alerts_data:  # para evitar error si la lista está vacía
-        table_name = alerts_data[0]['table']
-        error_logs = alerts_data[0]['logs']
+    texto = request.form.get("texto", "").lower().strip()
+    modo = request.form.get("modo")
+    desde = request.form.get("desde")
+    hasta = request.form.get("hasta")
+
+    resultados = report_analyzer2.get_todo(texto, modo, desde, hasta)
+    #vsftpd
+    #xfer
+    #apache
+    #error_apache
+    if tipo_log == "vsftpd":
+        return render_template("partials/reportes_ftp.html", resultados=resultados['ftp'])
+    elif tipo_log == "xfer":
+        return render_template("partials/reportes_xfer.html", resultados=resultados['xfer'])
+    elif tipo_log == "apache":
+        return render_template("partials/reportes_apache.html", resultados=resultados['apache'])
+    elif tipo_log == "error_apache":
+        return render_template("partials/reportes_apache_error.html", resultados=resultados['apache_error'])
     else:
-        table_name = ""
-        error_logs = []
-    
-    return render_template(
-        'reportes/alertas.html', 
-        table_name=table_name, 
-        error_logs=error_logs
-    )
+        return "", 400
+
+
+
+@app.route('/alertas', methods=['GET'])
+def alertas():
+    db_config = config.DB_CONFIG
+    alertas = AlertasClass(db_config)
+    resultados = alertas.get_todo("", 'todo', '', '')  # Carga inicial
+
+    return render_template("reportes/alertas.html", resultados=resultados)
+
+@app.route('/filtros_alertas/<tipo_log>', methods=['POST'])
+def filtros_alertas(tipo_log):
+    db_config = config.DB_CONFIG
+    alertas = AlertasClass(db_config)
+
+    texto = request.form.get("texto", "").lower().strip()
+    modo = request.form.get("modo")
+    desde = request.form.get("desde")
+    hasta = request.form.get("hasta")
+
+    resultados = alertas.get_todo(texto, modo, desde, hasta)
+
+    if tipo_log == "vsftpd":
+        return render_template("partials/alertas_ftp.html", filas=resultados['ftp']['tabla'])
+    elif tipo_log == "error_apache":
+        return render_template("partials/alertas_apache.html", filas=resultados['apache']['tabla'])
+    else:
+        return "", 400
+
 
 if __name__ == '__main__':
     app.run(debug=True)

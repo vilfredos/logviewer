@@ -8,7 +8,7 @@
 <!-- Formulario arriba, de ancho completo -->
 <div class="card mb-12 shadow-sm">
   <div class="card-body">
-    <form method="POST" class="row g-3">
+    <form id="form-busqueda"  class="row g-3">
       <div class="col-md-4">
         <label for="texto" class="form-label">Texto a buscar:</label>
         <input type="text" name="texto" id="texto" class="form-control">
@@ -69,120 +69,84 @@
     <!-- Tab panes -->
     <div class="tab-content">
       <div class="tab-pane fade show active" id="vsftpd" role="tabpanel">
-        <h5 class="mt-4 text-center">Conteo de entradas</h5>
-
-        <div class="bg-white p-3 rounded shadow-sm mb-4 text-center" style="overflow-x: auto;">
-          <img src="{{ grafico_cantidad }}" class="img-fluid" alt="Gráfico de logs FTP">
+        <div id="contenido-vsftpd">
+          
         </div>
-
-
-        <h5 class="mt-4">Tabla de logs FTP</h5>
-
-        {% if resultados %}
-        <div class="bg-white shadow-sm rounded p-3" style="max-height: 500px; overflow: scroll;">
-          <table class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th>Fecha y hora</th>
-                <th>Usuario</th>
-                <th>IP</th>
-                <th>Acción</th>
-                <th>Archivo</th>
-                <th>Detalles</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for fila in resultados %}
-              <tr>
-                <td>{{fila['fecha_hora']}}</td>
-                <td>{{fila['usuario']}}</td>
-                <td>{{fila['ip']}}</td>
-                <td>{{fila['accion']}}</td>
-                <td>{{fila['archivo']}}</td>
-                <td>{{fila['detalles']}}</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-        
-        {% endif %}
       </div>
 
       <div class="tab-pane fade" id="xfer" role="tabpanel">
-        <h5 class="mt-4 text-center">Conteo de entradas</h5>
-        <div class="bg-white p-3 rounded shadow-sm mb-4 text-center" style="overflow-x: auto;">
-          <img src="{{ grafico_logs_xfer }}" class="img-fluid" alt="Gráfico de logs FTP">
+        <div id="contenido-xfer">
+          
         </div>
 
-        <h5 class="mt-4">Tabla tipo xfer_logs FTP</h5>
-        {% if logs_xfer %}
-
-        <div class="bg-white shadow-sm rounded p-3" style="max-height: 500px; overflow: scroll;">
-          <div class="table-responsive bg-white shadow-sm rounded p-3" style="overflow-x: auto;">
-            <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>Fecha y hora</th>
-                  <th>Tiempo de Transferencia</th>
-                  <th>Host remoto</th>
-                  <th>Tamaño del archivo</th>
-                  <th>Nombre del archivo</th>
-                  <th>Tipo de transferencia</th>
-                  <th>Acción especial</th>
-                  <th>Direccion</th>
-                  <th>Usuario</th>
-                  <th>Servicio</th>
-                  <th>Método de autenticación</th>
-                  <th>Usuario autenticado</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for fila in logs_xfer %}
-                <tr>
-                  <td>{{fila['fecha_hora']}}</td>
-                  <td>{{fila['duracion']}}</td>
-                  <td>{{fila['servidor']}}</td>
-                  <td>{{fila['tamaño_archivo']}}</td>
-                  <td>{{fila['archivo']}}</td>
-                  <td>{{fila['tipo_transferencia']}}</td>
-                  <td>{{fila['accion_especial']}}</td>
-                  <td>{{fila['direccion']}}</td>
-                  <td>{{fila['usuario']}}</td>
-                  <td>{{fila['servicio']}}</td>
-                  <td>{{fila['metodo_autenticacion']}}</td>
-                  <td>{{fila['usuario_id']}}</td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-
-        </div>
-        
-        {% else %}
-        <p class="text-muted">No se encontraron resultados.</p>
-        {% endif %}
       </div>
+      
       <div class="tab-pane fade" id="apache" role="tabpanel">
-        <h5>Logs del servidor Apache</h5>
-        <pre>{{ apache_logs }}</pre>
+        <div id="contenido-apache">
+          
+        </div>
+
       </div>
       <div class="tab-pane fade" id="error_apache" role="tabpanel">
-        <h5>Errores del servidor Apache</h5>
-        <pre>{{ apache_logs }}</pre>
+        <div id="contenido-error_apache">
+          
+        </div>
+
       </div>
     </div>
   </div>
 </div>
 
-<!-- Script -->
+
 <script>
   function toggleFechas() {
     const modo = document.getElementById("modo").value;
     const fechaDiv = document.getElementById("fechas");
     fechaDiv.style.display = (modo === "rango") ? "block" : "none";
   }
-  window.addEventListener("DOMContentLoaded", toggleFechas);
+
+  function cargarResultados(tipo) {
+    const form = document.querySelector('#form-busqueda');
+    const formData = new FormData(form);
+
+    fetch(`/filtros_registro/${tipo}`, {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.text())
+    .then(html => {
+      if (tipo === "vsftpd") {
+        document.getElementById("contenido-vsftpd").innerHTML = html;
+      } else if (tipo === "xfer") {
+        document.getElementById("contenido-xfer").innerHTML = html;
+      }else if (tipo === "apache") {
+        document.getElementById("contenido-apache").innerHTML = html;
+      }else if (tipo === "error_apache") {
+        document.getElementById("contenido-error_apache").innerHTML = html;
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    toggleFechas();
+
+    // Carga inicial
+    cargarResultados("vsftpd");
+
+    // Cambio de pestañas
+    document.querySelectorAll('.nav-link').forEach(tab => {
+      tab.addEventListener('click', function () {
+        const tipo = this.getAttribute('data-bs-target').substring(1); // elimina el #
+        cargarResultados(tipo);
+      });
+    });
+
+    // Evitar que el form recargue la página
+    document.querySelector('#form-busqueda').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const activa = document.querySelector('.tab-pane.active').id;
+      cargarResultados(activa);
+    });
+  });
 </script>
 {% endblock %}
