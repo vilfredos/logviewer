@@ -469,7 +469,7 @@ def alerts():
         error_logs = []
     
     return render_template(
-        'alerts.html', 
+        'reportes/alertas.html', 
         table_name=table_name, 
         error_logs=error_logs
     )
