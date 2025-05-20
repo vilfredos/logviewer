@@ -16,4 +16,4 @@ DB_CONFIG = {
 }
 
 # Configuración de paginación
-PAGE_SIZE = 50
+PAGE_SIZE = 100
