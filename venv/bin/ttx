@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 #!/home/carlos/practica_aso_2_0/logviewer/venv/bin/python3
-=======
-#!/home/gabriel/Documentos/logviewer/venv/bin/python3
->>>>>>> origin
 # -*- coding: utf-8 -*-
 import re
 import sys

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, session
 import os
-import datetime
+from datetime import datetime, timedelta
 
 from werkzeug.utils import secure_filename
 from models.database import Database
@@ -12,6 +12,11 @@ from utils.alertas_2 import AlertasClass
 from utils.reportes_2 import ReportAnalyzer2
 import config
 import re
+
+from flask import request, send_file
+import pandas as pd
+import io
+import base64
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -432,14 +437,14 @@ def filtros_registro(tipo_log):
     #vsftpd
     #xfer
     #apache
-    #error_apache
+    #apache_error
     if tipo_log == "vsftpd":
         return render_template("partials/reportes_ftp.html", resultados=resultados['ftp'])
     elif tipo_log == "xfer":
         return render_template("partials/reportes_xfer.html", resultados=resultados['xfer'])
     elif tipo_log == "apache":
         return render_template("partials/reportes_apache.html", resultados=resultados['apache'])
-    elif tipo_log == "error_apache":
+    elif tipo_log == "apache_error":
         return render_template("partials/reportes_apache_error.html", resultados=resultados['apache_error'])
     else:
         return "", 400
@@ -472,6 +477,138 @@ def filtros_alertas(tipo_log):
         return render_template("partials/alertas_apache.html", filas=resultados['apache']['tabla'])
     else:
         return "", 400
+
+
+
+@app.route('/exportar_excel', methods=['POST'])
+def exportar_excel():
+
+    
+    filtros = request.json  
+
+
+    db_config = config.DB_CONFIG
+    report_analyzer2 = ReportAnalyzer2(db_config)
+
+    texto = filtros['texto']
+    modo = filtros['modo']
+    desde = filtros['desde']
+    hasta = filtros['hasta']
+    tipo = filtros['tipo']
+    data = {'datos':[], 'imagenes':[]}
+    if tipo == 'vsftpd':
+        data['datos'] = report_analyzer2.get_ftp_filtrado(texto, modo, desde, hasta)
+        data['imagenes'] = [
+            {'nombre':'Conteo de entradas',
+             'imagen': report_analyzer2.get_ftp_filtrado_grafico(texto, modo, desde, hasta)}
+        ]
+    elif tipo == 'xfer':
+        data['datos'] = report_analyzer2.get_xfer_filtrado(texto, modo, desde, hasta)
+        data['imagenes'] = [
+            {'nombre':'Conteo de entradas',
+             'imagen': report_analyzer2.get_xfer_filtrado_grafico(texto, modo, desde, hasta)}
+        ]
+    elif tipo == 'apache':
+        data['datos'] = report_analyzer2.get_apache_filtrado(texto, modo, desde, hasta)
+        data['imagenes'] = [
+            {'nombre':'Conteo de entradas',
+             'imagen': report_analyzer2.get_apache_filtrado_grafico(texto, modo, desde, hasta)}
+        ]
+    elif tipo == 'apache_error':
+        data['datos'] = report_analyzer2.get_apache_error_filtrado(texto, modo, desde, hasta)
+        data['imagenes'] = [
+            {'nombre':'Conteo de entradas',
+             'imagen': report_analyzer2.get_apache_error_filtrado_grafico(texto, modo, desde, hasta)}
+        ]
+    output = io.BytesIO()
+    writer = pd.ExcelWriter(output, engine='xlsxwriter')
+
+    # Convertir a DataFrame sin la imagen
+    df = []
+    if tipo == "vsftpd":
+        
+        df = pd.DataFrame([{
+        "Fecha y hora": row["fecha_hora"],
+        "Usuario": row["usuario"],
+        "IP": row["ip"],
+        "Acción": row["accion"],
+        "Archivo": row["archivo"],
+        "Detalles": row["detalles"]
+        } for row in data['datos']])
+    elif tipo == "xfer":
+        df = pd.DataFrame([{
+        "Fecha y hora": row["fecha_hora"],
+        "Tiempo de Transferencia": row["duracion"],
+        "Host remoto": row["servidor"],
+        "Tamaño del archivo": row["tamaño_archivo"],
+        "Nombre del archivo": row["archivo"],
+        "Tipo de transferencia": row["tipo_transferencia"],
+        "Acción especial": row["accion_especial"],
+        "Direccion": row["direccion"],
+        "Usuario": row["usuario"],
+        "Servicio": row["servicio"],
+        "Método de autenticación": row["metodo_autenticacion"],
+        "Usuario autenticado": row["usuario_id"]
+        } for row in data['datos']])
+    elif tipo == "apache":
+        df = pd.DataFrame([{
+        "IP": row["ip"],
+        "Fecha y hora": row["fecha_hora"],
+        "Metodo": row["metodo"],
+        "Ruta": row["ruta"],
+        "Protocolo": row["protocolo"],
+        "Bytes enviados": row["bytes_enviados"],
+        "Referencia": row["referer"],
+        "Cliente": row["user_agent"],
+        "Tiempo de Respuesta": row["tiempo_respuesta"],
+        } for row in data['datos']])
+    elif tipo == "apache_error":
+        df = pd.DataFrame([{
+        "Fecha y hora": row["fecha_hora"],
+        "Severidad": row["nivel_error"],
+        "Cliente": row["cliente"],
+        "Mensaje": row["mensaje"],
+        "archivo": row["archivo"],
+        "Linea de Codigo": row["linea"],
+        } for row in data['datos']])
+    else:
+        return "", 400
+    
+    df.to_excel(writer, index=False, sheet_name='Datos')
+    workbook = writer.book
+    sheet = workbook.add_worksheet('Imagenes')
+    writer.sheets['Imagenes'] = sheet
+
+    col_count = 2
+    row_spacing = 6 
+
+    for i, row in enumerate(data['imagenes']):
+        col = i % col_count
+        block = i // col_count
+        fila_titulo = block * row_spacing
+        fila_imagen = fila_titulo + 1
+
+        # Título
+        sheet.write(fila_titulo, col, row['nombre'])
+
+        # Imagen base64
+        imagen_b64 = row['imagen'].split(',')[1] if ',' in row['imagen'] else row['imagen']
+        img_data = base64.b64decode(imagen_b64)
+        img_io = io.BytesIO(img_data)
+
+        # Insertar imagen
+        sheet.insert_image(fila_imagen, col, f"imagen_{i}.png", {
+            'image_data': img_io,
+            'x_scale': 0.5,
+            'y_scale': 0.5
+        })
+
+    writer.close()
+    output.seek(0)
+
+    nombre_archivo = f"reporte_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
+
+    return send_file(output, download_name=nombre_archivo, as_attachment=True)
 
 
 if __name__ == '__main__':

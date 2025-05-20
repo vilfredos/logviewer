@@ -60,7 +60,7 @@
         </button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="error_apache-tab" data-bs-toggle="tab" data-bs-target="#error_apache" type="button" role="tab">
+        <button class="nav-link" id="apache_error-tab" data-bs-toggle="tab" data-bs-target="#apache_error" type="button" role="tab">
           Errors Apache
         </button>
       </li>
@@ -87,8 +87,8 @@
         </div>
 
       </div>
-      <div class="tab-pane fade" id="error_apache" role="tabpanel">
-        <div id="contenido-error_apache">
+      <div class="tab-pane fade" id="apache_error" role="tabpanel">
+        <div id="contenido-apache_error">
           
         </div>
 
@@ -97,7 +97,59 @@
   </div>
 </div>
 
+<script>
+              
+        
+  
+  async function exportarExcel(tipo) {
+    const form = document.querySelector('#form-busqueda');
+    const formData = new FormData(form);
 
+      const filtros = {
+        'texto': formData.get('texto'),
+        'modo': formData.get('modo'),
+        'desde': formData.get('desde'),
+        'hasta': formData.get('hasta'),
+        'tipo':tipo
+      }
+    // 2. Enviar datos al servidor
+    const response = await fetch("/exportar_excel", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(filtros)
+    });
+
+    if (!response.ok) {
+      alert("Error al generar el archivo.");
+      return;
+    }
+
+    // 3. Descargar el archivo Excel
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+
+    a.href = url;
+    a.download = await obtenerNombreDesdeCabecera(response.headers) || "reporte.xlsx";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+
+
+  async function obtenerNombreDesdeCabecera(headers) {
+    const disposition = headers.get("Content-Disposition");
+    if (disposition && disposition.includes("filename=")) {
+      return disposition.split("filename=")[1].replace(/["']/g, "");
+    }
+    return null;
+  }
+
+</script>
 <script>
   function toggleFechas() {
     const modo = document.getElementById("modo").value;
@@ -121,8 +173,8 @@
         document.getElementById("contenido-xfer").innerHTML = html;
       }else if (tipo === "apache") {
         document.getElementById("contenido-apache").innerHTML = html;
-      }else if (tipo === "error_apache") {
-        document.getElementById("contenido-error_apache").innerHTML = html;
+      }else if (tipo === "apache_error") {
+        document.getElementById("contenido-apache_error").innerHTML = html;
       }
     });
   }
