@@ -1,0 +1,32 @@
+<h5 class="mt-4">Entradas de alerta</h5>
+
+        {% if filas %}
+        <div class="bg-white shadow-sm rounded p-3" style="max-height: 500px; overflow: scroll;">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Fecha y hora</th>
+                <th>Usuario</th>
+                <th>IP</th>
+                <th>Acción</th>
+                <th>Archivo</th>
+                <th>Detalles</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for fila in filas %}
+              <tr>
+                <td>{{fila['fecha_hora']}}</td>
+                <td>{{fila['usuario']}}</td>
+                <td>{{fila['ip']}}</td>
+                <td>{{fila['accion']}}</td>
+                <td>{{fila['archivo']}}</td>
+                <td>{{fila['detalles']}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <p class="text-muted">No se encontraron resultados.</p>
+        {% endif %}

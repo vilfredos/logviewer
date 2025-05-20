@@ -27,8 +27,436 @@ class ReportAnalyzer2:
             cursorclass=pymysql.cursors.DictCursor
         )
 
+    
+    def get_todo(self,texto,modo,desde,hasta):
+
+        ftp = self.get_ftp_filtrado(texto,modo,desde,hasta)
+        ftp_g1 = self.get_ftp_filtrado_grafico(texto,modo,desde,hasta)
         
+        xfer = self.get_xfer_filtrado(texto,modo,desde,hasta)
+        xfer_g1 = self.get_xfer_filtrado_grafico(texto,modo,desde,hasta)
+        
+        apache = self.get_apache_filtrado(texto,modo,desde,hasta)
+        apache_g1 = self.get_apache_filtrado_grafico(texto,modo,desde,hasta)
+
+        apache_error = self.get_apache_error_filtrado(texto,modo,desde,hasta)
+        apache_error_g1 = self.get_apache_error_filtrado_grafico(texto,modo,desde,hasta)
+        resultado = {
+            'ftp':{'tabla':ftp,
+                   'g1':ftp_g1
+                  },
+            'xfer':{'tabla':xfer,
+                    'g1':xfer_g1
+                   },
+            'apache':{'tabla':apache,
+                    'g1':apache_g1
+                    },
+            'apache_error':{'tabla':apache_error,
+                    'g1':apache_error_g1
+                    },
+        }
+        return resultado
  
+    
+    def get_apache_error_filtrado(self,texto,modo,desde,hasta):
+
+        connection = self.get_connection()
+        resultado = []
+        query = """
+            SELECT * FROM registros_error
+            WHERE (
+                nivel_error LIKE %s
+                OR cliente LIKE %s
+                OR mensaje LIKE %s
+                OR archivo LIKE %s
+                OR linea LIKE %s
+            )
+        """
+        params = [f"%{texto}%"] * 5
+
+        if modo == "diario":
+            hoy = datetime.now().date()
+            desde = f"{hoy} 00:00:00"
+            hasta = f"{hoy} 23:59:59"
+            query += " AND fecha_hora BETWEEN %s AND %s"
+            params.extend([desde, hasta])
+        elif modo == "semanal":
+            hoy = datetime.now()
+            # Día de la semana: lunes=0, domingo=6
+            dia_semana = hoy.weekday()
+            
+            lunes = hoy - timedelta(days=dia_semana)
+            domingo = lunes + timedelta(days=6)
+
+            desde = f"{lunes.date()} 00:00:00"
+            hasta = f"{domingo.date()} 23:59:59"
+
+            query += " AND fecha_hora BETWEEN %s AND %s"
+            params.extend([desde, hasta])
+        elif modo == "mensual":
+            hoy = datetime.now()
+            anio = hoy.year
+            mes = hoy.month
+            primer_dia = f"{anio}-{mes:02d}-01 00:00:00"
+            # Último día del mes
+            ultimo_dia_num = calendar.monthrange(anio, mes)[1]
+            ultimo_dia = f"{anio}-{mes:02d}-{ultimo_dia_num} 23:59:59"
+
+            query += " AND fecha_hora BETWEEN %s AND %s"
+            params.extend([primer_dia, ultimo_dia])
+        elif modo == "rango" and desde and hasta:
+            query += " AND fecha_hora BETWEEN %s AND %s"
+            params.extend([desde, hasta])
+        
+        
+
+        try:
+            cursor = connection.cursor()
+            cursor.execute(query,params)
+            resultado = cursor.fetchall()
+        finally:
+            connection.close()
+        return resultado
+    
+
+    def get_apache_error_filtrado_grafico(self,texto,modo,desde,hasta):
+        connection = self.get_connection()
+        resultado = []
+        query = ""
+        
+        params = [f"%{texto}%"] * 5
+
+        if modo == "diario":
+            hoy = datetime.now().date()
+            desde = f"{hoy} 00:00:00"
+            hasta = f"{hoy} 23:59:59"
+            query += """
+                SELECT HOUR(fecha_hora) AS tiempo, COUNT(*) AS cantidad
+                FROM registros_error
+                WHERE (
+                    nivel_error LIKE %s
+                    OR cliente LIKE %s
+                    OR mensaje LIKE %s
+                    OR archivo LIKE %s
+                    OR linea LIKE %s
+                )
+                AND fecha_hora BETWEEN %s AND %s
+                GROUP BY tiempo
+                ORDER BY tiempo
+            """
+            params.extend([desde, hasta])
+
+
+        elif modo == "semanal":
+            hoy = datetime.now()
+            # Día de la semana: lunes=0, domingo=6
+            dia_semana = hoy.weekday()
+            
+            lunes = hoy - timedelta(days=dia_semana)
+            domingo = lunes + timedelta(days=6)
+
+            desde = f"{lunes.date()} 00:00:00"
+            hasta = f"{domingo.date()} 23:59:59"
+
+            query += """
+                SELECT DATE(fecha_hora) AS tiempo, COUNT(*) AS cantidad
+                FROM registros_error
+                WHERE (
+                    nivel_error LIKE %s
+                    OR cliente LIKE %s
+                    OR mensaje LIKE %s
+                    OR archivo LIKE %s
+                    OR linea LIKE %s
+                )
+                AND fecha_hora BETWEEN %s AND %s
+                GROUP BY tiempo
+                ORDER BY tiempo
+            """
+            
+            params.extend([desde, hasta])
+
+        elif modo == "mensual":
+            hoy = datetime.now()
+            anio = hoy.year
+            mes = hoy.month
+            primer_dia = f"{anio}-01-01 00:00:00"
+            ultimo_dia = f"{anio}-12-31 23:59:59"
+
+            query += """
+                SELECT MONTH(fecha_hora) AS tiempo, COUNT(*) AS cantidad
+                FROM registros_error
+                WHERE (
+                    nivel_error LIKE %s
+                    OR cliente LIKE %s
+                    OR mensaje LIKE %s
+                    OR archivo LIKE %s
+                    OR linea LIKE %s
+                )
+                AND fecha_hora BETWEEN %s AND %s
+                GROUP BY tiempo
+                ORDER BY tiempo
+            """
+
+            params.extend([primer_dia, ultimo_dia])
+        elif modo == "rango" and desde and hasta:
+            query += """
+                SELECT DATE(fecha_hora) AS tiempo, COUNT(*) AS cantidad
+                FROM registros_error
+                WHERE (
+                    nivel_error LIKE %s
+                    OR cliente LIKE %s
+                    OR mensaje LIKE %s
+                    OR archivo LIKE %s
+                    OR linea LIKE %s
+                )
+                AND fecha_hora BETWEEN %s AND %s
+                GROUP BY tiempo
+                ORDER BY tiempo
+            """
+
+            params.extend([desde, hasta])
+        else:
+            query += """
+                SELECT DATE(fecha_hora) AS tiempo, COUNT(*) AS cantidad
+                FROM registros_error
+                WHERE (
+                    nivel_error LIKE %s
+                    OR cliente LIKE %s
+                    OR mensaje LIKE %s
+                    OR archivo LIKE %s
+                    OR linea LIKE %s
+                )
+                GROUP BY tiempo
+                ORDER BY tiempo
+                """
+
+        
+
+        try:
+            cursor = connection.cursor()
+            cursor.execute(query,params)
+            resultado = cursor.fetchall()
+            resultado = pd.DataFrame(resultado, columns=["tiempo", "cantidad"])
+            resultado['tiempo'] = resultado['tiempo'].astype(str)
+            grafico = self._create_bar_chart(
+                resultado['tiempo'],
+                resultado['cantidad'],
+                'Logs en el tiempo', 'Tiempo', 'Cantidad'
+            )
+            
+        finally:
+            connection.close()
+        return grafico
+
+
+
+
+
+ 
+    def get_apache_filtrado(self,texto,modo,desde,hasta):
+
+        connection = self.get_connection()
+        resultado = []
+        query = """
+            SELECT * FROM registros_acceso
+            WHERE (
+                ip LIKE %s
+                OR metodo LIKE %s
+                OR ruta LIKE %s
+                OR protocolo LIKE %s
+                OR codigo_estado LIKE %s
+                OR referer LIKE %s
+                OR user_agent LIKE %s
+            )
+        """
+        params = [f"%{texto}%"] * 7
+
+        if modo == "diario":
+            hoy = datetime.now().date()
+            desde = f"{hoy} 00:00:00"
+            hasta = f"{hoy} 23:59:59"
+            query += " AND fecha_hora BETWEEN %s AND %s"
+            params.extend([desde, hasta])
+        elif modo == "semanal":
+            hoy = datetime.now()
+            # Día de la semana: lunes=0, domingo=6
+            dia_semana = hoy.weekday()
+            
+            lunes = hoy - timedelta(days=dia_semana)
+            domingo = lunes + timedelta(days=6)
+
+            desde = f"{lunes.date()} 00:00:00"
+            hasta = f"{domingo.date()} 23:59:59"
+
+            query += " AND fecha_hora BETWEEN %s AND %s"
+            params.extend([desde, hasta])
+        elif modo == "mensual":
+            hoy = datetime.now()
+            anio = hoy.year
+            mes = hoy.month
+            primer_dia = f"{anio}-{mes:02d}-01 00:00:00"
+            # Último día del mes
+            ultimo_dia_num = calendar.monthrange(anio, mes)[1]
+            ultimo_dia = f"{anio}-{mes:02d}-{ultimo_dia_num} 23:59:59"
+
+            query += " AND fecha_hora BETWEEN %s AND %s"
+            params.extend([primer_dia, ultimo_dia])
+        elif modo == "rango" and desde and hasta:
+            query += " AND fecha_hora BETWEEN %s AND %s"
+            params.extend([desde, hasta])
+        
+        
+
+        try:
+            cursor = connection.cursor()
+            cursor.execute(query,params)
+            resultado = cursor.fetchall()
+        finally:
+            connection.close()
+        return resultado
+    
+
+    def get_apache_filtrado_grafico(self,texto,modo,desde,hasta):
+        connection = self.get_connection()
+        resultado = []
+        query = ""
+        
+        params = [f"%{texto}%"] * 7
+
+        if modo == "diario":
+            hoy = datetime.now().date()
+            desde = f"{hoy} 00:00:00"
+            hasta = f"{hoy} 23:59:59"
+            query += """
+                SELECT HOUR(fecha_hora) AS tiempo, COUNT(*) AS cantidad
+                FROM registros_acceso
+                WHERE (
+                    ip LIKE %s
+                    OR metodo LIKE %s
+                    OR ruta LIKE %s
+                    OR protocolo LIKE %s
+                    OR codigo_estado LIKE %s
+                    OR referer LIKE %s
+                    OR user_agent LIKE %s
+                )
+                AND fecha_hora BETWEEN %s AND %s
+                GROUP BY tiempo
+                ORDER BY tiempo
+            """
+            params.extend([desde, hasta])
+
+
+        elif modo == "semanal":
+            hoy = datetime.now()
+            # Día de la semana: lunes=0, domingo=6
+            dia_semana = hoy.weekday()
+            
+            lunes = hoy - timedelta(days=dia_semana)
+            domingo = lunes + timedelta(days=6)
+
+            desde = f"{lunes.date()} 00:00:00"
+            hasta = f"{domingo.date()} 23:59:59"
+
+            query += """
+                SELECT DATE(fecha_hora) AS tiempo, COUNT(*) AS cantidad
+                FROM registros_acceso
+                WHERE (
+                    ip LIKE %s
+                    OR metodo LIKE %s
+                    OR ruta LIKE %s
+                    OR protocolo LIKE %s
+                    OR codigo_estado LIKE %s
+                    OR referer LIKE %s
+                    OR user_agent LIKE %s
+                )
+                AND fecha_hora BETWEEN %s AND %s
+                GROUP BY tiempo
+                ORDER BY tiempo
+            """
+            
+            params.extend([desde, hasta])
+
+        elif modo == "mensual":
+            hoy = datetime.now()
+            anio = hoy.year
+            mes = hoy.month
+            primer_dia = f"{anio}-01-01 00:00:00"
+            ultimo_dia = f"{anio}-12-31 23:59:59"
+
+            query += """
+                SELECT MONTH(fecha_hora) AS tiempo, COUNT(*) AS cantidad
+                FROM registros_acceso
+                WHERE (
+                    ip LIKE %s
+                    OR metodo LIKE %s
+                    OR ruta LIKE %s
+                    OR protocolo LIKE %s
+                    OR codigo_estado LIKE %s
+                    OR referer LIKE %s
+                    OR user_agent LIKE %s
+                )
+                AND fecha_hora BETWEEN %s AND %s
+                GROUP BY tiempo
+                ORDER BY tiempo
+            """
+
+            params.extend([primer_dia, ultimo_dia])
+        elif modo == "rango" and desde and hasta:
+            query += """
+                SELECT DATE(fecha_hora) AS tiempo, COUNT(*) AS cantidad
+                FROM registros_acceso
+                WHERE (
+                    ip LIKE %s
+                    OR metodo LIKE %s
+                    OR ruta LIKE %s
+                    OR protocolo LIKE %s
+                    OR codigo_estado LIKE %s
+                    OR referer LIKE %s
+                    OR user_agent LIKE %s
+                )
+                AND fecha_hora BETWEEN %s AND %s
+                GROUP BY tiempo
+                ORDER BY tiempo
+            """
+
+            params.extend([desde, hasta])
+        else:
+            query += """
+                SELECT DATE(fecha_hora) AS tiempo, COUNT(*) AS cantidad
+                FROM registros_acceso
+                WHERE (
+                    ip LIKE %s
+                    OR metodo LIKE %s
+                    OR ruta LIKE %s
+                    OR protocolo LIKE %s
+                    OR codigo_estado LIKE %s
+                    OR referer LIKE %s
+                    OR user_agent LIKE %s
+                )
+                GROUP BY tiempo
+                ORDER BY tiempo
+                """
+
+        
+
+        try:
+            cursor = connection.cursor()
+            cursor.execute(query,params)
+            resultado = cursor.fetchall()
+            resultado = pd.DataFrame(resultado, columns=["tiempo", "cantidad"])
+            resultado['tiempo'] = resultado['tiempo'].astype(str)
+            grafico = self._create_bar_chart(
+                resultado['tiempo'],
+                resultado['cantidad'],
+                'Logs en el tiempo', 'Tiempo', 'Cantidad'
+            )
+            
+        finally:
+            connection.close()
+        return grafico
+    
+
+    
     def get_xfer_filtrado(self,texto,modo,desde,hasta):
 
         connection = self.get_connection()

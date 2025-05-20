@@ -1,0 +1,43 @@
+
+        <h5>Errores del servidor Apache</h5><button onclick="exportarExcel('apache_error')" class="btn btn-success">Descargar</button>
+        <h5 class="mt-4 text-center">Conteo de entradas</h5>
+
+        <div class="bg-white p-3 rounded shadow-sm mb-4 text-center" style="overflow-x: auto;">
+          <img src="{{ resultados['g1'] }}" class="img-fluid" alt="Gráfico de logs FTP">
+        </div>
+
+
+        <h5 class="mt-4">Tabla de logs FTP</h5>
+
+        {% if resultados['tabla'] %}
+        <div class="bg-white shadow-sm rounded p-3" style="max-height: 500px; overflow: scroll;">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Fecha y hora</th>
+                <th>Severidad</th>
+                <th>Cliente</th>
+                <th>Mensaje</th>
+                <th>archivo</th>
+                <th>Linea de Codigo</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for fila in resultados['tabla'] %}
+              <tr>
+                
+                <td>{{fila['fecha_hora']}}</td>
+                <td>{{fila['nivel_error']}}</td>
+                <td>{{fila['cliente']}}</td>
+                <td>{{fila['mensaje']}}</td>
+                <td>{{fila['archivo']}}</td>
+                <td>{{fila['linea']}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <p class="text-muted">No se encontraron resultados.</p>
+        {% endif %}
+

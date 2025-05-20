@@ -33,11 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-<<<<<<< HEAD
 set -gx VIRTUAL_ENV /home/carlos/practica_aso_2_0/logviewer/venv
-=======
-set -gx VIRTUAL_ENV /home/gabriel/Documentos/logviewer/venv
->>>>>>> origin
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"bin $PATH

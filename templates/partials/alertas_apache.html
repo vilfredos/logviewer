@@ -1,0 +1,32 @@
+<h5 class="mt-4">Logs de error</h5>
+
+        {% if filas %}
+        <div class="bg-white shadow-sm rounded p-3" style="max-height: 500px; overflow: scroll;">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Fecha y hora</th>
+                <th>Severidad</th>
+                <th>Cliente</th>
+                <th>Detalle</th>
+                <th>Archivo</th>
+                <th>Linea de codigo</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for fila in filas %}
+              <tr>
+                <td>{{fila['fecha_hora']}}</td>
+                <td>{{fila['nivel_error']}}</td>
+                <td>{{fila['cliente']}}</td>
+                <td>{{fila['mensaje']}}</td>
+                <td>{{fila['archivo']}}</td>
+                <td>{{fila['linea']}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <p class="text-muted">No se encontraron resultados.</p>
+        {% endif %}
