@@ -42,6 +42,8 @@ class ReportAnalyzer2:
 
         apache_error = self.get_apache_error_filtrado(texto,modo,desde,hasta)
         apache_error_g1 = self.get_apache_error_filtrado_grafico(texto,modo,desde,hasta)
+        apache_error_gx = self.get_demas_graficos_apache_error(texto,modo,desde,hasta)
+
         resultado = {
             'ftp':{'tabla':ftp,
                    'g1':ftp_g1
@@ -54,7 +56,8 @@ class ReportAnalyzer2:
                     'demas':apache_gx
                     },
             'apache_error':{'tabla':apache_error,
-                    'g1':apache_error_g1
+                    'g1':apache_error_g1,
+                    'demas':apache_error_gx
                     },
         }
         return resultado
@@ -99,10 +102,10 @@ class ReportAnalyzer2:
             hoy = datetime.now()
             anio = hoy.year
             mes = hoy.month
-            primer_dia = f"{anio}-{mes:02d}-01 00:00:00"
+            primer_dia = f"{anio}-01-01 00:00:00"
             # Último día del mes
             ultimo_dia_num = calendar.monthrange(anio, mes)[1]
-            ultimo_dia = f"{anio}-{mes:02d}-{ultimo_dia_num} 23:59:59"
+            ultimo_dia = f"{anio}-12-31 23:59:59"
 
             query += " AND fecha_hora BETWEEN %s AND %s"
             params.extend([primer_dia, ultimo_dia])
@@ -292,10 +295,10 @@ class ReportAnalyzer2:
             hoy = datetime.now()
             anio = hoy.year
             mes = hoy.month
-            primer_dia = f"{anio}-{mes:02d}-01 00:00:00"
+            primer_dia = f"{anio}-01-01 00:00:00"
             # Último día del mes
             ultimo_dia_num = calendar.monthrange(anio, mes)[1]
-            ultimo_dia = f"{anio}-{mes:02d}-{ultimo_dia_num} 23:59:59"
+            ultimo_dia = f"{anio}-12-31 23:59:59"
 
             query += " AND fecha_hora BETWEEN %s AND %s"
             params.extend([primer_dia, ultimo_dia])
@@ -500,10 +503,10 @@ class ReportAnalyzer2:
             hoy = datetime.now()
             anio = hoy.year
             mes = hoy.month
-            primer_dia = f"{anio}-{mes:02d}-01 00:00:00"
+            primer_dia = f"{anio}-01-01 00:00:00"
             # Último día del mes
             ultimo_dia_num = calendar.monthrange(anio, mes)[1]
-            ultimo_dia = f"{anio}-{mes:02d}-{ultimo_dia_num} 23:59:59"
+            ultimo_dia = f"{anio}-12-31 23:59:59"
 
             query += " AND fecha_hora BETWEEN %s AND %s"
             params.extend([primer_dia, ultimo_dia])
@@ -725,10 +728,10 @@ class ReportAnalyzer2:
             hoy = datetime.now()
             anio = hoy.year
             mes = hoy.month
-            primer_dia = f"{anio}-{mes:02d}-01 00:00:00"
+            primer_dia = f"{anio}-01-01 00:00:00"
             # Último día del mes
             ultimo_dia_num = calendar.monthrange(anio, mes)[1]
-            ultimo_dia = f"{anio}-{mes:02d}-{ultimo_dia_num} 23:59:59"
+            ultimo_dia = f"{anio}-12-31 23:59:59"
 
             query += " AND fecha_hora BETWEEN %s AND %s"
             params.extend([primer_dia, ultimo_dia])
@@ -919,10 +922,10 @@ class ReportAnalyzer2:
             hoy = datetime.now()
             anio = hoy.year
             mes = hoy.month
-            primer_dia = f"{anio}-{mes:02d}-01 00:00:00"
+            primer_dia = f"{anio}-01-01 00:00:00"
             # Último día del mes
             ultimo_dia_num = calendar.monthrange(anio, mes)[1]
-            ultimo_dia = f"{anio}-{mes:02d}-{ultimo_dia_num} 23:59:59"
+            ultimo_dia = f"{anio}-12-31 23:59:59"
 
             filtros_where += " AND fecha_hora BETWEEN %s AND %s"
             params.extend([primer_dia, ultimo_dia])
@@ -1152,6 +1155,180 @@ class ReportAnalyzer2:
 
         connection.close()
         return report_data 
+
+
+
+
+    def get_demas_graficos_apache_error(self,texto,modo,desde,hasta):
+        
+        filtros_where = """ 
+            WHERE (
+                nivel_error LIKE %s
+                OR cliente LIKE %s
+                OR mensaje LIKE %s
+                OR archivo LIKE %s
+                OR linea LIKE %s
+            ) 
+        """
+        params = [f"%{texto}%"] * 5
+
+        if modo == "diario":
+            hoy = datetime.now().date()
+            desde = f"{hoy} 00:00:00"
+            hasta = f"{hoy} 23:59:59"
+            filtros_where += " AND fecha_hora BETWEEN %s AND %s"
+            params.extend([desde, hasta])
+        elif modo == "semanal":
+            hoy = datetime.now()
+            # Día de la semana: lunes=0, domingo=6
+            dia_semana = hoy.weekday()
+            
+            lunes = hoy - timedelta(days=dia_semana)
+            domingo = lunes + timedelta(days=6)
+
+            desde = f"{lunes.date()} 00:00:00"
+            hasta = f"{domingo.date()} 23:59:59"
+
+            filtros_where += " AND fecha_hora BETWEEN %s AND %s"
+            params.extend([desde, hasta])
+        elif modo == "mensual":
+            hoy = datetime.now()
+            anio = hoy.year
+            mes = hoy.month
+            primer_dia = f"{anio}-01-01 00:00:00"
+            # Último día del mes
+            ultimo_dia_num = calendar.monthrange(anio, mes)[1]
+            ultimo_dia = f"{anio}-12-31 23:59:59"
+
+            filtros_where += " AND fecha_hora BETWEEN %s AND %s"
+            params.extend([primer_dia, ultimo_dia])
+        elif modo == "rango" and desde and hasta:
+            filtros_where += " AND fecha_hora BETWEEN %s AND %s"
+            params.extend([desde, hasta])
+
+
+        connection = self.get_connection()
+        cursor = connection.cursor()
+        report_data = {}
+       
+        # Total errors
+        query = """
+        SELECT COUNT(*) as total FROM registros_error 
+
+        """
+        query += filtros_where
+        cursor.execute(query,params)
+        report_data["total_errors"] = cursor.fetchone()['total']
+        
+        # Errors by severity level
+        query = """
+            SELECT nivel_error, COUNT(*) as count 
+            FROM registros_error  
+
+        """
+        query += filtros_where
+        query += """
+            GROUP BY nivel_error 
+            ORDER BY count DESC
+        """
+        cursor.execute(query, params)
+        errors_by_level = cursor.fetchall()
+        report_data["errors_by_level"] = errors_by_level
+        
+        # Error level chart
+        report_data["error_level_chart"] = self._create_pie_chart(
+            [e['nivel_error'] for e in errors_by_level],
+            [e['count'] for e in errors_by_level],
+            'Error Level Distribution'
+        )
+        
+        
+        # Most common error messages
+        query = """
+            SELECT LEFT(mensaje, 100) as mensaje_short, COUNT(*) as count 
+            FROM registros_error  
+
+        """
+        query += filtros_where
+        query += """ 
+            GROUP BY mensaje_short 
+            ORDER BY count DESC 
+            LIMIT 10
+        """
+        cursor.execute(query,params)
+        common_errors = cursor.fetchall()
+        common_errors = common_errors[::-1]
+        report_data["common_errors"] = cursor.fetchall()
+        
+
+        # Most common error messages chart
+        report_data["common_errors_chart"] = self._create_horizontal_bar_chart(
+            [str(m['mensaje_short']) for m in common_errors],
+            [m['count'] for m in common_errors],
+            'Mensajes de Error comunes',
+            'Cantidad'
+        )
+
+
+        # Files with most errors
+
+        query = """ 
+            SELECT archivo, COUNT(*) as count 
+            FROM registros_error  
+        """
+        query += filtros_where
+
+        query += """ 
+            AND (archivo IS NOT NULL AND archivo != '')
+            GROUP BY archivo 
+            ORDER BY count DESC 
+            LIMIT 10
+        """
+        cursor.execute(query,params)
+        error_files = cursor.fetchall()
+        error_files = error_files[::-1]
+        report_data["error_files"] = error_files
+
+        # Files with most chart
+        report_data["error_files_chart"] = self._create_horizontal_bar_chart(
+            [str(m['archivo']) for m in error_files],
+            [m['count'] for m in error_files],
+            'Archivos con mas errores',
+            'Cantidad'
+        )
+
+        
+        # Clients causing most errors
+        query = """
+            SELECT cliente, COUNT(*) as count 
+            FROM registros_error  
+
+        """
+        query += filtros_where
+        query += """ 
+            AND (cliente IS NOT NULL AND cliente != '')
+            GROUP BY cliente 
+            ORDER BY count DESC 
+            LIMIT 10 
+        """
+        cursor.execute(query, params)
+        error_clients = cursor.fetchall()
+        error_clients = error_clients[::-1]
+        report_data["error_clients"] = error_clients
+        
+        # Clients causing most errors chart
+        report_data["error_clients_chart"] = self._create_horizontal_bar_chart(
+            [str(m['cliente']) for m in error_clients],
+            [m['count'] for m in error_clients],
+            'CLientes con mas errores',
+            'Cantidad'
+        )
+        connection.close()
+        return report_data
+
+
+
+
 
 
     def _create_bar_chart(self, x_data, y_data, title, x_label, y_label):
