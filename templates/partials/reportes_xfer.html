@@ -1,50 +1,98 @@
-<h5 class="mt-4 text-center">Conteo de entradas</h5><button onclick="exportarExcel('xfer')" class="btn btn-success">Descargar</button>
-        <div class="bg-white p-3 rounded shadow-sm mb-4 text-center" style="overflow-x: auto;">
-          <img src="{{ resultados['g1'] }}" class="img-fluid" alt="Gráfico de logs FTP">
-        </div>
 
-        <h5 class="mt-4">Tabla tipo xfer_logs FTP</h5>
-        {% if resultados['tabla'] %}
 
-        <div class="bg-white shadow-sm rounded p-3" style="max-height: 500px; overflow: scroll;">
-          <div class="table-responsive bg-white shadow-sm rounded p-3" style="overflow-x: auto;">
-            <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th>Fecha y hora</th>
-                  <th>Tiempo de Transferencia</th>
-                  <th>Host remoto</th>
-                  <th>Tamaño del archivo</th>
-                  <th>Nombre del archivo</th>
-                  <th>Tipo de transferencia</th>
-                  <th>Acción especial</th>
-                  <th>Direccion</th>
-                  <th>Usuario</th>
-                  <th>Servicio</th>
-                  <th>Método de autenticación</th>
-                  <th>Usuario autenticado</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for fila in resultados['tabla'] %}
-                <tr>
-                  <td>{{fila['fecha_hora']}}</td>
-                  <td>{{fila['duracion']}}</td>
-                  <td>{{fila['servidor']}}</td>
-                  <td>{{fila['tamaño_archivo']}}</td>
-                  <td>{{fila['archivo']}}</td>
-                  <td>{{fila['tipo_transferencia']}}</td>
-                  <td>{{fila['accion_especial']}}</td>
-                  <td>{{fila['direccion']}}</td>
-                  <td>{{fila['usuario']}}</td>
-                  <td>{{fila['servicio']}}</td>
-                  <td>{{fila['metodo_autenticacion']}}</td>
-                  <td>{{fila['usuario_id']}}</td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-          {% else %}
-            <p class="text-muted">No se encontraron resultados.</p>
-          {% endif %}
+
+<div class="container-fluid my-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="mb-0">Reporte de Transferencias FTP</h4>
+    <button onclick="exportarExcel('xfer')" class="btn btn-success">
+      Descargar Excel
+    </button>
+  </div>
+
+  <!-- Total de logs -->
+  <div class="alert alert-secondary text-center">
+    <strong>Total de logs:</strong> {{ resultados['demas']['total_transfers'] }}
+  </div>
+  <div class="alert alert-secondary text-center">
+    <strong>Total del volumen transferido:</strong> {{ resultados['demas']['transfer_volume']['total_transfer_bytes'] }}
+  </div>
+  <div class="alert alert-secondary text-center">
+    <strong>Total del volumen de descargas:</strong> {{ resultados['demas']['transfer_volume']['total_download_bytes'] }}
+  </div>
+  <div class="alert alert-secondary text-center">
+    <strong>Total del volumen de subidas:</strong> {{ resultados['demas']['transfer_volume']['total_upload_bytes'] }}
+  </div>
+
+  <!-- Función para renderizar secciones de gráficos -->
+  {% macro grafico(titulo, src) %}
+    <div class="mb-4">
+      <h5 class="text-center text-secondary mb-3">{{ titulo }}</h5>
+      <div class="bg-white p-3 rounded shadow-sm text-center" style="overflow-x: auto;">
+        <img src="{{ src }}" class="img-fluid" alt="Gráfico de {{ titulo }}">
+      </div>
+    </div>
+  {% endmacro %}
+
+  <!-- Gráficos -->
+  {{ grafico("Conteo de Entradas", resultados['g1']) }}
+  {{ grafico("Direcciones", resultados['demas']['direction_chart']) }}
+  {{ grafico("Servicios", resultados['demas']['services_chart']) }}
+  {{ grafico("Metodos de autentificacion", resultados['demas']['auth_methods_chart']) }}
+  {{ grafico("Los Usuarios mas activos", resultados['demas']['active_users_chart']) }}
+  {{ grafico("Las IPs mas activas", resultados['demas']['active_ips_chart']) }}
+  {{ grafico("Tamaño de los Archivo", resultados['demas']['size_chart']) }}
+  {{ grafico("Promedios de duracion", resultados['demas']['avg_duration_chart']) }}
+
+  <!-- Tabla de logs -->
+  <div class="card shadow-sm mb-5">
+    <div class="card-header bg-secondary text-white">
+      <h5 class="mb-0">Tabla de Transferencias FTP</h5>
+    </div>
+    {% if resultados['tabla'] %}
+    <div class="card-body p-0" style="max-height: 500px; overflow: auto;">
+      <table class="table table-bordered table-striped table-hover table-sm m-0">
+        <thead style="position: sticky; top: 0; background-color: #f8f9fa; z-index: 1;">
+          <tr style="height: 48px;">
+
+            <th  class="align-middle">Fecha y hora</th>
+            <th  class="align-middle">Tiempo de Transferencia</th>
+            <th  class="align-middle">Host remoto</th>
+            <th  class="align-middle">Tamaño del archivo</th>
+            <th  class="align-middle">Nombre del archivo</th>
+            <th  class="align-middle">Tipo de transferencia</th>
+            <th  class="align-middle">Acción especial</th>
+            <th  class="align-middle">Direccion</th>
+            <th  class="align-middle">Usuario</th>
+            <th  class="align-middle">Servicio</th>
+            <th  class="align-middle">Método de autenticación</th>
+            <th  class="align-middle">Usuario autenticado</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for fila in resultados['tabla'] %}
+          <tr>
+            <td>{{fila['fecha_hora']}}</td>
+            <td>{{fila['duracion']}}</td>
+            <td>{{fila['servidor']}}</td>
+            <td>{{fila['tamaño_archivo']}}</td>
+            <td>{{fila['archivo']}}</td>
+            <td>{{fila['tipo_transferencia']}}</td>
+            <td>{{fila['accion_especial']}}</td>
+            <td>{{fila['direccion']}}</td>
+            <td>{{fila['usuario']}}</td>
+            <td>{{fila['servicio']}}</td>
+            <td>{{fila['metodo_autenticacion']}}</td>
+            <td>{{fila['usuario_id']}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="card-body">
+      <p class="text-muted text-center">No se encontraron resultados.</p>
+    </div>
+    {% endif %}
+  </div>
+</div>
