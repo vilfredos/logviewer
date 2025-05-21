@@ -1,50 +1,82 @@
 
+<div class="container-fluid my-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="mb-0">Reporte de Logs del Servidor Apache</h4>
+    <button onclick="exportarExcel('apache')" class="btn btn-success">
+      Descargar Excel
+    </button>
+  </div>
 
-        <h5>Logs del servidor Apache</h5><button onclick="exportarExcel('apache')" class="btn btn-success">Descargar</button>
-        <h5 class="mt-4 text-center">Conteo de entradas</h5>
+  <!-- Total de logs -->
+  <div class="alert alert-secondary text-center">
+    <strong>Total de logs:</strong> {{ resultados['demas']['total'] }}
+  </div>
 
-        <div class="bg-white p-3 rounded shadow-sm mb-4 text-center" style="overflow-x: auto;">
-          <img src="{{ resultados['g1'] }}" class="img-fluid" alt="Gráfico de logs FTP">
-        </div>
+  <!-- Función para renderizar secciones de gráficos -->
+  {% macro grafico(titulo, src) %}
+    <div class="mb-4">
+      <h5 class="text-center text-secondary mb-3">{{ titulo }}</h5>
+      <div class="bg-white p-3 rounded shadow-sm text-center" style="overflow-x: auto;">
+        <img src="{{ src }}" class="img-fluid" alt="Gráfico de {{ titulo }}">
+      </div>
+    </div>
+  {% endmacro %}
 
+  <!-- Gráficos -->
+  {{ grafico("Conteo de Entradas", resultados['g1']) }}
+  {{ grafico("Las 10 Rutas más Populares", resultados['demas']['populares_chart']) }}
+  {{ grafico("Métodos HTTP Usados", resultados['demas']['http_methods_chart']) }}
+  {{ grafico("Respuestas HTTP Enviadas", resultados['demas']['status_codes_chart']) }}
+  {{ grafico("URLs de Referencia", resultados['demas']['top_referrers_chart']) }}
+  {{ grafico("Usuarios Utilizados", resultados['demas']['top_user_agents_chart']) }}
+  {{ grafico("Tamaño de Bytes Enviados", resultados['demas']['response_sizes_chart']) }}
+  {{ grafico("Las 10 IPs más Activas", resultados['demas']['top_ips_chart']) }}
+  {{ grafico("Tiempo de Respuesta (mín, promedio, máx)", resultados['demas']['response_time_stats_chart']) }}
 
-        <h5 class="mt-4">Tabla de logs FTP</h5>
-
-        {% if resultados['tabla'] %}
-        <div class="bg-white shadow-sm rounded p-3" style="max-height: 500px; overflow: scroll;">
-          <table class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th>IP</th>
-                <th>Fecha y hora</th>
-                <th>Metodo</th>
-                <th>Ruta</th>
-                <th>Protocolo</th>
-                <th>Bytes enviados</th>
-                <th>Referencia</th>
-                <th>Cliente</th>
-                <th>Tiempo de Respuesta</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for fila in resultados['tabla'] %}
-              <tr>
-                
-                <td>{{fila['ip']}}</td>
-                <td>{{fila['fecha_hora']}}</td>
-                <td>{{fila['metodo']}}</td>
-                <td>{{fila['ruta']}}</td>
-                <td>{{fila['protocolo']}}</td>
-                <td>{{fila['bytes_enviados']}}</td>
-                <td>{{fila['referer']}}</td>
-                <td>{{fila['user_agent']}}</td>
-                <td>{{fila['tiempo_respuesta']}}</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-        {% else %}
-        <p class="text-muted">No se encontraron resultados.</p>
-        {% endif %}
-
+  <!-- Tabla de logs -->
+  <div class="card shadow-sm mb-5">
+    <div class="card-header bg-secondary text-white">
+      <h5 class="mb-0">Tabla de Logs Apache</h5>
+    </div>
+    {% if resultados['tabla'] %}
+    <div class="card-body p-0" style="max-height: 500px; overflow: auto;">
+      <table class="table table-bordered table-striped table-hover table-sm m-0">
+        <thead style="position: sticky; top: 0; background-color: #f8f9fa; z-index: 1;">
+          <tr style="height: 48px;">
+            <th class="align-middle">IP</th>
+            <th class="align-middle">Fecha y hora</th>
+            <th class="align-middle">Método</th>
+            <th class="align-middle">Ruta</th>
+            <th class="align-middle">Protocolo</th>
+            <th class="align-middle">Código</th>
+            <th class="align-middle">Bytes</th>
+            <th class="align-middle">Referencia</th>
+            <th class="align-middle">Cliente</th>
+            <th class="align-middle">Tiempo (ms)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for fila in resultados['tabla'] %}
+          <tr>
+            <td>{{ fila['ip'] }}</td>
+            <td>{{ fila['fecha_hora'] }}</td>
+            <td>{{ fila['metodo'] }}</td>
+            <td>{{ fila['ruta'] }}</td>
+            <td>{{ fila['protocolo'] }}</td>
+            <td>{{ fila['codigo_estado'] }}</td>
+            <td>{{ fila['bytes_enviados'] }}</td>
+            <td>{{ fila['referer'] }}</td>
+            <td>{{ fila['user_agent'] }}</td>
+            <td>{{ fila['tiempo_respuesta'] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="card-body">
+      <p class="text-muted text-center">No se encontraron resultados.</p>
+    </div>
+    {% endif %}
+  </div>
+</div>
