@@ -32,7 +32,8 @@ class ReportAnalyzer2:
 
         ftp = self.get_ftp_filtrado(texto,modo,desde,hasta)
         ftp_g1 = self.get_ftp_filtrado_grafico(texto,modo,desde,hasta)
-        
+        ftp_gx = self.get_demas_graficos_ftp(texto,modo,desde,hasta)
+
         xfer = self.get_xfer_filtrado(texto,modo,desde,hasta)
         xfer_g1 = self.get_xfer_filtrado_grafico(texto,modo,desde,hasta)
         
@@ -46,7 +47,8 @@ class ReportAnalyzer2:
 
         resultado = {
             'ftp':{'tabla':ftp,
-                   'g1':ftp_g1
+                   'g1':ftp_g1,
+                   'demas':ftp_gx
                   },
             'xfer':{'tabla':xfer,
                     'g1':xfer_g1
@@ -1327,6 +1329,209 @@ class ReportAnalyzer2:
         return report_data
 
 
+    def get_demas_graficos_ftp(self,texto,modo,desde,hasta):
+
+        filtro_where = """
+            WHERE (
+                usuario LIKE %s
+                OR ip LIKE %s
+                OR accion LIKE %s
+                OR archivo LIKE %s
+                OR detalles LIKE %s
+            )
+        """
+        params1 = ["'%success%'", "'%FAIL%'"]
+        params=([f"%{texto}%"] * 5)
+
+        if modo == "diario":
+            hoy = datetime.now().date()
+            desde = f"{hoy} 00:00:00"
+            hasta = f"{hoy} 23:59:59"
+            query += " AND fecha_hora BETWEEN %s AND %s"
+            params.extend([desde, hasta])
+        elif modo == "semanal":
+            hoy = datetime.now()
+            # Día de la semana: lunes=0, domingo=6
+            dia_semana = hoy.weekday()
+            
+            lunes = hoy - timedelta(days=dia_semana)
+            domingo = lunes + timedelta(days=6)
+
+            desde = f"{lunes.date()} 00:00:00"
+            hasta = f"{domingo.date()} 23:59:59"
+
+            query += " AND fecha_hora BETWEEN %s AND %s"
+            params.extend([desde, hasta])
+        elif modo == "mensual":
+            hoy = datetime.now()
+            anio = hoy.year
+            mes = hoy.month
+            primer_dia = f"{anio}-01-01 00:00:00"
+            # Último día del mes
+            ultimo_dia_num = calendar.monthrange(anio, mes)[1]
+            ultimo_dia = f"{anio}-12-31 23:59:59"
+
+            query += " AND fecha_hora BETWEEN %s AND %s"
+            params.extend([primer_dia, ultimo_dia])
+        elif modo == "rango" and desde and hasta:
+            query += " AND fecha_hora BETWEEN %s AND %s"
+            params.extend([desde, hasta])
+       
+
+        connection = self.get_connection()
+        cursor = connection.cursor()
+        report_data = {}
+
+        # Total events
+        query = """
+                SELECT COUNT(*) as total FROM registros_ftp 
+
+                """
+        query += filtro_where
+
+        cursor.execute(query,params)
+        report_data["total_events"] = cursor.fetchone()['total']
+        
+        # Events by action type
+
+        query = """
+            SELECT accion, COUNT(*) as count 
+            FROM registros_ftp  
+ 
+        """
+        query += filtro_where
+        query += """ 
+            GROUP BY accion 
+            ORDER BY count DESC
+        """
+        cursor.execute(query, params)
+        actions = cursor.fetchall()
+        report_data["events_by_action"] = actions
+        
+        # Action chart 
+        report_data["action_chart"] = self._create_pie_chart(
+            [a['accion'] for a in actions],
+            [a['count'] for a in actions],
+            'FTP Actions Distribution'
+        )
+        
+        
+        # Login success/failure counts
+        query = """
+            SELECT 
+                SUM(CASE WHEN detalles LIKE %s THEN 1 ELSE 0 END) as successful_logins,
+                SUM(CASE WHEN detalles LIKE %s THEN 1 ELSE 0 END) as failed_logins
+            FROM registros_ftp
+        """
+        query += filtro_where
+        query += """
+            AND (accion = 'LOGIN')
+        """
+        params3 = params1
+        params3.extend(params)
+        cursor.execute(query,params3)
+        login_stats = cursor.fetchone()
+
+        # Asegurar que no sean None
+        success = login_stats['successful_logins'] or 0
+        fail = login_stats['failed_logins'] or 0
+
+        report_data["login_stats"] = {
+            'successful_logins': success,
+            'failed_logins': fail
+        }
+
+        # Solo crear gráfico si hay datos válidos
+        if success + fail > 0:
+            report_data["login_stats_chart"] = self._create_pie_chart(
+                ['Sesiones exitosas', 'Sesiones fallidas'],
+                [success, fail],
+                'Intentos de sesión exitosa vs fallida'
+            )
+        else:
+            report_data["login_stats_chart"] = None  # O algún marcador para no mostrar nada
+
+
+
+        # Most active users
+        query = """
+            SELECT usuario, COUNT(*) as count 
+            FROM registros_ftp  
+
+        """
+        query += filtro_where
+        query += """
+            
+            GROUP BY usuario 
+            ORDER BY count DESC 
+            LIMIT 10
+        """
+        cursor.execute(query, params)
+        active_users = cursor.fetchall()
+        active_users = active_users[::-1]
+        report_data["active_users"] = active_users
+        # Most active users chart
+        report_data["active_users_chart"] = self._create_horizontal_bar_chart(
+            [str(m['usuario']) for m in active_users],
+            [m['count'] for m in active_users],
+            'Usuarios mas Activos',
+            'Cantidad'
+        )
+
+        
+        # Most active IPs
+        query = """
+            SELECT ip, COUNT(*) as count 
+            FROM registros_ftp  
+
+        """
+        query += filtro_where
+        query += """ 
+ 
+            GROUP BY ip 
+            ORDER BY count DESC 
+            LIMIT 10
+        """
+        cursor.execute(query,params)
+
+        active_ips = cursor.fetchall()
+        active_ips = active_ips[::-1]
+        report_data["active_ips"] = active_ips
+        # Most active IPs chart
+        report_data["active_ips_chart"] = self._create_horizontal_bar_chart(
+            [str(m['ip']) for m in active_ips],
+            [m['count'] for m in active_ips],
+            'IPs mas Activas',
+            'Cantidad'
+        )
+
+        # Most accessed files
+        query = """
+            SELECT archivo, COUNT(*) as count 
+            FROM registros_ftp  
+            
+        """
+        query += filtro_where
+        query += """
+            
+            AND (archivo IS NOT NULL AND archivo != '')
+            GROUP BY archivo 
+            ORDER BY count DESC 
+            LIMIT 10
+        """
+        cursor.execute(query,params)
+        accessed_files = cursor.fetchall()
+        accessed_files = accessed_files[::-1]
+        report_data["accessed_files"] = accessed_files
+        
+         #  Most accessed files chart
+        report_data["accessed_files_chart"] = self._create_horizontal_bar_chart(
+            [str(m['archivo']) for m in accessed_files],
+            [m['count'] for m in accessed_files],
+            'Archivos mas Accedidos',
+            'Cantidad'
+        )
+        return report_data
 
 
 

@@ -497,11 +497,23 @@ def exportar_excel():
     tipo = filtros['tipo']
     data = {'datos':[], 'imagenes':[]}
     if tipo == 'vsftpd':
+        demas = report_analyzer2.get_demas_graficos_ftp(texto, modo, desde, hasta)
         data['datos'] = report_analyzer2.get_ftp_filtrado(texto, modo, desde, hasta)
         data['imagenes'] = [
             {'nombre':'Conteo de entradas',
-             'imagen': report_analyzer2.get_ftp_filtrado_grafico(texto, modo, desde, hasta)}
+             'imagen': report_analyzer2.get_ftp_filtrado_grafico(texto, modo, desde, hasta)},
+             {'nombre':'Tipos de Acciones',
+             'imagen': demas['action_chart']},
+             {'nombre':'Inicios de sesion',
+             'imagen': demas['login_stats_chart']},
+             {'nombre':'Los usuarios mas activos',
+             'imagen': demas['active_users_chart']},
+             {'nombre':'Las IPs mas activas',
+             'imagen': demas['active_ips_chart']},
+             {'nombre':'Los archivos mas accedidos',
+             'imagen': demas['accessed_files_chart']},
         ]
+
     elif tipo == 'xfer':
         data['datos'] = report_analyzer2.get_xfer_filtrado(texto, modo, desde, hasta)
         data['imagenes'] = [
