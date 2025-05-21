@@ -510,9 +510,28 @@ def exportar_excel():
         ]
     elif tipo == 'apache':
         data['datos'] = report_analyzer2.get_apache_filtrado(texto, modo, desde, hasta)
+
+        demas = report_analyzer2.get_demas_graficos_apache(texto, modo, desde, hasta)
+
         data['imagenes'] = [
             {'nombre':'Conteo de entradas',
-             'imagen': report_analyzer2.get_apache_filtrado_grafico(texto, modo, desde, hasta)}
+             'imagen': report_analyzer2.get_apache_filtrado_grafico(texto, modo, desde, hasta)},
+             {'nombre':'Las 10 Rutas más Populares',
+             'imagen': demas['populares_chart']},
+             {'nombre':'Métodos HTTP Usados',
+             'imagen': demas['http_methods_chart']},
+             {'nombre':'Respuestas HTTP Enviadas',
+             'imagen': demas['status_codes_chart']},
+             {'nombre':'URLs de Referencia',
+             'imagen': demas['top_referrers_chart']},
+             {'nombre':'Usuarios Utilizados',
+             'imagen': demas['top_user_agents_chart']},
+             {'nombre':'Tamaño de Bytes Enviados',
+             'imagen': demas['response_sizes_chart']},
+             {'nombre':'Las 10 IPs más Activas',
+             'imagen': demas['top_ips_chart']},
+             {'nombre':'Tiempo de Respuesta (mín, promedio, máx)',
+             'imagen': demas['response_time_stats_chart']},
         ]
     elif tipo == 'apache_error':
         data['datos'] = report_analyzer2.get_apache_error_filtrado(texto, modo, desde, hasta)
@@ -580,7 +599,7 @@ def exportar_excel():
     writer.sheets['Imagenes'] = sheet
 
     col_count = 2
-    row_spacing = 6 
+    row_spacing = 20 
 
     for i, row in enumerate(data['imagenes']):
         col = i % col_count
