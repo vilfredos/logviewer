@@ -497,11 +497,23 @@ def exportar_excel():
     tipo = filtros['tipo']
     data = {'datos':[], 'imagenes':[]}
     if tipo == 'vsftpd':
+        demas = report_analyzer2.get_demas_graficos_ftp(texto, modo, desde, hasta)
         data['datos'] = report_analyzer2.get_ftp_filtrado(texto, modo, desde, hasta)
         data['imagenes'] = [
             {'nombre':'Conteo de entradas',
-             'imagen': report_analyzer2.get_ftp_filtrado_grafico(texto, modo, desde, hasta)}
+             'imagen': report_analyzer2.get_ftp_filtrado_grafico(texto, modo, desde, hasta)},
+             {'nombre':'Tipos de Acciones',
+             'imagen': demas['action_chart']},
+             {'nombre':'Inicios de sesion',
+             'imagen': demas['login_stats_chart']},
+             {'nombre':'Los usuarios mas activos',
+             'imagen': demas['active_users_chart']},
+             {'nombre':'Las IPs mas activas',
+             'imagen': demas['active_ips_chart']},
+             {'nombre':'Los archivos mas accedidos',
+             'imagen': demas['accessed_files_chart']},
         ]
+
     elif tipo == 'xfer':
         data['datos'] = report_analyzer2.get_xfer_filtrado(texto, modo, desde, hasta)
         data['imagenes'] = [
@@ -534,10 +546,20 @@ def exportar_excel():
              'imagen': demas['response_time_stats_chart']},
         ]
     elif tipo == 'apache_error':
+        demas = report_analyzer2.get_demas_graficos_apache_error(texto, modo, desde, hasta)
+
         data['datos'] = report_analyzer2.get_apache_error_filtrado(texto, modo, desde, hasta)
         data['imagenes'] = [
             {'nombre':'Conteo de entradas',
-             'imagen': report_analyzer2.get_apache_error_filtrado_grafico(texto, modo, desde, hasta)}
+             'imagen': report_analyzer2.get_apache_error_filtrado_grafico(texto, modo, desde, hasta)},
+             {'nombre':'Severidad de los errores',
+             'imagen': demas['error_level_chart']},
+             {'nombre':'Mensajes de error Comunes',
+             'imagen': demas['common_errors_chart']},
+             {'nombre':'Los Archivos con mas Errores',
+             'imagen': demas['error_files_chart']},
+             {'nombre':'Los Clientes que causaron mas Errores',
+             'imagen': demas['error_clients_chart']},
         ]
     output = io.BytesIO()
     writer = pd.ExcelWriter(output, engine='xlsxwriter')
@@ -598,7 +620,7 @@ def exportar_excel():
     sheet = workbook.add_worksheet('Imagenes')
     writer.sheets['Imagenes'] = sheet
 
-    col_count = 2
+    col_count = 11
     row_spacing = 20 
 
     for i, row in enumerate(data['imagenes']):
