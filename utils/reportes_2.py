@@ -36,6 +36,7 @@ class ReportAnalyzer2:
 
         xfer = self.get_xfer_filtrado(texto,modo,desde,hasta)
         xfer_g1 = self.get_xfer_filtrado_grafico(texto,modo,desde,hasta)
+        xfer_gx = self.get_demas_graficos_xfer(texto,modo,desde,hasta)
         
         apache = self.get_apache_filtrado(texto,modo,desde,hasta)
         apache_g1 = self.get_apache_filtrado_grafico(texto,modo,desde,hasta)
@@ -51,7 +52,8 @@ class ReportAnalyzer2:
                    'demas':ftp_gx
                   },
             'xfer':{'tabla':xfer,
-                    'g1':xfer_g1
+                    'g1':xfer_g1,
+                    'demas':xfer_gx
                    },
             'apache':{'tabla':apache,
                     'g1':apache_g1,
@@ -1150,11 +1152,18 @@ class ReportAnalyzer2:
         cursor.execute(query, params)
         report_data["response_time_stats"] = cursor.fetchone()
 
+        stats = report_data["response_time_stats"]
         labels = ['Mínimo', 'Promedio', 'Máximo']
-        values = [report_data["response_time_stats"]['min_time'], report_data["response_time_stats"]['avg_time'], report_data["response_time_stats"]['max_time']]
+        values = [stats['min_time'], stats['avg_time'], stats['max_time']]
 
-        report_data["response_time_stats_chart"] = self._create_bar_chart(labels, values, 'Tiempos de respuesta', '', 'ms')
+        # Reemplazar None por 0 (o puedes decidir omitir el gráfico)
+        values = [v if v is not None else 0 for v in values]
 
+        # Crear el gráfico solo si hay algún valor distinto de 0
+        if any(values):
+            report_data["response_time_stats_chart"] = self._create_bar_chart(labels, values, 'Tiempos de respuesta', '', 'ms')
+        else:
+            report_data["response_time_stats_chart"] = None  # O algún mensaje alternativo
         connection.close()
         return report_data 
 
@@ -1347,7 +1356,7 @@ class ReportAnalyzer2:
             hoy = datetime.now().date()
             desde = f"{hoy} 00:00:00"
             hasta = f"{hoy} 23:59:59"
-            query += " AND fecha_hora BETWEEN %s AND %s"
+            filtro_where += " AND fecha_hora BETWEEN %s AND %s"
             params.extend([desde, hasta])
         elif modo == "semanal":
             hoy = datetime.now()
@@ -1360,7 +1369,7 @@ class ReportAnalyzer2:
             desde = f"{lunes.date()} 00:00:00"
             hasta = f"{domingo.date()} 23:59:59"
 
-            query += " AND fecha_hora BETWEEN %s AND %s"
+            filtro_where += " AND fecha_hora BETWEEN %s AND %s"
             params.extend([desde, hasta])
         elif modo == "mensual":
             hoy = datetime.now()
@@ -1371,10 +1380,10 @@ class ReportAnalyzer2:
             ultimo_dia_num = calendar.monthrange(anio, mes)[1]
             ultimo_dia = f"{anio}-12-31 23:59:59"
 
-            query += " AND fecha_hora BETWEEN %s AND %s"
+            filtro_where += " AND fecha_hora BETWEEN %s AND %s"
             params.extend([primer_dia, ultimo_dia])
         elif modo == "rango" and desde and hasta:
-            query += " AND fecha_hora BETWEEN %s AND %s"
+            filtro_where += " AND fecha_hora BETWEEN %s AND %s"
             params.extend([desde, hasta])
        
 
@@ -1416,40 +1425,43 @@ class ReportAnalyzer2:
         )
         
         
-        # Login success/failure counts
+       # Construir la consulta con placeholders
         query = """
             SELECT 
-                SUM(CASE WHEN detalles LIKE %s THEN 1 ELSE 0 END) as successful_logins,
-                SUM(CASE WHEN detalles LIKE %s THEN 1 ELSE 0 END) as failed_logins
+                SUM(CASE WHEN detalles LIKE 'OK%%' THEN 1 ELSE 0 END) AS successful_logins,
+                SUM(CASE WHEN detalles LIKE 'FAIL%%' THEN 1 ELSE 0 END) AS failed_logins
             FROM registros_ftp
         """
         query += filtro_where
         query += """
-            AND (accion = 'LOGIN')
+            AND (accion = 'LOGIN' OR accion = 'LOGIN_FAILED')
         """
-        params3 = params1
-        params3.extend(params)
-        cursor.execute(query,params3)
+
+        # Definir los patrones como parámetros
+        # Asume que `params` ya tiene tus parámetros previos del filtro
+        cursor.execute(query, params)
         login_stats = cursor.fetchone()
 
-        # Asegurar que no sean None
-        success = login_stats['successful_logins'] or 0
-        fail = login_stats['failed_logins'] or 0
+       # Asegurar que login_stats no sea None y usar .get con fallback
+        success = login_stats.get('successful_logins') or 0 if login_stats else 0
+        fail = login_stats.get('failed_logins') or 0 if login_stats else 0
 
+        # Guardar en el diccionario
         report_data["login_stats"] = {
             'successful_logins': success,
             'failed_logins': fail
         }
 
-        # Solo crear gráfico si hay datos válidos
-        if success + fail > 0:
+        # Solo crear gráfico si hay algún dato válido (>0)
+        if success > 0 or fail > 0:
             report_data["login_stats_chart"] = self._create_pie_chart(
                 ['Sesiones exitosas', 'Sesiones fallidas'],
                 [success, fail],
                 'Intentos de sesión exitosa vs fallida'
             )
         else:
-            report_data["login_stats_chart"] = None  # O algún marcador para no mostrar nada
+            report_data["login_stats_chart"] = None  # o simplemente omitirlo
+
 
 
 
@@ -1531,9 +1543,278 @@ class ReportAnalyzer2:
             'Archivos mas Accedidos',
             'Cantidad'
         )
+        connection.close()
         return report_data
 
 
+    def get_demas_graficos_xfer(self,texto,modo,desde,hasta):
+        
+
+        filtros_where = """
+            WHERE (
+                usuario LIKE %s
+                OR ip_remota LIKE %s
+                OR servidor LIKE %s
+                OR archivo LIKE %s
+                OR tipo_transferencia LIKE %s
+
+                OR accion_especial LIKE %s
+                OR direccion LIKE %s
+                OR usuario LIKE %s
+                OR servicio LIKE %s
+                OR metodo_autenticacion LIKE %s
+                OR usuario_id LIKE %s
+            )
+        """
+        params = [f"%{texto}%"] * 11
+
+        if modo == "diario":
+            hoy = datetime.now().date()
+            desde = f"{hoy} 00:00:00"
+            hasta = f"{hoy} 23:59:59"
+            filtros_where += " AND fecha_hora BETWEEN %s AND %s"
+            params.extend([desde, hasta])
+        elif modo == "semanal":
+            hoy = datetime.now()
+            # Día de la semana: lunes=0, domingo=6
+            dia_semana = hoy.weekday()
+            
+            lunes = hoy - timedelta(days=dia_semana)
+            domingo = lunes + timedelta(days=6)
+
+            desde = f"{lunes.date()} 00:00:00"
+            hasta = f"{domingo.date()} 23:59:59"
+
+            filtros_where += " AND fecha_hora BETWEEN %s AND %s"
+            params.extend([desde, hasta])
+        elif modo == "mensual":
+            hoy = datetime.now()
+            anio = hoy.year
+            mes = hoy.month
+            primer_dia = f"{anio}-01-01 00:00:00"
+            # Último día del mes
+            ultimo_dia_num = calendar.monthrange(anio, mes)[1]
+            ultimo_dia = f"{anio}-12-31 23:59:59"
+
+            filtros_where += " AND fecha_hora BETWEEN %s AND %s"
+            params.extend([primer_dia, ultimo_dia])
+        elif modo == "rango" and desde and hasta:
+            filtros_where += " AND fecha_hora BETWEEN %s AND %s"
+            params.extend([desde, hasta])
+
+
+        connection = self.get_connection()
+        cursor = connection.cursor()
+        report_data = {}
+        
+      
+        # Total transfers
+        query = """
+            SELECT COUNT(*) as total FROM transferencias_ftp 
+
+        """
+        query+= filtros_where
+        cursor.execute(query,params)
+        report_data["total_transfers"] = cursor.fetchone()['total']
+        
+        # Upload vs Download counts
+        query = """ 
+            SELECT direccion, COUNT(*) as count 
+            FROM transferencias_ftp  
+        """
+
+        query+= filtros_where
+        query+= """ 
+            GROUP BY direccion
+        """
+        cursor.execute(query,params)
+        directions = cursor.fetchall()
+        report_data["transfers_by_direction"] = directions
+        
+        # Direction chart
+        report_data["direction_chart"] = self._create_pie_chart(
+            [d['direccion'] for d in directions],
+            [d['count'] for d in directions],
+            'Distribucion de Direcciones'
+        )
+        
+        
+        # Transfer service types
+        query = """
+            SELECT servicio, COUNT(*) as count 
+            FROM transferencias_ftp  
+
+        """
+        query += filtros_where
+        query += """ 
+            GROUP BY servicio 
+            ORDER BY count DESC 
+        """
+        cursor.execute(query,params)
+        services = cursor.fetchall()
+        report_data["services"] = services
+        # Transfer service types
+        report_data["services_chart"] = self._create_pie_chart(
+            [d['servicio'] for d in services],
+            [d['count'] for d in services],
+            'Servicios'
+        )
+
+        # Authentication methods
+        query = """
+            SELECT metodo_autenticacion, COUNT(*) as count 
+            FROM transferencias_ftp  
+        """
+        query+= filtros_where
+        query += """ 
+            GROUP BY metodo_autenticacion 
+            ORDER BY count DESC 
+        """
+        cursor.execute(query,params)
+        auth_methods = cursor.fetchall()
+        report_data["auth_methods"] = auth_methods
+
+        # auth char
+        report_data["auth_methods_chart"] = self._create_pie_chart(
+            [d['metodo_autenticacion'] for d in auth_methods],
+            [d['count'] for d in auth_methods],
+            'Metodos de Autentificacion'
+        )
+
+        
+        # Most active users
+        query = """
+            SELECT usuario, COUNT(*) as count 
+            FROM transferencias_ftp  
+             
+        """
+        query += filtros_where
+        query += """ 
+            GROUP BY usuario 
+            ORDER BY count DESC 
+            LIMIT 10
+        """
+        cursor.execute(query,params)
+        active_users = cursor.fetchall()
+        active_users = active_users[::-1]
+        report_data["active_users"] = active_users
+
+        report_data["active_users_chart"] = self._create_horizontal_bar_chart(
+            [str(m['usuario']) for m in active_users],
+            [m['count'] for m in active_users],
+            'Usuarios mas activos',
+            'Cantidad'
+        )
+        
+        # Most active IPs
+        query = """
+            SELECT ip_remota, COUNT(*) as count 
+            FROM transferencias_ftp  
+
+        """
+        query += filtros_where
+        query += """  
+            GROUP BY ip_remota 
+            ORDER BY count DESC 
+            LIMIT 10
+        """
+        cursor.execute(query,params)
+        active_ips = cursor.fetchall()
+        active_ips = active_ips[::-1]
+        report_data["active_ips"] = active_ips
+
+        #grap
+        report_data["active_ips_chart"] = self._create_horizontal_bar_chart(
+            [str(m['ip_remota']) for m in active_ips],
+            [m['count'] for m in active_ips],
+            'Usuarios mas activos',
+            'Cantidad'
+        )
+
+        
+        # Transfer size distribution
+        query = """
+            SELECT 
+                CASE 
+                    WHEN tamaño_archivo < 1024 THEN '< 1KB'
+                    WHEN tamaño_archivo < 102400 THEN '1KB - 100KB'
+                    WHEN tamaño_archivo < 1048576 THEN '100KB - 1MB'
+                    WHEN tamaño_archivo < 10485760 THEN '1MB - 10MB'
+                    ELSE '> 10MB' 
+                END as size_range,
+                COUNT(*) as count
+            FROM transferencias_ftp
+            
+        """
+        query += filtros_where
+        query += """ 
+            GROUP BY size_range
+            ORDER BY 
+                CASE size_range
+                    WHEN '< 1KB' THEN 1
+                    WHEN '1KB - 100KB' THEN 2
+                    WHEN '100KB - 1MB' THEN 3
+                    WHEN '1MB - 10MB' THEN 4
+                    ELSE 5
+                END
+        """
+        cursor.execute(query, params)
+        size_ranges = cursor.fetchall()
+        report_data["transfer_sizes"] = size_ranges
+        
+        # Size range chart
+        report_data["size_chart"] = self._create_pie_chart(
+            [r['size_range'] for r in size_ranges],
+            [r['count'] for r in size_ranges],
+            'Transfer Size Distribution'
+        )
+        
+        # Total bytes transferred
+        query = """
+            SELECT 
+                SUM(CASE WHEN direccion = 'IN' THEN tamaño_archivo ELSE 0 END) as total_upload_bytes,
+                SUM(CASE WHEN direccion = 'OUT' THEN tamaño_archivo ELSE 0 END) as total_download_bytes,
+                SUM(tamaño_archivo) as total_transfer_bytes
+            FROM transferencias_ftp 
+
+        """
+        query += filtros_where
+        cursor.execute(query,params)
+        report_data["transfer_volume"] = cursor.fetchone()
+        
+        # Average transfer duration
+
+
+        # Response time statistics
+        query = """
+            SELECT 
+                AVG(duracion) as avg_time,
+                MAX(duracion) as max_time,
+                MIN(duracion) as min_time
+            FROM transferencias_ftp 
+        """
+        query += filtros_where
+        cursor.execute(query, params)
+        report_data["avg_duration"] = cursor.fetchone()
+
+        stats = report_data["avg_duration"]
+        labels = ['Mínimo', 'Promedio', 'Máximo']
+        values = [stats['min_time'], stats['avg_time'], stats['max_time']]
+
+        # Reemplazar None por 0 (o puedes decidir omitir el gráfico)
+        values = [v if v is not None else 0 for v in values]
+
+        # Crear el gráfico solo si hay algún valor distinto de 0
+        if any(values):
+            report_data["avg_duration_chart"] = self._create_bar_chart(labels, values, 'Tiempos de transferencia', '', 'ms')
+        else:
+            report_data["avg_duration_chart"] = None  # O algún mensaje alternativo
+
+
+
+
+        connection.close()
+        return report_data
 
 
     def _create_bar_chart(self, x_data, y_data, title, x_label, y_label):

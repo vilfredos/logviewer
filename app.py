@@ -515,11 +515,27 @@ def exportar_excel():
         ]
 
     elif tipo == 'xfer':
+        demas = report_analyzer2.get_demas_graficos_xfer(texto, modo, desde, hasta)
         data['datos'] = report_analyzer2.get_xfer_filtrado(texto, modo, desde, hasta)
         data['imagenes'] = [
             {'nombre':'Conteo de entradas',
-             'imagen': report_analyzer2.get_xfer_filtrado_grafico(texto, modo, desde, hasta)}
+             'imagen': report_analyzer2.get_xfer_filtrado_grafico(texto, modo, desde, hasta)},
+             {'nombre':'Direcciones',
+             'imagen': demas['direction_chart']},
+             {'nombre':'Servicios',
+             'imagen': demas['services_chart']},
+             {'nombre':'Metodos de autentificacion',
+             'imagen': demas['auth_methods_chart']},
+             {'nombre':'Los Usuarios mas activos',
+             'imagen': demas['active_users_chart']},
+             {'nombre':'Las IPs mas activas',
+             'imagen': demas['active_ips_chart']},
+             {'nombre':'Tamaño de los Archivo',
+             'imagen': demas['size_chart']},
+             {'nombre':'Promedios de duracion',
+             'imagen': demas['avg_duration_chart']},
         ]
+
     elif tipo == 'apache':
         data['datos'] = report_analyzer2.get_apache_filtrado(texto, modo, desde, hasta)
 
@@ -620,25 +636,22 @@ def exportar_excel():
     sheet = workbook.add_worksheet('Imagenes')
     writer.sheets['Imagenes'] = sheet
 
-    col_count = 11
-    row_spacing = 20 
+    col_count = 2
+    row_spacing = 30 
 
     for i, row in enumerate(data['imagenes']):
-        col = i % col_count
-        block = i // col_count
-        fila_titulo = block * row_spacing
+        fila_titulo = i * row_spacing
         fila_imagen = fila_titulo + 1
 
-        # Título
-        sheet.write(fila_titulo, col, row['nombre'])
+        # Título en columna 0
+        sheet.write(fila_titulo, 0, row['nombre'])
 
-        # Imagen base64
+        # Imagen
         imagen_b64 = row['imagen'].split(',')[1] if ',' in row['imagen'] else row['imagen']
         img_data = base64.b64decode(imagen_b64)
         img_io = io.BytesIO(img_data)
 
-        # Insertar imagen
-        sheet.insert_image(fila_imagen, col, f"imagen_{i}.png", {
+        sheet.insert_image(fila_imagen, 0, f"imagen_{i}.png", {
             'image_data': img_io,
             'x_scale': 0.5,
             'y_scale': 0.5
